@@ -1,10 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PoModule } from '@po-ui/ng-components';
-import { RouterModule } from '@angular/router';
+import { LayoutComponentsModule } from './modules/layout/components/layout-components.module';
 
 @NgModule({
   declarations: [
@@ -13,10 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PoModule,
-    RouterModule.forRoot([])
+    LayoutComponentsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
