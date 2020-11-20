@@ -6,8 +6,14 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutBaseComponent,
-    children: []
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('./modules/page/page.module').then(m => m.PageModule)
+      },
+    ],
   },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
