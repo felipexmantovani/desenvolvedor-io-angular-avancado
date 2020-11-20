@@ -8,10 +8,11 @@ const routes: Routes = [
     component: LayoutBaseComponent,
     children: [
       {
-        path: 'home',
+        path: 'page',
         loadChildren: () => import('./modules/page/page.module').then(m => m.PageModule)
       },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
+      { path: '', redirectTo: 'page/home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'page/erro', pathMatch: 'full' }
     ],
   }
 ];

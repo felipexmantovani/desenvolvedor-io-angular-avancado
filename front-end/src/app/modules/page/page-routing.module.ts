@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageHomeComponent } from './pages/home/page-home.component';
+import { PageErroComponent } from './pages/page-erro/page-erro.component';
+import { PageHomeComponent } from './pages/page-home/page-home.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: PageHomeComponent,
   },
+  {
+    path: 'erro',
+    component: PageErroComponent
+  }
 ];
 
 @NgModule({
