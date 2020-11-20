@@ -11,7 +11,8 @@ const routes: Routes = [
   {
     path: 'erro',
     component: PageErroComponent
-  }
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
