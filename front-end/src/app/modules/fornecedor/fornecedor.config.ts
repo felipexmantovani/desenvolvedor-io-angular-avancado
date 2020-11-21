@@ -7,4 +7,4 @@ export const FORNECEDOR_CONFIG: ModuleConfig = {
   namePlural: 'Fornecedores',
   path,
   pathFront: `/${path}`
-}
+};
