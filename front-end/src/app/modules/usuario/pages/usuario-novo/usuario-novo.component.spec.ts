@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PoPageModule } from '@po-ui/ng-components';
 import { UsuarioNovoComponent } from './usuario-novo.component';
 
 describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
@@ -7,9 +9,8 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        UsuarioNovoComponent
-      ]
+      declarations: [UsuarioNovoComponent],
+      imports: [RouterTestingModule, PoPageModule],
     });
 
     fixture = TestBed.createComponent(UsuarioNovoComponent);
