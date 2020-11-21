@@ -5,6 +5,28 @@
     [p-short-logo]="logo"
     p-filter="true"
     p-collapsed="false">
+
+    <ng-template p-menu-header-template>
+      <div class="nav-auth">
+        <po-avatar p-size="md"></po-avatar>
+
+        <div class="links">
+          <po-button
+            (p-click)="goLogin()"
+            p-label="Entrar"
+            p-small="true"
+            p-type="link">
+          </po-button>
+
+          <po-button
+            (p-click)="goNewAccount()"
+            p-label="Criar conta"
+            p-small="true"
+            p-type="link">
+          </po-button>
+        </div>
+      </div>
+    </ng-template>
   </po-menu>
 
   <router-outlet></router-outlet>

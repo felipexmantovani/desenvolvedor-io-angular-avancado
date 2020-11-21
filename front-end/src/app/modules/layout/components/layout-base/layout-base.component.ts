@@ -6,6 +6,7 @@ import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
 @Component({
   selector: 'app-layout-base',
   templateUrl: './layout-base.component.html',
+  styleUrls: ['./layout-base.component.scss']
 })
 export class LayoutBaseComponent {
   readonly logo = './assets/logo/po_white.svg';
@@ -32,4 +33,8 @@ export class LayoutBaseComponent {
   ];
 
   constructor() {}
+
+  public goLogin(): void {}
+
+  public goNewAccount(): void {}
 }
