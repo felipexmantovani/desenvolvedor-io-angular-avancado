@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { PoMenuItem } from '@po-ui/ng-components';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
+import { USUARIO_CONFIG } from '../../../usuario/usuario.config';
 
 @Component({
   selector: 'app-layout-base',
@@ -34,9 +36,11 @@ export class LayoutBaseComponent {
     },
   ];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   public goLogin(): void {}
 
-  public goNewAccount(): void {}
+  public goNewAccount(): void {
+    this.router.navigateByUrl(`${USUARIO_CONFIG.pathFront}/novo`);
+  }
 }
