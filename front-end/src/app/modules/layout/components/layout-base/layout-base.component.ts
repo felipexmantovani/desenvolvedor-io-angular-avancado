@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PoMenuItem } from '@po-ui/ng-components';
+import { StringUtil } from '../../../../shared/utils/string.util';
 import { FORNECEDORES_CONFIG } from '../../../fornecedor/fornecedor.config';
 
 @Component({
@@ -17,16 +18,16 @@ export class LayoutBaseComponent {
       shortLabel: 'Home'
     },
     {
-      label: `${FORNECEDORES_CONFIG.namePlural}`,
-      link: `${FORNECEDORES_CONFIG.pathFront}`,
+      label: FORNECEDORES_CONFIG.namePlural,
+      link: FORNECEDORES_CONFIG.pathFront,
       icon: 'po-icon-truck',
-      shortLabel: `${FORNECEDORES_CONFIG.namePlural}`
+      shortLabel: StringUtil.resume(FORNECEDORES_CONFIG.namePlural, 5, true)
     },
     {
       label: 'Produtos',
       link: '/produtos',
       icon: 'po-icon-database',
-      shortLabel: 'Produtos'
+      shortLabel: StringUtil.resume('Produtos', 5, true)
     },
   ];
 
