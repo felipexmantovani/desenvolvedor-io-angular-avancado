@@ -11,24 +11,26 @@ import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
 export class LayoutBaseComponent {
   readonly logo = './assets/logo/po_white.svg';
 
+  private maxShortLabel = 5;
+
   readonly menu: Array<PoMenuItem> = [
     {
       label: 'Home',
       link: '/home',
       icon: 'po-icon-home',
-      shortLabel: 'Home'
+      shortLabel: StringUtil.resume('Home', this.maxShortLabel, true)
     },
     {
       label: FORNECEDOR_CONFIG.namePlural,
       link: FORNECEDOR_CONFIG.pathFront,
       icon: 'po-icon-truck',
-      shortLabel: StringUtil.resume(FORNECEDOR_CONFIG.namePlural, 5, true)
+      shortLabel: StringUtil.resume(FORNECEDOR_CONFIG.namePlural, this.maxShortLabel, true)
     },
     {
       label: 'Produtos',
       link: '/produtos',
       icon: 'po-icon-database',
-      shortLabel: StringUtil.resume('Produtos', 5, true)
+      shortLabel: StringUtil.resume('Produtos', this.maxShortLabel, true)
     },
   ];
 
