@@ -1,4 +1,11 @@
 <div class="po-wrapper">
-  <app-layout-menu></app-layout-menu>
+  <po-menu
+    [p-menus]="menu"
+    [p-logo]="logo"
+    [p-short-logo]="logo"
+    p-filter="true"
+    p-collapsed="true">
+  </po-menu>
+
   <router-outlet></router-outlet>
 </div>
