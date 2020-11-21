@@ -38,6 +38,10 @@ export class LayoutBaseComponent {
 
   constructor(private router: Router) {}
 
+  public goUsuario(): void {
+    this.router.navigateByUrl(USUARIO_CONFIG.pathFront);
+  }
+
   public goLogin(): void {}
 
   public goNewAccount(): void {

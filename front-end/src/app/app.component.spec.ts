@@ -20,6 +20,7 @@ describe('app.component.spec | AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('Deve ser criado', () => {

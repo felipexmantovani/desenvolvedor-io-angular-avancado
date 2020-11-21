@@ -11,3 +11,12 @@
     flex-direction: column;
   }
 }
+
+po-avatar {
+  transition: 0.25s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.75;
+  }
+}

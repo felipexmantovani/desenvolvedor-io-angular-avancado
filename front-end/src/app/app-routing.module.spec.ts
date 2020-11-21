@@ -20,8 +20,8 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
     router.initialNavigation();
   });
 
-  it('Deve conter 3 rotas', () => {
-    expect(router.config.length).toBe(3);
+  it('Deve conter 4 rotas', () => {
+    expect(router.config.length).toBe(4);
   });
 
   it('Deve redirecionar para /home',  async() => {
@@ -32,5 +32,10 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
   it('Deve redirecionar para /erro', async() => {
     const url = await router.navigateByUrl('/rota-inexistente').then(() => location.path());
     expect(url).toBe('/erro');
+  });
+
+  it('Deve navegar para módulo de usuário', async () => {
+    const url = await router.navigateByUrl('/usuario').then(() => location.path());
+    expect(url).toBe('/usuario');
   });
 });

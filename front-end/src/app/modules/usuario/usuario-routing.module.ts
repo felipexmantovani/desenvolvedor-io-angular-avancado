@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsuarioNovoComponent } from './pages/usuario-novo/usuario-novo.component';
+import { UsuarioPerfilComponent } from './pages/usuario-perfil/usuario-perfil.component';
 
-const routes: Routes = [
+export const routes: Routes = [
+  {
+    path: '',
+    component: UsuarioPerfilComponent
+  },
   {
     path: 'novo',
     component: UsuarioNovoComponent
-  },
-  { path: '', redirectTo: '/novo', pathMatch: 'full' }
+  }
 ]
 
 @NgModule({
