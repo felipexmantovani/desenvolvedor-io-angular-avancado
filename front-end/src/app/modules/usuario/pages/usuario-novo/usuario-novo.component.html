@@ -1,2 +1,49 @@
-<po-page-default p-title="app-usuario-novo">
+<po-page-default
+  [p-title]="pageTitle"
+  [p-actions]="actions"
+  [p-breadcrumb]="breadcrumb">
+
+  <div class="po-row">
+    <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
+
+      <form [formGroup]="form">
+        <po-email
+          formControlName="email"
+          p-auto-focus="true"
+          p-clean="true"
+          p-error-pattern="Informe um e-mail válido"
+          p-icon="po-icon-mail"
+          p-label="E-mail"
+          p-maxlength="100"
+          p-minlength="6"
+          name="email"
+          p-required="true">
+        </po-email>
+
+        <po-password
+          formControlName="password"
+          p-clean="true"
+          p-icon="po-icon-lock"
+          p-label="Senha"
+          p-maxlength="100"
+          p-minlength="6"
+          name="password"
+          p-error-pattern="Deve conter entre 6 e 100 caracteres"
+          p-required="true">
+        </po-password>
+
+        <po-password
+          formControlName="confirmPassword"
+          p-clean="true"
+          p-icon="po-icon-lock"
+          p-label="Confirme a senha"
+          name="confirmPassword"
+          p-required="true"
+          [p-disabled]="!passwordValid">
+        </po-password>
+      </form>
+
+    </div>
+  </div>
+
 </po-page-default>
