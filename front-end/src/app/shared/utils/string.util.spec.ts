@@ -1,4 +1,4 @@
-import { StringUtil } from "./string.util";
+import { StringUtil } from './string.util';
 
 describe('string.util.spec | StringUtil', () => {
   let textResume: string;

@@ -7,4 +7,4 @@ export const USUARIO_CONFIG: ModuleConfig = {
   namePlural: 'Usuários',
   path,
   pathFront: `/${path}`
-}
+};

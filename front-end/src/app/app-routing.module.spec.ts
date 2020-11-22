@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { routes } from './app-routing.module';
 
@@ -24,12 +24,12 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
     expect(router.config.length).toBe(4);
   });
 
-  it('Deve redirecionar para /home',  async() => {
+  it('Deve redirecionar para /home', async () => {
     const url = await router.navigateByUrl('').then(() => location.path());
     expect(url).toBe('/home');
   });
 
-  it('Deve redirecionar para /erro', async() => {
+  it('Deve redirecionar para /erro', async () => {
     const url = await router.navigateByUrl('/rota-inexistente').then(() => location.path());
     expect(url).toBe('/erro');
   });

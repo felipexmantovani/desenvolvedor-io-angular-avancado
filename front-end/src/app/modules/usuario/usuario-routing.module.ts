@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: 'novo',
     component: UsuarioNovoComponent
   }
-]
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)]
