@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PoMenuItem } from '@po-ui/ng-components';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
+import { PRODUTO_CONFIG } from '../../../produto/produto.config';
 import { USUARIO_CONFIG } from '../../../usuario/usuario.config';
 
 @Component({
@@ -29,10 +30,10 @@ export class LayoutBaseComponent {
       shortLabel: StringUtil.resume(FORNECEDOR_CONFIG.namePlural, this.maxShortLabel, true)
     },
     {
-      label: 'Produtos',
-      link: '/produtos',
+      label: PRODUTO_CONFIG.namePlural,
+      link: PRODUTO_CONFIG.pathFront,
       icon: 'po-icon-database',
-      shortLabel: StringUtil.resume('Produtos', this.maxShortLabel, true)
+      shortLabel: StringUtil.resume(PRODUTO_CONFIG.namePlural, this.maxShortLabel, true)
     },
   ];
 
