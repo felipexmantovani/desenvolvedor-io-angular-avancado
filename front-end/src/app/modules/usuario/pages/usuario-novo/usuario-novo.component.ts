@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
 import { Subscription } from 'rxjs';
+import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { USUARIO_CONFIG } from '../../usuario.config';
 
@@ -22,7 +23,10 @@ export class UsuarioNovoComponent implements OnInit, OnDestroy, PageDefault {
 
   private subs: Array<Subscription> = new Array<Subscription>();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -60,9 +64,8 @@ export class UsuarioNovoComponent implements OnInit, OnDestroy, PageDefault {
 
   private onSubmit(): void {
     if (!this.passwordEquals()) {
-      // mensagem
+      this.notificationService.error('As senhas devem ser iguais.');
       return;
     }
-    // api
   }
 }
