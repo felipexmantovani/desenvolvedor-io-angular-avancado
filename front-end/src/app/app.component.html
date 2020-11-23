@@ -1,1 +1,7 @@
 <app-layout-base></app-layout-base>
+
+<po-loading-overlay
+  *ngIf="showLoading"
+  p-screen-lock="true"
+  p-text="Aguarde...">
+</po-loading-overlay>

@@ -17,7 +17,7 @@ describe('notification.service.spec | NotificationService', () => {
   });
 
   it('Deve chamar método de mensagem de erro', () => {
-    const msg: string = 'Mensagem de erro.';
+    const msg = 'Mensagem de erro.';
     service.error(msg);
 
     const spy = spyOn<any>(service, 'error');
@@ -26,7 +26,7 @@ describe('notification.service.spec | NotificationService', () => {
   });
 
   it('Deve chamar método de mensagem de informação', () => {
-    const msg: string = 'Mensagem de informação.';
+    const msg = 'Mensagem de informação.';
     service.information(msg);
 
     const spy = spyOn<any>(service, 'information');
@@ -35,7 +35,7 @@ describe('notification.service.spec | NotificationService', () => {
   });
 
   it('Deve chamar método de mensagem de sucesso', () => {
-    const msg: string = 'Mensagem de sucesso.';
+    const msg = 'Mensagem de sucesso.';
     service.success(msg);
 
     const spy = spyOn<any>(service, 'success');
@@ -44,7 +44,7 @@ describe('notification.service.spec | NotificationService', () => {
   });
 
   it('Deve chamar método de mensagem de aviso', () => {
-    const msg: string = 'Mensagem de aviso.';
+    const msg = 'Mensagem de aviso.';
     service.warning(msg);
 
     const spy = spyOn<any>(service, 'warning');
