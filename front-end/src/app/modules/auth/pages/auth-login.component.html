@@ -12,25 +12,21 @@
       <form [formGroup]="form">
         <po-email
           formControlName="email"
+          name="email"
           p-auto-focus="true"
           p-clean="true"
           p-error-pattern="Informe um e-mail válido"
           p-icon="po-icon-mail"
           p-label="E-mail"
-          p-maxlength="100"
-          p-minlength="6"
-          name="email"
           p-required="true">
         </po-email>
 
         <po-password
           formControlName="password"
+          name="password"
           p-clean="true"
           p-icon="po-icon-lock"
           p-label="Senha"
-          p-maxlength="100"
-          p-minlength="6"
-          name="password"
           p-required="true">
         </po-password>
       </form>

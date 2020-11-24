@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
@@ -17,8 +17,8 @@ import { AuthService } from '../services/auth.service';
   selector: 'app-auth-login',
   templateUrl: './auth-login.component.html'
 })
-export class AuthLoginComponent implements OnInit, PageDefault {
-  public pageTitle: string = 'Login';
+export class AuthLoginComponent implements OnInit, OnDestroy, PageDefault {
+  public pageTitle = 'Login';
 
   public readonly breadcrumb: PoBreadcrumb = {
     items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }],
@@ -67,6 +67,6 @@ export class AuthLoginComponent implements OnInit, PageDefault {
           this.router.navigateByUrl('/');
         },
         (error) => this.exceptionService.handleError(error)
-      )
+      );
   }
 }

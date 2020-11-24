@@ -23,13 +23,7 @@ export class AuthService {
       .pipe(
         take(1),
         map((result) => HttpUtil.extractData(result)),
-        tap((token: Token) => {
-          if (token.accessToken) {
-            this.isLoggedBS.next(true);
-            return;
-          }
-          this.isLoggedBS.next(false);
-        })
+        tap((token: Token) => token.accessToken ? this.isLoggedBS.next(true) : this.isLoggedBS.next(false))
       );
   }
 

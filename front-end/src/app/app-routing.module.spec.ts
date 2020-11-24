@@ -23,8 +23,12 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
     router.initialNavigation();
   });
 
-  it('Deve conter 6 rotas', () => {
-    expect(router.config.length).toBe(6);
+  it('Deve conter 3 rotas principais', () => {
+    expect(router.config.length).toBe(3);
+  });
+
+  it('Deve conter 5 rotas filhas carregadas no componente LayoutBaseComponent', () => {
+    expect(router.config[0].children.length).toBe(5);
   });
 
   it('Deve redirecionar para /home', async () => {
