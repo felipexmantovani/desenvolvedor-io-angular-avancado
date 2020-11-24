@@ -10,5 +10,6 @@ export const AUTH_CONFIG: AuthConfig = {
   name: 'Autenticação',
   namePlural: 'Autenticações',
   path,
+  pathFront: `/${path}`,
   keyToken: 'token'
 };

@@ -9,7 +9,9 @@ import { Usuario } from '../models/usuario.interface';
 
 @Injectable()
 export class UsuarioService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient
+  ) {}
 
   public novo(usuario: Usuario): Observable<Token> {
     return this.httpClient

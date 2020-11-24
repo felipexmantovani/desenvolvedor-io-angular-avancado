@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { Subscription } from 'rxjs';
+import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { ExceptionService } from '../../../../core/services/exception/exception.service';
 import { LoadingService } from '../../../../core/services/loading/loading.service';
@@ -15,18 +14,14 @@ import { USUARIO_CONFIG } from '../../usuario.config';
   selector: 'app-usuario-novo',
   templateUrl: './usuario-novo.component.html'
 })
-export class UsuarioNovoComponent implements OnInit, OnDestroy, PageDefault {
+export class UsuarioNovoComponent implements OnInit, PageDefault {
   public pageTitle = `Novo ${USUARIO_CONFIG.name}`;
 
   public readonly breadcrumb: PoBreadcrumb = {
     items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }]
   };
 
-  public actions: Array<PoPageAction>;
-
   public form: FormGroup;
-
-  private subs: Array<Subscription> = new Array<Subscription>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,14 +33,6 @@ export class UsuarioNovoComponent implements OnInit, OnDestroy, PageDefault {
 
   ngOnInit(): void {
     this.createForm();
-    this.getActions();
-    this.subs.push(
-      this.form.valueChanges.subscribe(() => this.getActions())
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
   }
 
   private createForm(): void {
@@ -56,12 +43,6 @@ export class UsuarioNovoComponent implements OnInit, OnDestroy, PageDefault {
     });
   }
 
-  private getActions(): void {
-    this.actions = [
-      { label: 'Enviar', action: this.onSubmit.bind(this), disabled: !this.form.valid }
-    ];
-  }
-
   get passwordValid(): boolean {
     return this.form.get('password').valid;
   }
@@ -70,7 +51,7 @@ export class UsuarioNovoComponent implements OnInit, OnDestroy, PageDefault {
     return this.form.get('password').value === this.form.get('confirmPassword').value;
   }
 
-  private onSubmit(): void {
+  public onSubmit(): void {
     if (!this.passwordEquals()) {
       this.notificationService.error('As senhas devem ser iguais.');
       return;

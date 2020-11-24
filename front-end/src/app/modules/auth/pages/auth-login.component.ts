@@ -1,0 +1,72 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PoBreadcrumb } from '@po-ui/ng-components';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { ExceptionService } from '../../../core/services/exception/exception.service';
+import { LoadingService } from '../../../core/services/loading/loading.service';
+import { NotificationService } from '../../../core/services/notification/notification.service';
+import { StorageService } from '../../../core/services/storage/storage.service';
+import { PageDefault } from '../../../shared/interfaces/page-default.interface';
+import { AUTH_CONFIG } from '../auth.config';
+import { Login } from '../models/login.interface';
+import { AuthService } from '../services/auth.service';
+
+@Component({
+  selector: 'app-auth-login',
+  templateUrl: './auth-login.component.html'
+})
+export class AuthLoginComponent implements OnInit, PageDefault {
+  public pageTitle: string = 'Login';
+
+  public readonly breadcrumb: PoBreadcrumb = {
+    items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }],
+  };
+
+  public form: FormGroup;
+
+  private subs: Array<Subscription> = new Array<Subscription>();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private loadingService: LoadingService,
+    private authService: AuthService,
+    private exceptionService: ExceptionService,
+    private storageService: StorageService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
+
+  ngOnInit(): void {
+    this.createForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => sub.unsubscribe());
+  }
+
+  private createForm(): void {
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
+
+  public onSubmit(): void {
+    this.loadingService.show();
+
+    const login: Login = this.form.value;
+    this.authService
+      .login(login)
+      .pipe(finalize(() => this.loadingService.hide()))
+      .subscribe(
+        (token) => {
+          this.storageService.localSetItem(AUTH_CONFIG.keyToken, token.accessToken);
+          this.notificationService.success('Olá, seja bem-vindo(a).');
+          this.router.navigateByUrl('/');
+        },
+        (error) => this.exceptionService.handleError(error)
+      )
+  }
+}

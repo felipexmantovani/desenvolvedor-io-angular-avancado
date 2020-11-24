@@ -12,6 +12,7 @@
 
         <div class="links">
           <po-button
+            *ngIf="!isLogged"
             (p-click)="goLogin()"
             p-label="Entrar"
             p-small="true"
@@ -19,10 +20,19 @@
           </po-button>
 
           <po-button
+            *ngIf="!isLogged"
             (p-click)="goNewAccount()"
             p-label="Criar conta"
             p-small="true"
             p-type="link">
+          </po-button>
+
+          <po-button
+            *ngIf="isLogged"
+            (p-click)="logout()"
+            p-label="Sair"
+            p-small="true"
+            p-type="danger">
           </po-button>
         </div>
       </div>

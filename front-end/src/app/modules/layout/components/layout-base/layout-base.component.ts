@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoMenuItem } from '@po-ui/ng-components';
 import { StringUtil } from '../../../../shared/utils/string.util';
+import { AUTH_CONFIG } from '../../../auth/auth.config';
+import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
 import { PRODUTO_CONFIG } from '../../../produto/produto.config';
 import { USUARIO_CONFIG } from '../../../usuario/usuario.config';
@@ -9,9 +11,10 @@ import { USUARIO_CONFIG } from '../../../usuario/usuario.config';
 @Component({
   selector: 'app-layout-base',
   templateUrl: './layout-base.component.html',
-  styleUrls: ['./layout-base.component.scss']
+  styleUrls: ['./layout-base.component.scss'],
+  providers: [AuthService]
 })
-export class LayoutBaseComponent {
+export class LayoutBaseComponent implements OnInit {
   readonly logo = './assets/logo/po_white.svg';
 
   private maxShortLabel = 5;
@@ -37,15 +40,33 @@ export class LayoutBaseComponent {
     },
   ];
 
-  constructor(private router: Router) {}
+  public isLogged = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.authService.isLoggedBS.subscribe(value => {
+      this.isLogged = this.authService.isLogged() || value;
+    });
+  }
 
   public goUsuario(): void {
     this.router.navigateByUrl(USUARIO_CONFIG.pathFront);
   }
 
-  public goLogin(): void {}
+  public goLogin(): void {
+    this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
+  }
 
   public goNewAccount(): void {
     this.router.navigateByUrl(`${USUARIO_CONFIG.pathFront}/novo`);
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl('/');
   }
 }

@@ -6,7 +6,7 @@
     <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
 
       <div class="po-sm-12 po-md-8 po-lg-8 po-xl-8 po-offset-md-2 po-offset-lg-2 po-offset-xl-2">
-        <img class="w-100" src="./assets/nova-conta.png">
+        <img class="w-100" src="./assets/login.png">
       </div>
 
       <form [formGroup]="form">
@@ -31,18 +31,7 @@
           p-maxlength="100"
           p-minlength="6"
           name="password"
-          p-error-pattern="Deve conter entre 6 e 100 caracteres"
           p-required="true">
-        </po-password>
-
-        <po-password
-          formControlName="confirmPassword"
-          p-clean="true"
-          p-icon="po-icon-lock"
-          p-label="Confirme a senha"
-          name="confirmPassword"
-          p-required="true"
-          [p-disabled]="!passwordValid">
         </po-password>
       </form>
 
@@ -50,7 +39,7 @@
         class="po-sm-12 btn-form"
         (p-click)="onSubmit()"
         [p-disabled]="!form.valid"
-        p-label="Enviar"
+        p-label="Entrar"
         p-type="primary">
       </po-button>
 
