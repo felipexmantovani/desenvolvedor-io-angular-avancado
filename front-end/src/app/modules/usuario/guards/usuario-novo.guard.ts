@@ -25,7 +25,7 @@ export class UsuarioNovoGuard implements CanDeactivate<UsuarioNovoComponent> {
           cancel: () => {
             resolve(false);
           }
-        }
+        };
         this.poDialogService.confirm(options);
       }
     });
