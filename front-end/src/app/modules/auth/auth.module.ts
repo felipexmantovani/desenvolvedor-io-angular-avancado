@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PoButtonModule, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
 import { AuthRoutingModule } from './auth-routing.module';
+import { LoginGuard } from './guards/login.guard';
 import { AuthLoginComponent } from './pages/auth-login.component';
 import { AuthService } from './services/auth.service';
 
@@ -16,6 +17,6 @@ import { AuthService } from './services/auth.service';
     PoFieldModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, LoginGuard],
 })
 export class AuthModule {}
