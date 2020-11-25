@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PoMenuItem } from '@po-ui/ng-components';
+import { PoDialogConfirmOptions, PoDialogService, PoMenuItem } from '@po-ui/ng-components';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { AUTH_CONFIG } from '../../../auth/auth.config';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -44,7 +44,8 @@ export class LayoutBaseComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private poDialogService: PoDialogService
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +67,14 @@ export class LayoutBaseComponent implements OnInit {
   }
 
   public logout(): void {
-    this.authService.logout();
-    this.router.navigateByUrl('/');
+    const options: PoDialogConfirmOptions = {
+      title: 'Confirmação!',
+      message: 'Realmente fazer sair?',
+      confirm: () => {
+        this.authService.logout();
+        this.router.navigateByUrl('/');
+      }
+    };
+    this.poDialogService.confirm(options);
   }
 }
