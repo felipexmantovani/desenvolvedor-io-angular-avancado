@@ -89,7 +89,7 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
   public logout(): void {
     const options: PoDialogConfirmOptions = {
       title: 'Confirmação!',
-      message: 'Realmente fazer sair?',
+      message: 'Realmente deseja sair?',
       confirm: () => {
         this.authService.logout();
         this.router.navigateByUrl('/');
