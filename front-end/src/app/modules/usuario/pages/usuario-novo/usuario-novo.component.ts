@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
@@ -49,6 +49,13 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
 
   private passwordEquals(): boolean {
     return this.form.get('password').value === this.form.get('confirmPassword').value;
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyUp(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && this.form.valid) {
+      this.onSubmit();
+    }
   }
 
   public onSubmit(): void {

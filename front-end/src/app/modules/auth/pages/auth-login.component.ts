@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
@@ -51,6 +51,13 @@ export class AuthLoginComponent implements OnInit, OnDestroy, PageDefault {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyUp(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && this.form.valid) {
+      this.onSubmit();
+    }
   }
 
   public onSubmit(): void {

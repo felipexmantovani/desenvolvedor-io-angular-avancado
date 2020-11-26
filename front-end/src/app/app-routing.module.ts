@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AUTH_CONFIG } from './modules/auth/auth.config';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
 import { FORNECEDOR_CONFIG } from './modules/fornecedor/fornecedor.config';
 import { LayoutBaseComponent } from './modules/layout/components/layout-base/layout-base.component';
 import { PRODUTO_CONFIG } from './modules/produto/produto.config';
@@ -21,6 +22,7 @@ export const routes: Routes = [
       },
       {
         path: FORNECEDOR_CONFIG.path,
+        canLoad: [AuthGuard],
         loadChildren: () => import('./modules/fornecedor/fornecedor.module').then(m => m.FornecedorModule)
       },
       {
