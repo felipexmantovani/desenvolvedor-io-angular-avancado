@@ -1,7 +1,7 @@
 export interface Token {
   accessToken: string;
-  expiresIn: number;
-  userToken: UserToken;
+  expiresIn?: number;
+  userToken?: UserToken;
 }
 
 interface Claims {

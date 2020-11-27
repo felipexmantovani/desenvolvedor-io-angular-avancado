@@ -7,9 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
 import { LoadingService } from '../../../core/services/loading/loading.service';
 import { NotificationService } from '../../../core/services/notification/notification.service';
-import { StorageService } from '../../../core/services/storage/storage.service';
 import { PageDefault } from '../../../shared/interfaces/page-default.interface';
-import { AUTH_CONFIG } from '../auth.config';
 import { Login } from '../models/login.interface';
 import { AuthService } from '../services/auth.service';
 
@@ -33,7 +31,6 @@ export class AuthLoginComponent implements OnInit, OnDestroy, PageDefault {
     private loadingService: LoadingService,
     private authService: AuthService,
     private exceptionService: ExceptionService,
-    private storageService: StorageService,
     private router: Router,
     private notificationService: NotificationService
   ) {}
@@ -69,7 +66,7 @@ export class AuthLoginComponent implements OnInit, OnDestroy, PageDefault {
       .pipe(finalize(() => this.loadingService.hide()))
       .subscribe(
         (token) => {
-          this.storageService.localSetItem(AUTH_CONFIG.keyToken, token.accessToken);
+          this.authService.setToken(token);
           this.notificationService.success('Olá, seja bem-vindo(a).');
           this.router.navigateByUrl('/');
         },

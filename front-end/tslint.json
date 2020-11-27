@@ -4,6 +4,7 @@
     "codelyzer"
   ],
   "rules": {
+    "no-string-literal": false,
     "align": {
       "options": [
         "parameters",
@@ -49,7 +50,10 @@
       "info",
       "time",
       "timeEnd",
-      "trace"
+      "trace",
+      "console",
+      "error",
+      "warning"
     ],
     "no-empty": false,
     "no-inferrable-types": [

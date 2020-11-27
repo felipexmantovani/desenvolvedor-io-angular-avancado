@@ -26,6 +26,8 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
 
   private subs: Array<Subscription> = new Array<Subscription>();
 
+  private opa: string;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -45,7 +47,7 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
     this.subs.forEach(sub => sub.unsubscribe());
   }
 
-  private getMenu(): void {
+  public getMenu(): void {
     this.menu = new Array<PoMenuItem>();
 
     this.menu.push({

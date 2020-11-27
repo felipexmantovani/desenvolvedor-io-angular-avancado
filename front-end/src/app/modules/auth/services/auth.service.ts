@@ -15,7 +15,10 @@ import { Login } from '../models/login.interface';
 export class AuthService {
   public readonly isLoggedBS: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private httpClient: HttpClient, private storageService: StorageService) {}
+  constructor(
+    private httpClient: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   public login(login: Login): Observable<Token> {
     return this.httpClient
@@ -38,5 +41,9 @@ export class AuthService {
 
   public getToken(): any {
     return this.storageService.localGetItem(AUTH_CONFIG.keyToken);
+  }
+
+  public setToken(token: Token): void {
+    this.storageService.localSetItem(AUTH_CONFIG.keyToken, token.accessToken);
   }
 }

@@ -12,6 +12,7 @@ import { USUARIO_CONFIG } from './modules/usuario/usuario.config';
 describe('app-routing.module.spec | AppRoutingModule', () => {
   let router: Router;
   let location: Location;
+  let authGuard: AuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -24,6 +25,7 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
 
     router = TestBed.inject(Router);
     location = TestBed.inject(Location);
+    authGuard = TestBed.inject(AuthGuard);
     router.initialNavigation();
   });
 
@@ -45,11 +47,11 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
     expect(url).toBe('/erro');
   });
 
-  // to-do criar spy para o guarda de rotas AuthGuard
-  // it('Deve navegar para módulo de fornecedor', async () => {
-  //   const url = await router.navigateByUrl(FORNECEDOR_CONFIG.path).then(() => location.path());
-  //   expect(url).toBe(FORNECEDOR_CONFIG.pathFront);
-  // });
+  it('Deve navegar para módulo de fornecedor', async () => {
+    spyOn(authGuard, 'canLoad').and.returnValue(true);
+    const url = await router.navigateByUrl(FORNECEDOR_CONFIG.path).then(() => location.path());
+    expect(url).toBe(FORNECEDOR_CONFIG.pathFront);
+  });
 
   it('Deve navegar para módulo de produto', async () => {
     const url = await router.navigateByUrl(PRODUTO_CONFIG.path).then(() => location.path());

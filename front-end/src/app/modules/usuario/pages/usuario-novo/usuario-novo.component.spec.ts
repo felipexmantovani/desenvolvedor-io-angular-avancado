@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoFieldModule, PoPageModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
 import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioNovoComponent } from './usuario-novo.component';
 
@@ -12,7 +12,7 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [UsuarioNovoComponent],
-      imports: [RouterTestingModule, PoPageModule, PoFieldModule],
+      imports: [RouterTestingModule, PoPageModule, PoFieldModule, PoButtonModule],
       providers: [FormBuilder, UsuarioService],
     });
 
