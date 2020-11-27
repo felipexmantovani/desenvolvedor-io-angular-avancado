@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { PoLoadingModule } from '@po-ui/ng-components';
 import { CoreServiceModule } from './services/core-services.module';
 
 @NgModule({
   imports: [
-    CoreServiceModule,
-    PoLoadingModule
+    CoreServiceModule
   ],
-  exports: [PoLoadingModule]
+  exports: [CoreServiceModule]
 })
 export class CoreModule {}

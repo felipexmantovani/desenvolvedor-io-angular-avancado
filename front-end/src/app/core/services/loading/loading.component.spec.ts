@@ -1,39 +1,36 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { PoLoadingModule } from '@po-ui/ng-components';
 import { LoadingComponent } from './loading.component';
-import { LoadingService } from './loading.service';
 
-describe('loading.service.spec | LoadingService', () => {
-  let service: LoadingService;
+describe('loading.component.spec | LoadingComponent', () => {
   let component: LoadingComponent;
   let fixture: ComponentFixture<LoadingComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [LoadingComponent]
+        declarations: [LoadingComponent],
+        imports: [CommonModule, PoLoadingModule],
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    service = TestBed.inject(LoadingService);
     fixture = TestBed.createComponent(LoadingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('Deve ser criado', () => {
-    expect(service).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it('Deve mostrar e esconder o loading', () => {
-    component.loadingService.loadingBS.subscribe((value) => {
-      component.showLoading = value;
-    });
+  it('Deve iniciar escondendo o loading', () => {
     expect(component.showLoading).toBeFalsy();
-    service.loadingBS.next(true);
-    expect(component.showLoading).toBeTruthy();
-    service.loadingBS.next(false);
-    expect(component.showLoading).toBeFalsy();
+  });
+
+  it('Deve ter o texto padrão como "Aguarde..."', () => {
+    expect(component.text).toBe('Aguarde...');
   });
 });
