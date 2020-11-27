@@ -50,10 +50,7 @@
       "info",
       "time",
       "timeEnd",
-      "trace",
-      "console",
-      "error",
-      "warning"
+      "trace"
     ],
     "no-empty": false,
     "no-inferrable-types": [
