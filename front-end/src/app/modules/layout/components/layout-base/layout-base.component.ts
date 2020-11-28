@@ -77,7 +77,7 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
   }
 
   public goUsuario(): void {
-    this.router.navigateByUrl(USUARIO_CONFIG.pathFront);
+    this.router.navigateByUrl(`${USUARIO_CONFIG.pathFront}/perfil`);
   }
 
   public goLogin(): void {
