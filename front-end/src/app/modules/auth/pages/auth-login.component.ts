@@ -1,8 +1,7 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
-import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../core/modules/loading/loading.service';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
@@ -15,7 +14,7 @@ import { AuthService } from '../services/auth.service';
   selector: 'app-auth-login',
   templateUrl: './auth-login.component.html'
 })
-export class AuthLoginComponent implements OnInit, OnDestroy, PageDefault {
+export class AuthLoginComponent implements OnInit, PageDefault {
   public pageTitle = 'Login';
 
   public readonly breadcrumb: PoBreadcrumb = {
@@ -23,8 +22,6 @@ export class AuthLoginComponent implements OnInit, OnDestroy, PageDefault {
   };
 
   public form: FormGroup;
-
-  private subs: Array<Subscription> = new Array<Subscription>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,10 +34,6 @@ export class AuthLoginComponent implements OnInit, OnDestroy, PageDefault {
 
   ngOnInit(): void {
     this.createForm();
-  }
-
-  ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
   }
 
   private createForm(): void {

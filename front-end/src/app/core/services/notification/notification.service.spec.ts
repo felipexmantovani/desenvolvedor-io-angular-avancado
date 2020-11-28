@@ -1,8 +1,10 @@
 import { TestBed } from '@angular/core/testing';
+import { PoNotificationService } from '@po-ui/ng-components';
 import { NotificationService } from './notification.service';
 
 describe('notification.service.spec | NotificationService', () => {
   let service: NotificationService;
+  let poNotification: PoNotificationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -10,6 +12,7 @@ describe('notification.service.spec | NotificationService', () => {
     });
 
     service = TestBed.inject(NotificationService);
+    poNotification = TestBed.inject(PoNotificationService);
   });
 
   it('Deve ser criado', () => {
@@ -17,38 +20,26 @@ describe('notification.service.spec | NotificationService', () => {
   });
 
   it('Deve chamar método de mensagem de erro', () => {
-    const msg = 'Mensagem de erro.';
-    service.error(msg);
-
-    const spy = spyOn<any>(service, 'error');
-    service.error(msg);
+    const spy = spyOn<any>(poNotification, 'error');
+    service.error('Mensagem de erro.');
     expect(spy).toHaveBeenCalled();
   });
 
   it('Deve chamar método de mensagem de informação', () => {
-    const msg = 'Mensagem de informação.';
-    service.information(msg);
-
-    const spy = spyOn<any>(service, 'information');
-    service.information(msg);
+    const spy = spyOn<any>(poNotification, 'information');
+    service.information('Mensagem de informação.');
     expect(spy).toHaveBeenCalled();
   });
 
   it('Deve chamar método de mensagem de sucesso', () => {
-    const msg = 'Mensagem de sucesso.';
-    service.success(msg);
-
-    const spy = spyOn<any>(service, 'success');
-    service.success(msg);
+    const spy = spyOn<any>(poNotification, 'success');
+    service.success('Mensagem de sucesso.');
     expect(spy).toHaveBeenCalled();
   });
 
   it('Deve chamar método de mensagem de aviso', () => {
-    const msg = 'Mensagem de aviso.';
-    service.warning(msg);
-
-    const spy = spyOn<any>(service, 'warning');
-    service.warning(msg);
+    const spy = spyOn<any>(poNotification, 'warning');
+    service.warning('Mensagem de aviso.');
     expect(spy).toHaveBeenCalled();
   });
 });

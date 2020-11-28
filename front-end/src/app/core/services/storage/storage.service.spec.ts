@@ -11,6 +11,8 @@ describe('storage.service.spec | StorageService', () => {
 
   beforeEach(() => {
     service = TestBed.inject(StorageService);
+    service.localClear();
+    service.sessionClear();
   });
 
   it('Deve ser criado', () => {
