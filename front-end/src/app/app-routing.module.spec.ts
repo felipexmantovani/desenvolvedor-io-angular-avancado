@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { routes } from './app-routing.module';
+import { AUTH_CONFIG } from './modules/auth/auth.config';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
 import { FORNECEDOR_CONFIG } from './modules/fornecedor/fornecedor.config';
 import { PRODUTO_CONFIG } from './modules/produto/produto.config';
@@ -45,6 +46,11 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
   it('Deve redirecionar para /erro', async () => {
     const url = await router.navigateByUrl('/rota-inexistente').then(() => location.path());
     expect(url).toBe('/erro');
+  });
+
+  it('Deve navegar para módulo de autenticação', async () => {
+    const url = await router.navigateByUrl(AUTH_CONFIG.path).then(() => location.path());
+    expect(url).toBe(AUTH_CONFIG.pathFront);
   });
 
   it('Deve navegar para módulo de fornecedor', async () => {

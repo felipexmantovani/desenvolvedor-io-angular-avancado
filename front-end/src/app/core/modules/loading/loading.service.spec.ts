@@ -31,9 +31,9 @@ describe('loading.service.spec | LoadingService', () => {
       component.showLoading = value;
     });
     expect(component.showLoading).toBeFalsy();
-    service.loadingBS.next(true);
+    service.show();
     expect(component.showLoading).toBeTruthy();
-    service.loadingBS.next(false);
+    service.hide();
     expect(component.showLoading).toBeFalsy();
   });
 });

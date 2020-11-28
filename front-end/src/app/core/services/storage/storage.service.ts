@@ -6,6 +6,14 @@ import { Injectable } from '@angular/core';
 export class StorageService {
   constructor() {}
 
+  public sessionSetItem(key: string, object: any): void {
+    sessionStorage.setItem(key, JSON.stringify(object));
+  }
+
+  public sessionGetItem(key: string): any {
+    return JSON.parse(sessionStorage.getItem(key));
+  }
+
   public sessionRemoveItem(key: string): void {
     sessionStorage.removeItem(key);
   }
