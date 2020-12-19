@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -18,7 +18,7 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule.withRoutes(routes)
       ],
       providers: [AuthGuard]

@@ -1,4 +1,5 @@
-import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -21,7 +22,7 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientModule, RouterTestingModule],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         providers: [FormBuilder, AuthService, ExceptionService]
       }).compileComponents();
   }));

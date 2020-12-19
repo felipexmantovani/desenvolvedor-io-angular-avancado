@@ -14,32 +14,37 @@ export class ExceptionService implements ErrorHandler {
   constructor(private notificationService: NotificationService) {}
 
   handleError(response: any): void {
-    console.log('ExceptionService');
-    console.log(response);
-
     if (response instanceof HttpErrorResponse) {
+      console.log('ExceptionService');
+      console.log(response);
+
       if (response.status === HttpStatusCodeEnum.NotFound) {
-        this.notificationService.error('Requisição não encontrada.');
+        this.notificationService.error(`#${response.status} - Requisição não encontrada.`);
         return;
       }
 
       if (response.status === HttpStatusCodeEnum.InternalServerError) {
-        this.notificationService.error('Ocorreu um erro interno no servidor.');
+        this.notificationService.error(`#${response.status} - Ocorreu um erro interno no servidor.`);
         return;
       }
 
       if (response.statusText === 'Unknown Error') {
-        this.notificationService.error('Ocorreu um erro desconhecido.');
+        this.notificationService.error(`#${response.status} - Ocorreu um erro desconhecido.`);
         return;
       }
 
-      if (response.error) {
+      if (response.statusText === 'Unauthorized' || response.statusText === 'Forbidden') {
+        this.notificationService.error(`#${response.status} - Sem permissão.`);
+        return;
+      }
+
+      if (response.error && response) {
         (response.error as Erros).errors.forEach(item => {
           this.notificationService.error(item);
         });
       }
     } else {
-      this.notificationService.error('O sistema encontra-se indisponível.');
+      this.notificationService.error(`#${response.status} - O sistema encontra-se indisponível.`);
     }
   }
 }

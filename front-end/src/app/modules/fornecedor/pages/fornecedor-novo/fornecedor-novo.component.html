@@ -1,6 +1,7 @@
 <po-page-default
   [p-title]="pageTitle"
-  [p-breadcrumb]="breadcrumb">
+  [p-breadcrumb]="breadcrumb"
+  [p-actions]="actions">
 
   <form [formGroup]="form">
     <po-tabs>
@@ -12,7 +13,8 @@
                 formControlName="tipoFornecedor"
                 name="tipoFornecedor"
                 p-label="Tipo"
-                [p-options]="[{ label: 'Pessoa física', value: '0' }, { label: 'Pessoa jurídica', value: '1' }]">
+                [p-options]="[{ label: 'Pessoa física', value: '1' }, { label: 'Pessoa jurídica', value: '2' }]"
+                (p-change)="changeTipoFornecedor($event)">
               </po-radio-group>
               <po-input
                 formControlName="nome"
@@ -20,32 +22,39 @@
                 p-auto-focus="true"
                 p-clean="true"
                 p-error-pattern="Informe entre 2 e 100 caracteres"
-                p-label="Nome"
+                [p-label]="isPF ? 'Nome' : 'Razão social'"
                 p-maxlength="100"
                 p-minlength="2"
                 p-required="true">
               </po-input>
-              <po-number
+              <po-input
                 formControlName="documento"
                 name="documento"
                 p-clean="true"
-                p-error-pattern="Informe um CPF válido"
-                p-label="CPF"
-                p-maxlength="11"
-                p-minlength="11"
-                p-required="true">
-              </po-number>
+                [p-error-pattern]="isPF ? 'Informe um CPF válido' : 'Informe um CNPJ válido'"
+                [p-mask]="isPF ? '999.999.999-99' : '99.999.999/9999-99'"
+                [p-label]="isPF ? 'CPF' : 'CNPJ'"
+                p-required="true"
+                cpf>
+              </po-input>
+              <po-switch
+                formControlName="ativo"
+                name="ativo"
+                p-label-on="Sim"
+                p-label-off="Não"
+                p-label="Ativar fornecedor">
+              </po-switch>
 
           </div>
         </div>
       </po-tab>
 
-      <po-tab p-label="Dados de endereço">
+      <po-tab p-label="Dados endereço">
         <div class="po-row po-mt-5">
           <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
 
             <div formGroupName="endereco">
-              <po-number
+              <po-input
                 formControlName="cep"
                 name="cep"
                 p-clean="true"
@@ -53,8 +62,9 @@
                 p-label="CEP"
                 p-maxlength="8"
                 p-minlength="8"
-                p-required="true">
-              </po-number>
+                p-required="true"
+                (p-change)="changeCep($event)">
+              </po-input>
               <po-input
                 formControlName="logradouro"
                 name="logradouro"
@@ -65,7 +75,7 @@
                 p-minlength="2"
                 p-required="true">
               </po-input>
-              <po-number
+              <po-input
                 formControlName="numero"
                 name="numero"
                 p-clean="true"
@@ -74,7 +84,7 @@
                 p-maxlength="50"
                 p-minlength="1"
                 p-required="true">
-              </po-number>
+              </po-input>
               <po-input
                 formControlName="complemento"
                 name="complemento"
@@ -94,14 +104,13 @@
               <po-select
                 formControlName="estado"
                 name="estado"
-                (p-change)="changeEstado()"
                 p-label="Estado"
-                [p-options]="estados"
-                p-required="true">
+                p-required="true"
+                [p-options]="estados">
               </po-select>
               <po-select
                 formControlName="cidade"
-                [p-disabled]="true"
+                [p-disabled]="cidades.length <= 0"
                 name="string"
                 p-label="Cidade"
                 [p-options]="cidades"
@@ -113,26 +122,6 @@
         </div>
       </po-tab>
     </po-tabs>
-
-    <po-divider></po-divider>
-
-    <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
-      <po-switch
-        formControlName="ativo"
-        name="ativo"
-        p-label-on="Sim"
-        p-label-off="Não"
-        p-label="Ativar fornecedor">
-      </po-switch>
-
-      <po-button
-        class="po-sm-12 po-mt-2 po-p-0"
-        (p-click)="onSubmit()"
-        [p-disabled]="!form.valid"
-        p-label="Salvar"
-        p-type="primary">
-      </po-button>
-    </div>
   </form>
 
 </po-page-default>
