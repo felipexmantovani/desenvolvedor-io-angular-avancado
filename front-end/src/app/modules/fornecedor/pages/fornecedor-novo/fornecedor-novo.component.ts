@@ -10,6 +10,7 @@ import { ViaCepService } from '../../../../core/modules/via-cep/services/via-cep
 import { ExceptionService } from '../../../../core/services/exception/exception.service';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
+import { StringUtil } from '../../../../shared/utils/string.util';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { Fornecedor } from '../../models/fornecedor.interface';
 import { FornecedorService } from '../../services/fornecedor.service';
@@ -111,10 +112,10 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
   }
 
   public changeCep(value: string): void {
-    if (this.form.get('endereco').get('cep').valid) {
+    const enderecoControl = this.form.get('endereco');
+    if (enderecoControl.get('cep').valid) {
       this.loadingService.show();
-      const enderecoControl = this.form.get('endereco');
-      this.viaCepService.get(value)
+      this.viaCepService.get(StringUtil.onlyDigits(value))
         .pipe(finalize(() => this.loadingService.hide()))
         .subscribe(viaCep => {
           enderecoControl.get('complemento').setValue(viaCep.complemento);

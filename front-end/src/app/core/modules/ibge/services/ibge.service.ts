@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { IbgeMunicipio } from '../models/municipio.interface';
 import { IbgeUf } from '../models/uf.interface';
@@ -17,7 +17,7 @@ export class IbgeService {
   public getEstados(): Observable<Array<IbgeUf>> {
     return this.httpClient.get<Array<IbgeUf>>(this.API).pipe(
       take(1),
-      map((estados) => StringUtil.alphabeticalOrder(estados))
+      map((estados) => StringUtil.objectAlphabeticalOrder(estados, 'nome'))
     );
   }
 
@@ -26,7 +26,7 @@ export class IbgeService {
       .get<Array<IbgeMunicipio>>(`${this.API}/${estado}/municipios`)
       .pipe(
         take(1),
-        map((municipios) => StringUtil.alphabeticalOrder(municipios))
+        map((municipios) => StringUtil.objectAlphabeticalOrder(municipios, 'nome'))
       );
   }
 }

@@ -7,9 +7,13 @@ export class StringUtil {
     return valueResume.trim();
   }
 
-  public static alphabeticalOrder(array: Array<any>): Array<any> {
+  public static objectAlphabeticalOrder(array: Array<object>, key: string): Array<any> {
     return array.sort((a, b) => {
-      return a.nome < b.nome ? -1 : a.nome > b.nome ? 1 : 0;
+      return a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
     });
+  }
+
+  public static onlyDigits(value: string): string {
+    return value.replace(/\D/g, '');
   }
 }

@@ -22,10 +22,7 @@
                 p-auto-focus="true"
                 p-clean="true"
                 p-error-pattern="Informe entre 2 e 100 caracteres"
-                [p-label]="isPF ? 'Nome' : 'Razão social'"
-                p-maxlength="100"
-                p-minlength="2"
-                p-required="true">
+                [p-label]="isPF ? 'Nome' : 'Razão social'">
               </po-input>
               <po-input
                 formControlName="documento"
@@ -33,9 +30,7 @@
                 p-clean="true"
                 [p-error-pattern]="isPF ? 'Informe um CPF válido' : 'Informe um CNPJ válido'"
                 [p-mask]="isPF ? '999.999.999-99' : '99.999.999/9999-99'"
-                [p-label]="isPF ? 'CPF' : 'CNPJ'"
-                p-required="true"
-                cpf>
+                [p-label]="isPF ? 'CPF' : 'CNPJ'">
               </po-input>
               <po-switch
                 formControlName="ativo"
@@ -60,9 +55,7 @@
                 p-clean="true"
                 p-error-pattern="Informe CEP válido"
                 p-label="CEP"
-                p-maxlength="8"
-                p-minlength="8"
-                p-required="true"
+                p-mask="99.999-999"
                 (p-change)="changeCep($event)">
               </po-input>
               <po-input
@@ -70,20 +63,14 @@
                 name="logradouro"
                 p-clean="true"
                 p-error-pattern="Informe entre 2 e 200 caracteres"
-                p-label="Logradouro"
-                p-maxlength="200"
-                p-minlength="2"
-                p-required="true">
+                p-label="Logradouro">
               </po-input>
               <po-input
                 formControlName="numero"
                 name="numero"
                 p-clean="true"
                 p-error-pattern="Informe entre 1 e 50 caracteres"
-                p-label="Número"
-                p-maxlength="50"
-                p-minlength="1"
-                p-required="true">
+                p-label="Número">
               </po-input>
               <po-input
                 formControlName="complemento"
@@ -96,16 +83,12 @@
                 name="bairro"
                 p-clean="true"
                 p-error-pattern="Informe entre 2 e 100 caracteres"
-                p-label="Bairro"
-                p-maxlength="100"
-                p-minlength="2"
-                p-required="true">
+                p-label="Bairro">
               </po-input>
               <po-select
                 formControlName="estado"
                 name="estado"
                 p-label="Estado"
-                p-required="true"
                 [p-options]="estados">
               </po-select>
               <po-select
@@ -113,8 +96,7 @@
                 [p-disabled]="cidades.length <= 0"
                 name="string"
                 p-label="Cidade"
-                [p-options]="cidades"
-                p-required="true">
+                [p-options]="cidades">
               </po-select>
             </div>
 

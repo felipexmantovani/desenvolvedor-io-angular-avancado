@@ -31,4 +31,19 @@ describe('string.util.spec | StringUtil', () => {
       expect(textResume).toBe('Pro');
     });
   });
+
+  describe('objectAlphabeticalOrder()', () => {
+    it('Deve retornar em ordem alfabética', () => {
+      let array = [{id: 1, nome: 'João'}, {id: 2, nome: 'Pedro'}, {id: 3, nome: 'Felipe'}];
+      array = StringUtil.objectAlphabeticalOrder(array, 'nome');
+      expect(array).toEqual([{id: 3, nome: 'Felipe'}, {id: 1, nome: 'João'}, {id: 2, nome: 'Pedro'}]);
+    });
+  });
+
+  describe('onlyDigits()', () => {
+    it('Deve retornar apenas os números', () => {
+      const value = '123.456-678-90-Abc!@#$%';
+      expect(StringUtil.onlyDigits(value)).toBe('12345667890');
+    });
+  });
 });
