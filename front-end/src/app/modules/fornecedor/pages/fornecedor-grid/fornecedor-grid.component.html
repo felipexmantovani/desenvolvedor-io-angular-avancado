@@ -1,12 +1,13 @@
 <po-page-default
   [p-title]="pageTitle"
-  [p-breadcrumb]="breadcrumb">
+  [p-breadcrumb]="breadcrumb"
+  [p-actions]="actionsPage">
 
   <po-table
     p-container="shadow"
     p-sort="true"
     p-hide-text-overflow="true"
-    [p-actions]="actions"
+    [p-actions]="actionsTable"
     [p-columns]="columns"
     [p-items]="fornecedores"
     [p-loading]="fornecedores.length === 0">

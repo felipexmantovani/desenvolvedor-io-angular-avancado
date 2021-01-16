@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PoBreadcrumb, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { Fornecedor } from '../../models/fornecedor.interface';
@@ -16,7 +16,15 @@ export class FornecedorGridComponent implements OnInit, PageDefault {
     items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }]
   };
 
-  public readonly actions: Array<PoTableAction> = [
+  public readonly actionsPage: Array<PoPageAction> = [
+    {
+      label: `Novo ${FORNECEDOR_CONFIG.name}`,
+      icon: 'po-icon-plus',
+      url: `${FORNECEDOR_CONFIG.pathFront}/novo`
+    }
+  ];
+
+  public readonly actionsTable: Array<PoTableAction> = [
     { label: 'Detalhes', icon: 'po-icon-eye', action: this.detalhes.bind(this) },
     { label: 'Excluir', icon: 'po-icon-delete', action: this.excluir.bind(this), type: 'danger' },
   ];

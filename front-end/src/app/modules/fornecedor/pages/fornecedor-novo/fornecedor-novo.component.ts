@@ -23,7 +23,11 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
   public pageTitle = `Novo ${FORNECEDOR_CONFIG.name}`;
 
   public readonly breadcrumb: PoBreadcrumb = {
-    items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }]
+    items: [
+      { label: 'Home', link: '/' },
+      { label: FORNECEDOR_CONFIG.namePlural, link: FORNECEDOR_CONFIG.pathFront },
+      { label: this.pageTitle }
+    ]
   };
 
   public actions: Array<PoPageAction>;
