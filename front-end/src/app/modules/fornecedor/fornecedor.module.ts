@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PoButtonModule, PoDividerModule, PoFieldModule, PoPageModule, PoTableModule, PoTabsModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoFieldModule, PoPageModule, PoTableModule, PoTabsModule } from '@po-ui/ng-components';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { FornecedorRoutingModule } from './fornecedor-routing.module';
 import { FornecedorNovoGuard } from './guards/fornecedor-novo.guard';
@@ -21,7 +21,6 @@ import { FornecedorService } from './services/fornecedor.service';
     PoTabsModule,
     ReactiveFormsModule,
     PoFieldModule,
-    PoDividerModule,
     PoButtonModule,
     PoTableModule
   ],
