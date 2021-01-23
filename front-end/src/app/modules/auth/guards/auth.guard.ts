@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router } from '@angular/router';
+import { CanActivate, CanLoad, Router } from '@angular/router';
 import { NotificationService } from '../../../core/services/notification/notification.service';
 import { AUTH_CONFIG } from '../auth.config';
 import { AuthService } from '../services/auth.service';
@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanLoad {
+export class AuthGuard implements CanLoad, CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -15,6 +15,15 @@ export class AuthGuard implements CanLoad {
   ) {}
 
   canLoad(): boolean {
+    return this.canAccess();
+  }
+
+
+  canActivate(): boolean {
+    return this.canAccess();
+  }
+
+  private canAccess(): boolean {
     if (!this.authService.isLogged()) {
       this.notificationService.warning('Para acessar essa página é preciso fazer o login.');
       this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);

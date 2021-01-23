@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { FornecedorNovoGuard } from './guards/fornecedor-novo.guard';
 import { FornecedorGridComponent } from './pages/fornecedor-grid/fornecedor-grid.component';
 import { FornecedorNovoComponent } from './pages/fornecedor-novo/fornecedor-novo.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'novo',
+    canActivate: [AuthGuard],
     canDeactivate: [FornecedorNovoGuard],
     component: FornecedorNovoComponent,
   },
