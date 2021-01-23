@@ -36,17 +36,7 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
     expect(component.logo).toContain('white.svg');
   });
 
-  it('Deve conter apenas 2 itens no menu caso usuário não estiver autenticado', () => {
-    expect(component.menu).toBeTruthy();
-    expect(component.menu.length).toBe(2);
-    expect(component.menu[0].label).toBe('Home');
-    expect(component.menu[0].link).toBe('/home');
-    expect(component.menu[1].label).toBe(PRODUTO_CONFIG.namePlural);
-    expect(component.menu[1].link).toBe(PRODUTO_CONFIG.pathFront);
-  });
-
-  it('Deve conter 3 itens no menu caso usuário estiver autenticado', () => {
-    component.isLogged = true;
+  it('Deve conter 3 itens no menu', () => {
     component['getMenu']();
     expect(component.menu).toBeTruthy();
     expect(component.menu.length).toBe(3);
