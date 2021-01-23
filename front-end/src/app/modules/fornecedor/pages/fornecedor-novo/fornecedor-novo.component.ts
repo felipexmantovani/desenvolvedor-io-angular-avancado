@@ -1,7 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PoBreadcrumb, PoPageAction, PoSelectOption } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoPageAction, PoRadioGroupOption, PoSelectOption } from '@po-ui/ng-components';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { IbgeService } from '../../../../core/modules/ibge/services/ibge.service';
@@ -22,6 +22,11 @@ import { FornecedorService } from '../../services/fornecedor.service';
 export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
   public pageTitle = `Novo ${FORNECEDOR_CONFIG.name}`;
 
+  public readonly options: Array<PoRadioGroupOption> = [
+    { label: 'Pessoa física', value: '1' },
+    { label: 'Pessoa jurídica', value: '2' }
+  ];
+
   public readonly breadcrumb: PoBreadcrumb = {
     items: [
       { label: 'Home', link: '/' },
@@ -38,7 +43,7 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
 
   public cidades: Array<PoSelectOption> = new Array<PoSelectOption>();
 
-  private subs: Array<Subscription> = new Array<Subscription>();
+  private subs: Subscription = new Subscription();
 
   private pessoaFisica = '1';
 
@@ -60,8 +65,8 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
     this.getEstados();
     this.getActions();
 
-    this.subs.push(
-      this.form.valueChanges.subscribe(() => this.getActions()),
+    this.subs.add(this.form.valueChanges.subscribe(() => this.getActions()));
+    this.subs.add(
       this.form.get('endereco').get('estado').valueChanges.subscribe(value => {
         this.loadingService.show();
         this.cidades = new Array<PoSelectOption>();
@@ -80,7 +85,7 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
   }
 
   ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs.unsubscribe();
   }
 
   private createForm(): void {

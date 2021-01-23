@@ -24,9 +24,7 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
 
   public isLogged = false;
 
-  private subs: Array<Subscription> = new Array<Subscription>();
-
-  private opa: string;
+  private subs: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -35,45 +33,42 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subs.push(
+    this.getMenu();
+
+    this.subs.add(
       this.authService.isLoggedBS.subscribe(value => {
         this.isLogged = this.authService.isLogged() || value;
-        this.getMenu();
       })
     );
   }
 
   ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs.unsubscribe();
   }
 
   public getMenu(): void {
     this.menu = new Array<PoMenuItem>();
 
-    this.menu.push({
-      label: 'Home',
-      link: '/home',
-      icon: 'po-icon-home',
-      shortLabel: StringUtil.resume('Home', this.maxShortLabel, true)
-    });
-
-    if (this.isLogged) {
-      this.menu.push(
-        {
-          label: FORNECEDOR_CONFIG.namePlural,
-          link: FORNECEDOR_CONFIG.pathFront,
-          icon: 'po-icon-truck',
-          shortLabel: StringUtil.resume(FORNECEDOR_CONFIG.namePlural, this.maxShortLabel, true)
-        }
-      );
-    }
-
-    this.menu.push({
-      label: PRODUTO_CONFIG.namePlural,
-      link: PRODUTO_CONFIG.pathFront,
-      icon: 'po-icon-database',
-      shortLabel: StringUtil.resume(PRODUTO_CONFIG.namePlural, this.maxShortLabel, true)
-    });
+    this.menu.push(
+      {
+        label: 'Home',
+        link: '/home',
+        icon: 'po-icon-home',
+        shortLabel: StringUtil.resume('Home', this.maxShortLabel, true)
+      },
+      {
+        label: FORNECEDOR_CONFIG.namePlural,
+        link: FORNECEDOR_CONFIG.pathFront,
+        icon: 'po-icon-truck',
+        shortLabel: StringUtil.resume(FORNECEDOR_CONFIG.namePlural, this.maxShortLabel, true)
+      },
+      {
+        label: PRODUTO_CONFIG.namePlural,
+        link: PRODUTO_CONFIG.pathFront,
+        icon: 'po-icon-database',
+        shortLabel: StringUtil.resume(PRODUTO_CONFIG.namePlural, this.maxShortLabel, true)
+      }
+    );
   }
 
   public goUsuario(): void {

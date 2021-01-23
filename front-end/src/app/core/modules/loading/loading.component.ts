@@ -16,12 +16,12 @@ export class LoadingComponent implements OnInit, OnDestroy {
   @Input()
   public text = 'Aguarde...';
 
-  private subs: Array<Subscription> = new Array<Subscription>();
+  private subs: Subscription = new Subscription();
 
   constructor(readonly loadingService: LoadingService) {}
 
   ngOnInit(): void {
-    this.subs.push(
+    this.subs.add(
       this.loadingService.loadingBS.subscribe(value => {
         this.showLoading = value;
       })
@@ -29,6 +29,6 @@ export class LoadingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs.unsubscribe();
   }
 }
