@@ -74,7 +74,4 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     component.onSubmit();
     expect(spyException).toHaveBeenCalled();
   });
-
-  it('Deve executar método onSubmit() caso pressionar a tecla Enter e caso o formulário estiver válido', () => {
-  });
 });

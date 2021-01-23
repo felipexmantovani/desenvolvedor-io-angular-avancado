@@ -8,9 +8,11 @@ import { ViaCep } from '../models/via-cep.interface';
   providedIn: 'root'
 })
 export class ViaCepService {
+  public static API = 'https://viacep.com.br/ws';
+
   constructor(private httpClient: HttpClient) {}
 
   get(cep: string): Observable<ViaCep> {
-    return this.httpClient.get<ViaCep>(`https://viacep.com.br/ws/${cep}/json`).pipe(take(1));
+    return this.httpClient.get<ViaCep>(`${ViaCepService.API}/${cep}/json`).pipe(take(1));
   }
 }

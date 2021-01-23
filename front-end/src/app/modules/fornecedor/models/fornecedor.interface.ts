@@ -8,5 +8,5 @@ export interface Fornecedor {
   tipoFornecedor: number;
   endereco: FornecedorEndereco;
   ativo: boolean;
-  produtos: Produto;
+  produtos: Array<Produto>;
 }

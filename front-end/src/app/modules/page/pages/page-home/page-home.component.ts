@@ -29,6 +29,10 @@ export class PageHomeComponent implements OnInit, PageDefault {
   ) {}
 
   ngOnInit(): void {
+    this.getFornecedores();
+  }
+
+  private getFornecedores(): void {
     this.loadingService.show();
     this.fornecedorService
       .read()
