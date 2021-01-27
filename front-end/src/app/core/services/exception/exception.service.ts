@@ -3,7 +3,7 @@ import { ErrorHandler, Injectable } from '@angular/core';
 import { HttpStatusCodeEnum } from '../../../shared/enums/http-status-code.enum';
 import { NotificationService } from '../notification/notification.service';
 
-interface Erros {
+export interface Erros {
   errors: Array<string>;
 }
 
@@ -42,6 +42,8 @@ export class ExceptionService implements ErrorHandler {
         (response.error as Erros).errors.forEach(item => {
           this.notificationService.error(item);
         });
+      } else {
+        this.notificationService.error('O sistema encontra-se indisponível.');
       }
     } else {
       this.notificationService.error(`#${response.status} - O sistema encontra-se indisponível.`);
