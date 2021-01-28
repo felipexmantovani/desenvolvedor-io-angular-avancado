@@ -74,4 +74,15 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     component.onSubmit();
     expect(spyException).toHaveBeenCalled();
   });
+
+  it('Deve submeter o formulário ao pressionar a tecla Enter', () => {
+    component.form.controls['email'].setValue('email@email.com');
+    component.form.controls['password'].setValue('123mudar');
+    const spy = spyOn(component, 'onSubmit');
+    const event = new KeyboardEvent('window:keyUp', {
+      key: 'Enter'
+    });
+    component.keyUp(event);
+    expect(spy).toHaveBeenCalled();
+  });
 });

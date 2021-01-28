@@ -40,6 +40,10 @@ describe('auth.guard.spec | AuthGuard', () => {
     guard.canLoad();
     expect(spy).toHaveBeenCalled();
     expect(guard.canLoad()).toBeTruthy();
+
+    guard.canActivate();
+    expect(spy).toHaveBeenCalled();
+    expect(guard.canLoad()).toBeTruthy();
   });
 
   it('Deve retornar false, exibir notificação e redirecionar para rota de login caso o usuário não estiver autenticado', () => {

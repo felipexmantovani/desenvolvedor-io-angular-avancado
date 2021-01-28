@@ -22,8 +22,6 @@ export class HttpCustomInterceptor implements HttpInterceptor {
         this.httpHeaders = this.httpHeaders.set(HttpHeadersEnum.Authorization, `Bearer ${this.token}`);
       }
       req = req.clone({headers: this.httpHeaders});
-    } else {
-      return next.handle(req);
     }
 
     return next.handle(req);
