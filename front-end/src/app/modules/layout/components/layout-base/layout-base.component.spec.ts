@@ -1,15 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoAvatarModule, PoButtonModule, PoMenuModule } from '@po-ui/ng-components';
+import { AUTH_CONFIG } from '../../../auth/auth.config';
 import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
 import { PRODUTO_CONFIG } from '../../../produto/produto.config';
+import { USUARIO_CONFIG } from '../../../usuario/usuario.config';
 import { LayoutBaseComponent } from './layout-base.component';
 
 describe('layout-base.component.spec | LayoutBaseComponent', () => {
   let component: LayoutBaseComponent;
   let fixture: ComponentFixture<LayoutBaseComponent>;
   let authService: AuthService;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,6 +29,7 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
     fixture = TestBed.createComponent(LayoutBaseComponent);
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthService);
+    router =  TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -46,5 +51,30 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
     expect(component.menu[1].link).toBe(FORNECEDOR_CONFIG.pathFront);
     expect(component.menu[2].label).toBe(PRODUTO_CONFIG.namePlural);
     expect(component.menu[2].link).toBe(PRODUTO_CONFIG.pathFront);
+  });
+
+  it('Deve navegar rota de perfil de usuário', () => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.goUsuario();
+    expect(spy).toHaveBeenCalledWith(`${USUARIO_CONFIG.pathFront}/perfil`);
+  });
+
+  it('Deve navegar rota de login', () => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.goLogin();
+    expect(spy).toHaveBeenCalledWith(`${AUTH_CONFIG.pathFront}/login`);
+  });
+
+  it('Deve navegar rota de nova conta de usuário', () => {
+    const spy = spyOn(router, 'navigateByUrl');
+    component.goNewAccount();
+    expect(spy).toHaveBeenCalledWith(`${USUARIO_CONFIG.pathFront}/novo`);
+  });
+
+  it('Deve navegar para raiz após fazer o logout', () => {
+    spyOn(router, 'navigateByUrl');
+    component.logout();
+    component['optionsDialog'].confirm();
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/');
   });
 });

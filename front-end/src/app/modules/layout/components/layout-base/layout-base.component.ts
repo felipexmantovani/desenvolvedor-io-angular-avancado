@@ -24,6 +24,8 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
 
   public isLogged = false;
 
+  private optionsDialog: PoDialogConfirmOptions;
+
   private subs: Subscription = new Subscription();
 
   constructor(
@@ -84,7 +86,7 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
   }
 
   public logout(): void {
-    const options: PoDialogConfirmOptions = {
+    this.optionsDialog = {
       title: 'Confirmação!',
       message: 'Realmente deseja sair?',
       confirm: () => {
@@ -92,6 +94,6 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/');
       }
     };
-    this.poDialogService.confirm(options);
+    this.poDialogService.confirm(this.optionsDialog);
   }
 }
