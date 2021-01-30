@@ -1,1 +1,3 @@
-describe('fornecedor-routing.module.spec | FornecedorRoutingModule', () => {});
+describe('fornecedor-routing.module.spec | FornecedorRoutingModule', () => {
+  it('', () => {});
+});

@@ -1,1 +1,3 @@
-describe('usuario.service.spec | UsuarioService', () => {});
+describe('usuario.service.spec | UsuarioService', () => {
+  it('', () => {});
+});

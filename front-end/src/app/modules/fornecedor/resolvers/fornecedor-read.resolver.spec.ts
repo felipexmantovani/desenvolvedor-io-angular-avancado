@@ -1,1 +1,3 @@
-describe('fornecedor-read.resolver.spec | FornecedorReadResolver', () => {});
+describe('fornecedor-read.resolver.spec | FornecedorReadResolver', () => {
+  it('', () => {});
+});

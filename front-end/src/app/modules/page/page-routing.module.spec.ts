@@ -1,1 +1,3 @@
-describe('page-routing.module.spec | PageRoutingModule', () => {});
+describe('page-routing.module.spec | PageRoutingModule', () => {
+  it('', () => {});
+});

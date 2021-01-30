@@ -1,1 +1,3 @@
-describe('auth-routing.module.spec | AuthRoutingModule', () => {});
+describe('auth-routing.module.spec | AuthRoutingModule', () => {
+  it('', () => {});
+});

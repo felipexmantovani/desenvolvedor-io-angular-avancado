@@ -1,1 +1,3 @@
-describe('fornecedor-grid.component.spec | FornecedorGridComponent', () => {});
+describe('fornecedor-grid.component.spec | FornecedorGridComponent', () => {
+  it('', () => {});
+});

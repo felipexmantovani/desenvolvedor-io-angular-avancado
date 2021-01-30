@@ -1,1 +1,3 @@
-describe('http-status-code.enum.spec | HttpStatusCodeEnum', () => {});
+describe('http-status-code.enum.spec | HttpStatusCodeEnum', () => {
+  it('', () => {});
+});

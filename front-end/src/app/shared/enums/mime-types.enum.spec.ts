@@ -1,1 +1,3 @@
-describe('mime-types.enum.spec | MimeTypesEnum', () => {});
+describe('mime-types.enum.spec | MimeTypesEnum', () => {
+  it('', () => {});
+});

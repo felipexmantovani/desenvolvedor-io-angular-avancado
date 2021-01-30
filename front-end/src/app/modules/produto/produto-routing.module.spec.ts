@@ -1,1 +1,3 @@
-describe('produto-routing.module.spec | ProdutoRoutingModule', () => {});
+describe('produto-routing.module.spec | ProdutoRoutingModule', () => {
+  it('', () => {});
+});

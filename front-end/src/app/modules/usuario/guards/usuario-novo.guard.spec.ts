@@ -1,1 +1,3 @@
-describe('usuario-novo.guard.spec | UsuarioNovoGuard', () => {});
+describe('usuario-novo.guard.spec | UsuarioNovoGuard', () => {
+  it('', () => {});
+});

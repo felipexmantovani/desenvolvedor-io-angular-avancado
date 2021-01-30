@@ -1,1 +1,3 @@
-describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {});
+describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
+  it('', () => {});
+});
