@@ -15,9 +15,6 @@ export class ExceptionService implements ErrorHandler {
 
   handleError(response: any): void {
     if (response instanceof HttpErrorResponse) {
-      console.log('ExceptionService');
-      console.log(response);
-
       if (response.status === HttpStatusCodeEnum.NotFound) {
         this.notificationService.error(`#${response.status} - Requisição não encontrada.`);
         return;

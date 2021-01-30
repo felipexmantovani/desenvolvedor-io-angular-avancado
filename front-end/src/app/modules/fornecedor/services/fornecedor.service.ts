@@ -11,7 +11,7 @@ import { Fornecedor } from '../models/fornecedor.interface';
 @Injectable()
 export class FornecedorService {
   private API = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}`;
-  private API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}/endereco`;
+  private API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApiEndereco}`;
 
   constructor(private httpClient: HttpClient) {}
 
