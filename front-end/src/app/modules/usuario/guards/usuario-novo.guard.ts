@@ -5,6 +5,8 @@ import { UsuarioNovoComponent } from '../pages/usuario-novo/usuario-novo.compone
 
 @Injectable()
 export class UsuarioNovoGuard implements CanDeactivate<UsuarioNovoComponent> {
+  public options: PoDialogConfirmOptions;
+
   constructor(public poDialogService: PoDialogService) {}
 
   async canDeactivate(component: UsuarioNovoComponent): Promise<boolean> {
@@ -16,17 +18,13 @@ export class UsuarioNovoGuard implements CanDeactivate<UsuarioNovoComponent> {
       if (!component.form.dirty) {
         resolve(true);
       } else {
-        const options: PoDialogConfirmOptions = {
+        this.options = {
           title: 'Confirmação!',
           message: 'Realmente deseja sair desta página e cancelar o cadastro?',
-          confirm: () => {
-            resolve(true);
-          },
-          cancel: () => {
-            resolve(false);
-          }
+          confirm: () => resolve(true),
+          cancel: () => resolve(false)
         };
-        this.poDialogService.confirm(options);
+        this.poDialogService.confirm(this.options);
       }
     });
   }

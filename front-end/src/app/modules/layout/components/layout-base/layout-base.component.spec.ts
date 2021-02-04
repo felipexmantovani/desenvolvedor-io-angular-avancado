@@ -1,7 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoAvatarModule, PoButtonModule, PoMenuModule } from '@po-ui/ng-components';
+import { take } from 'rxjs/operators';
 import { AUTH_CONFIG } from '../../../auth/auth.config';
 import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
@@ -73,8 +74,12 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
 
   it('Deve navegar para raiz após fazer o logout', () => {
     spyOn(router, 'navigateByUrl');
+    spyOn(component['poDialogService'], 'confirm');
+
     component.logout();
     component['optionsDialog'].confirm();
+
+    expect(component['poDialogService'].confirm).toHaveBeenCalled();
     expect(router.navigateByUrl).toHaveBeenCalledWith('/');
   });
 });
