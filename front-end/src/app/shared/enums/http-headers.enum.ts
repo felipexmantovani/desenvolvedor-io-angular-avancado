@@ -22,7 +22,7 @@ export enum HttpHeadersEnum {
   Age = 'Age',
   Allow = 'Allow',
   Authorization = 'Authorization',
-  CacheControl = ' Cache-Control',
+  CacheControl = 'Cache-Control',
   Connection = 'Connection',
   ContentDPR = 'Content-DPR',
   ContentDisposition = 'Content-Disposition',
