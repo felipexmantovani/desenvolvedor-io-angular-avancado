@@ -3,7 +3,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthGuard } from '../auth/guards/auth.guard';
 import { LoginGuard } from '../auth/guards/login.guard';
 import { routes } from './usuario-routing.module';
 
@@ -14,7 +13,7 @@ describe('usuario-routing.module.spec | UsuarioRoutingModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)],
-      providers: [AuthGuard, LoginGuard],
+      providers: [LoginGuard],
     });
 
     router = TestBed.inject(Router);

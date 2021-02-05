@@ -6,7 +6,7 @@ import { FornecedorGridComponent } from './pages/fornecedor-grid/fornecedor-grid
 import { FornecedorNovoComponent } from './pages/fornecedor-novo/fornecedor-novo.component';
 import { FornecedorReadResolver } from './resolvers/fornecedor-read.resolver';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: FornecedorGridComponent,
