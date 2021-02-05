@@ -4,13 +4,13 @@ export interface Token {
   userToken?: UserToken;
 }
 
-interface Claims {
-  value: string;
-  type: string;
-}
-
 interface UserToken {
   id: string;
   email: string;
   claims: Claims;
+}
+
+interface Claims {
+  value: string;
+  type: string;
 }

@@ -76,10 +76,10 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
   });
 
   it('Deve submeter o formulário ao pressionar a tecla Enter', () => {
-    component.form.controls['email'].setValue('email@email.com');
-    component.form.controls['password'].setValue('123mudar');
+    component.form.get('email').setValue('teste@teste.com');
+    component.form.get('password').setValue('Teste@123');
     const spy = spyOn(component, 'onSubmit');
-    const event = new KeyboardEvent('window:keyUp', {
+    const event = new KeyboardEvent('window:keyup', {
       key: 'Enter'
     });
     component.keyUp(event);
