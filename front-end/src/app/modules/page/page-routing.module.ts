@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageErroComponent } from './pages/page-erro/page-erro.component';
 import { PageHomeComponent } from './pages/page-home/page-home.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'home',
     component: PageHomeComponent,
