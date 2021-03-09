@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
+import { HttpStatusCodeEnum } from '../../../shared/enums/http-status-code.enum';
 import { Token } from '../models/auth-token.interface';
 import { AuthService } from '../services/auth.service';
 import { AuthLoginComponent } from './auth-login.component';
@@ -67,8 +68,8 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
 
   it('Deve tratar o erro caso ocorra ao chamar método onSubmit()', () => {
     spyOn(authService, 'login').and.returnValue(throwError(new HttpErrorResponse({
-      status: 500,
-      statusText: 'Ocorreu um erro no servidor'
+      status: HttpStatusCodeEnum.InternalServerError,
+      statusText: 'Ocorreu um erro no servidor.'
     })));
     const spyException = spyOn(exceptionService, 'handleError');
     component.onSubmit();

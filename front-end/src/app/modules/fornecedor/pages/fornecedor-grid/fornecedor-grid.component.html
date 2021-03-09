@@ -10,7 +10,7 @@
     [p-actions]="actionsTable"
     [p-columns]="columns"
     [p-items]="fornecedores"
-    [p-loading]="fornecedores.length === 0">
+    [p-loading]="fornecedores?.length === 0">
 
     <ng-template p-table-cell-template let-column="column" let-row="row">
         <span

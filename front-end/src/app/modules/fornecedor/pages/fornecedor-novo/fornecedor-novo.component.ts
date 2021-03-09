@@ -45,7 +45,7 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
 
   private subs: Subscription = new Subscription();
 
-  private pessoaFisica = '1';
+  private tipoFornecedor = '1';
 
   public fornecedor: Fornecedor;
 
@@ -64,7 +64,32 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
     this.createForm();
     this.getEstados();
     this.getActions();
+  }
 
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
+  private createForm(): void {
+    this.form = this.formBuilder.group({
+      nome: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(2)]],
+      documento: [null, [Validators.required, Validators.maxLength(14), Validators.minLength(11)]],
+      tipoFornecedor: [this.tipoFornecedor],
+      ativo: [true],
+      endereco: this.formBuilder.group({
+        cep: [null, [Validators.required, Validators.maxLength(8), Validators.minLength(8)]],
+        logradouro: [null, [Validators.required, Validators.maxLength(200), Validators.minLength(2)]],
+        numero: [null, [Validators.required, Validators.maxLength(50), Validators.minLength(1)]],
+        complemento: [null],
+        bairro: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(2)]],
+        estado: [null, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
+        cidade: [null, [Validators.required, Validators.maxLength(10), Validators.minLength(2)]],
+      })
+    });
+    this.onChangesForm();
+  }
+
+  private onChangesForm(): void {
     this.subs.add(this.form.valueChanges.subscribe(() => this.getActions()));
     this.subs.add(
       this.form.get('endereco').get('estado').valueChanges.subscribe(value => {
@@ -84,33 +109,11 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
     );
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
-
-  private createForm(): void {
-    this.form = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(2)]],
-      documento: ['', [Validators.required, Validators.maxLength(14), Validators.minLength(11)]],
-      tipoFornecedor: ['1'],
-      ativo: [true],
-      endereco: this.formBuilder.group({
-        cep: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(8)]],
-        logradouro: ['', [Validators.required, Validators.maxLength(200), Validators.minLength(2)]],
-        numero: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(1)]],
-        complemento: [''],
-        bairro: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(2)]],
-        estado: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
-        cidade: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(2)]],
-      })
-    });
-  }
-
   public changeTipoFornecedor(value: string): void {
     this.form.get('nome').setValue('');
     this.form.get('documento').setValue('');
 
-    this.pessoaFisica = value;
+    this.tipoFornecedor = value;
     const documentoControl = this.form.get('documento');
     if (this.isPF) {
       documentoControl.setValidators([Validators.required, Validators.maxLength(11), Validators.minLength(11)]);
@@ -163,7 +166,7 @@ export class FornecedorNovoComponent implements OnInit, OnDestroy, PageDefault {
   }
 
   public get isPF(): boolean {
-    return this.pessoaFisica === '1';
+    return this.tipoFornecedor === '1';
   }
 
   @HostListener('window:keyup', ['$event'])
