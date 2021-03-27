@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../app.config';
@@ -17,6 +18,7 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
+    private router: Router,
     private storageService: StorageService
   ) {}
 
@@ -33,6 +35,7 @@ export class AuthService {
   public logout(): void {
     this.storageService.localRemoveItem(AUTH_CONFIG.keyToken);
     this.isLoggedBS.next(false);
+    this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
   }
 
   public isLogged(): boolean {

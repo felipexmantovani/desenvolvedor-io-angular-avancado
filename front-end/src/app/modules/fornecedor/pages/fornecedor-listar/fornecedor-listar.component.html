@@ -12,14 +12,14 @@
     [p-items]="fornecedores"
     [p-loading]="fornecedores?.length === 0">
 
-    <ng-template p-table-cell-template let-column="column" let-row="row">
+    <ng-template p-table-column-template p-property="ativo" let-value>
       <span
-        *ngIf="column.property === 'ativo' && row.ativo === true"
+        *ngIf="value"
         class="po-color-11 po-table-column-label">
         Ativo
       </span>
       <span
-        *ngIf="column.property === 'ativo' && row.ativo === false"
+        *ngIf="!value"
         class="po-color-07 po-table-column-label">
         Inativo
       </span>

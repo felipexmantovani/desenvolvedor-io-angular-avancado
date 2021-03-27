@@ -1,5 +1,6 @@
 import { HttpClient, HttpHandler, HttpRequest } from '@angular/common/http';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { APP_CONFIG } from '../../../app.config';
 import { AuthService } from '../../../modules/auth/services/auth.service';
 import { HttpHeadersEnum } from '../../../shared/enums/http-headers.enum';
@@ -16,6 +17,7 @@ describe('http-custom-interceptor.service.spec | HttpCustomInterceptor', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
+        imports: [RouterTestingModule],
         providers: [
           AuthService,
           HttpHandler,

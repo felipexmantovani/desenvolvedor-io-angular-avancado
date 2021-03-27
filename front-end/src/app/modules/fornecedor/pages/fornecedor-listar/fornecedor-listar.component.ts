@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { Subscription } from 'rxjs';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
@@ -18,23 +18,11 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
     items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }]
   };
 
-  public actionsPage: Array<PoPageAction>;
+  public actionsPage: Array<PoPageAction> = new Array<PoPageAction>();
 
-  public readonly actionsTable: Array<PoTableAction> = [
-    { label: 'Detalhes', icon: 'po-icon-eye', action: this.detalhes.bind(this) },
-    { label: 'Excluir', icon: 'po-icon-delete', action: this.excluir.bind(this), type: 'danger' },
-  ];
+  public actionsTable: Array<PoTableAction> = new Array<PoTableAction>();
 
-  public readonly columns: Array<PoTableColumn> = [
-    {
-      property: 'ativo',
-      width: '100px',
-      label: 'Status',
-      type: 'cellTemplate'
-    },
-    { label: 'Nome', property: 'nome' },
-    { label: 'Documento', property: 'documento' },
-  ];
+  public columns: Array<PoTableColumn>;
 
   public fornecedores: Array<Fornecedor>;
 
@@ -44,7 +32,8 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,16 +42,32 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
     this.subs.add(
       this.authService.isLoggedBS.subscribe(value => {
         this.isLogged = this.authService.isLogged() || value;
-        this.getActionsPage();
       })
     );
+
+    this.getCollums();
+    this.getActionsPage();
+    this.getActionsTable();
   }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
-  private getActionsPage(): void {
+  getCollums(): void {
+    this.columns = [
+      {
+        label: 'Status',
+        property: 'ativo',
+        width: '100px',
+        type: 'columnTemplate',
+      },
+      { label: 'Nome', property: 'nome' },
+      { label: 'Documento', property: 'documento' }
+    ];
+  }
+
+  getActionsPage(): void {
     if (this.isLogged) {
       this.actionsPage = [
         {
@@ -74,11 +79,20 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
     }
   }
 
-  private detalhes(fornecedor: Fornecedor): void {
-    console.log(fornecedor);
+  getActionsTable(): void {
+    if (this.isLogged) {
+      this.actionsTable = [
+        { label: 'Detalhes', icon: 'po-icon-eye', action: this.detalhes.bind(this) },
+        { label: 'Excluir', icon: 'po-icon-delete', action: this.excluir.bind(this), type: 'danger' },
+      ];
+    }
   }
 
-  private excluir(fornecedor: Fornecedor): void {
+  detalhes(fornecedor: Fornecedor): void {
+    this.router.navigateByUrl(`${FORNECEDOR_CONFIG.pathFront}/detalhe/${fornecedor.id}`);
+  }
+
+  excluir(fornecedor: Fornecedor): void {
     console.log(fornecedor);
   }
 }

@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '../../../modules/auth/services/auth.service';
 import { HttpStatusCodeEnum } from '../../../shared/enums/http-status-code.enum';
 import { NotificationService } from '../notification/notification.service';
 import { Erros, ExceptionService } from './exception.service';
@@ -7,9 +8,11 @@ describe('exception.service.spec | ExceptionService', () => {
   let notification: jasmine.SpyObj<NotificationService>;
   let exception: ExceptionService;
 
+  const authService = jasmine.createSpyObj<AuthService>(['logout']);
+
   beforeEach(() => {
     notification = jasmine.createSpyObj(NotificationService, ['error']);
-    exception = new ExceptionService(notification);
+    exception = new ExceptionService(notification, authService);
   });
 
   it('Deve tratar o erro NotFound', () => {
@@ -37,20 +40,13 @@ describe('exception.service.spec | ExceptionService', () => {
     expect(notification.error).toHaveBeenCalledWith(`#${httpErrorResponse.status} - Ocorreu um erro desconhecido.`);
   });
 
-  it('Deve tratar o erro Unauthorized e Forbidden', () => {
+  it('Deve tratar o erro Unauthorized', () => {
     const httpErrorResponseUnauthorized = new HttpErrorResponse({
       status: 401,
       statusText: 'Unauthorized'
     });
     exception.handleError(httpErrorResponseUnauthorized);
-    expect(notification.error).toHaveBeenCalledWith(`#${httpErrorResponseUnauthorized.status} - Sem permissão.`);
-
-    const httpErrorResponseForbidden = new HttpErrorResponse({
-      status: 401,
-      statusText: 'Forbidden'
-    });
-    exception.handleError(httpErrorResponseForbidden);
-    expect(notification.error).toHaveBeenCalledWith(`#${httpErrorResponseForbidden.status} - Sem permissão.`);
+    expect(notification.error).toHaveBeenCalledWith(`#${httpErrorResponseUnauthorized.status} - Seu token expirou. Por favor, faça o login novamente.`);
   });
 
   it('Deve tratar o erro do array de erros', () => {

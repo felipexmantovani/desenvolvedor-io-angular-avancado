@@ -34,7 +34,6 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     fixture.detectChanges();
     exceptionService = TestBed.inject(ExceptionService);
     authService = TestBed.inject(AuthService);
-    authService.logout();
   });
 
   it('Deve ser criado', () => {

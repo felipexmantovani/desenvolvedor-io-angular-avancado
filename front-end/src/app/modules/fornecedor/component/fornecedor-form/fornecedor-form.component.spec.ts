@@ -1,7 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PoModule } from '@po-ui/ng-components';
 import { of, throwError } from 'rxjs';
 import { ExceptionService } from '../../../../core/services/exception/exception.service';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
@@ -30,6 +33,12 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [FornecedorFormComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule,
+        PoModule
+      ],
       providers: [
         FormBuilder,
         {

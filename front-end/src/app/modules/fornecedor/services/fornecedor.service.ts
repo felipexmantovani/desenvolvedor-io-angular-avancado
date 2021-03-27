@@ -30,12 +30,11 @@ export class FornecedorService {
       .pipe(take(1));
   }
 
-  public readById(id: number): Observable<Fornecedor> {
+  public readById(id: string): Observable<Fornecedor> {
     return this.httpClient
       .get<Fornecedor>(`${this.API}/${id}`)
       .pipe(
-        take(1),
-        map((result) => HttpUtil.extractData(result))
+        take(1)
       );
   }
 
@@ -66,7 +65,7 @@ export class FornecedorService {
       );
   }
 
-  public updateEndereco(endereco: FornecedorEndereco, id: number): Observable<FornecedorEndereco> {
+  public updateEndereco(endereco: FornecedorEndereco): Observable<FornecedorEndereco> {
     return this.httpClient
       .put<FornecedorEndereco>(`${this.API_ENDERECO}/${endereco.id}`, endereco)
       .pipe(

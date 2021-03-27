@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PoPageModule, PoTableModule } from '@po-ui/ng-components';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorListarComponent } from './fornecedor-listar.component';
 
@@ -12,7 +13,7 @@ describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [FornecedorListarComponent],
-        imports: [RouterTestingModule, HttpClientTestingModule]
+        imports: [RouterTestingModule, HttpClientTestingModule, PoPageModule, PoTableModule]
       }).compileComponents();
     })
   );

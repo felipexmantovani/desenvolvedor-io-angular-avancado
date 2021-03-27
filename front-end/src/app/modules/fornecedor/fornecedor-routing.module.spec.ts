@@ -40,8 +40,8 @@ describe('fornecedor-routing.module.spec | FornecedorRoutingModule', () => {
     location = TestBed.inject(Location);
   });
 
-  it('Deve conter 2 rotas', () => {
-    expect(router.config.length).toBe(2);
+  it('Deve conter 3 rotas', () => {
+    expect(router.config.length).toBe(3);
   });
 
   it('Deve navegar para listagem de fornecedores', async () => {

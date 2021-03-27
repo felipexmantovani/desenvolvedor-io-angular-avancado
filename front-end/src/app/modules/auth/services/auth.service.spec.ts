@@ -1,6 +1,7 @@
 import { HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { APP_CONFIG } from '../../../app.config';
 import { Token } from '../models/auth-token.interface';
 import { Login } from '../models/login.interface';
@@ -17,7 +18,7 @@ describe('auth.service.spec | AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule, RouterTestingModule]
     });
 
     httpTestingController = TestBed.inject(HttpTestingController);

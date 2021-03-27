@@ -5,15 +5,18 @@ import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-inte
 import { FornecedorComponentModule } from './component/fornecedor-component.module';
 import { FornecedorRoutingModule } from './fornecedor-routing.module';
 import { FornecedorNovoGuard } from './guards/fornecedor-novo.guard';
+import { FornecedorDetalheComponent } from './pages/fornecedor-detalhe/fornecedor-detalhe.component';
 import { FornecedorListarComponent } from './pages/fornecedor-listar/fornecedor-listar.component';
 import { FornecedorNovoComponent } from './pages/fornecedor-novo/fornecedor-novo.component';
+import { FornecedorGetByIdResolver } from './resolvers/fornecedor-get-by-id.resolver';
 import { FornecedorReadResolver } from './resolvers/fornecedor-read.resolver';
 import { FornecedorService } from './services/fornecedor.service';
 
 @NgModule({
   declarations: [
     FornecedorNovoComponent,
-    FornecedorListarComponent
+    FornecedorListarComponent,
+    FornecedorDetalheComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +27,11 @@ import { FornecedorService } from './services/fornecedor.service';
     PoButtonModule,
     PoTableModule
   ],
-  providers: [FornecedorNovoGuard, FornecedorService, FornecedorReadResolver]
+  providers: [
+    FornecedorNovoGuard,
+    FornecedorService,
+    FornecedorReadResolver,
+    FornecedorGetByIdResolver
+  ]
 })
 export class FornecedorModule {}

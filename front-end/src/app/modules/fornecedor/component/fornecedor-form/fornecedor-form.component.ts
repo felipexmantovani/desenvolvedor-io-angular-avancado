@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PoRadioGroupOption, PoSelectOption } from '@po-ui/ng-components';
@@ -10,6 +10,7 @@ import { ViaCepService } from '../../../../core/modules/via-cep/services/via-cep
 import { ExceptionService } from '../../../../core/services/exception/exception.service';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { StringUtil } from '../../../../shared/utils/string.util';
+import { Produto } from '../../../produto/models/produto.interface';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { Fornecedor } from '../../models/fornecedor.interface';
 import { FornecedorService } from '../../services/fornecedor.service';
@@ -38,6 +39,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     return this.tipoFornecedor === '1';
   }
 
+  @Input()
   public fornecedor: Fornecedor;
 
   constructor(
@@ -77,6 +79,19 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
       })
     });
     this.onChangesForm();
+
+    if (this.isEdit()) {
+      this.form.patchValue(this.fornecedor);
+
+      this.form.get('tipoFornecedor').setValue(this.fornecedor.tipoFornecedor.toString());
+      setTimeout(() => {
+        this.form.get('endereco').get('estado').setValue(this.fornecedor.endereco.estado);
+      }, 500);
+    }
+  }
+
+  isEdit(): boolean {
+    return this.fornecedor && this.fornecedor.id ? true : false;
   }
 
   private onChangesForm(): void {
@@ -93,6 +108,9 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
                 value: municipio.id
               });
             });
+            if (this.isEdit()) {
+              this.form.get('endereco').get('cidade').setValue(this.fornecedor.endereco.cidade);
+            }
           });
       })
     );
@@ -161,18 +179,50 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
 
     this.loadingService.show();
 
-    this.fornecedor = this.form.value;
-    this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString(), 10);
-    this.fornecedorService
-      .save(this.fornecedor)
-      .pipe(finalize(() => this.loadingService.hide()))
-      .subscribe(
-        fornecedorRes => {
-          this.fornecedor = fornecedorRes;
-          this.notificationService.success(`Fornecedor ${fornecedorRes.nome} cadastrado com sucesso.`);
-          this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
-        },
-        (error) => this.exceptionService.handleError(error)
-    );
+    if (!this.isEdit()) {
+      this.fornecedor = this.form.value;
+      this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString(), 10);
+
+      this.fornecedorService
+        .save(this.fornecedor)
+        .pipe(finalize(() => this.loadingService.hide()))
+        .subscribe(
+          fornecedorRes => {
+            this.fornecedor = fornecedorRes;
+            this.notificationService.success(`Fornecedor ${fornecedorRes.nome} cadastrado com sucesso.`);
+            this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
+          },
+          (error) => this.exceptionService.handleError(error)
+      );
+    } else {
+      const enderecoId: string = this.fornecedor.endereco.id;
+      const fornecedorId: string = this.fornecedor.id;
+
+      this.fornecedor = this.form.value;
+
+      this.fornecedor.endereco.id = enderecoId;
+      this.fornecedor.endereco.fornecedorId = fornecedorId;
+      this.fornecedor.endereco.cidade = this.fornecedor.endereco.cidade.toString();
+
+      this.fornecedor.id = fornecedorId;
+      this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString(), 10);
+      this.fornecedor.produtos = new Array<Produto>();
+
+      this.fornecedorService
+        .updateEndereco(this.fornecedor.endereco)
+        .subscribe(() => {
+          this.fornecedorService
+          .update(this.fornecedor)
+          .pipe(finalize(() => this.loadingService.hide()))
+          .subscribe(
+            fornecedorRes => {
+              this.fornecedor = fornecedorRes;
+              this.notificationService.success(`Fornecedor ${fornecedorRes.nome} salvo com sucesso.`);
+              this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
+            },
+            (error) => this.exceptionService.handleError(error)
+          );
+        });
+    }
   }
 }

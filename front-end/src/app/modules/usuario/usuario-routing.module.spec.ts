@@ -10,10 +10,18 @@ describe('usuario-routing.module.spec | UsuarioRoutingModule', () => {
   let router: Router;
   let location: Location;
 
+  const loginGuard = jasmine.createSpyObj<LoginGuard>(['canActivate']);
+  loginGuard.canActivate.and.returnValue(true);
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)],
-      providers: [LoginGuard],
+      providers: [
+        {
+          provide: LoginGuard,
+          useValue: loginGuard
+        }
+      ],
     });
 
     router = TestBed.inject(Router);

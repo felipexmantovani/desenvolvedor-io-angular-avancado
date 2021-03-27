@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
+import { AuthService } from '../../../modules/auth/services/auth.service';
 import { HttpStatusCodeEnum } from '../../../shared/enums/http-status-code.enum';
 import { NotificationService } from '../notification/notification.service';
 
@@ -11,7 +12,10 @@ export interface Erros {
   providedIn: 'root'
 })
 export class ExceptionService implements ErrorHandler {
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private authService: AuthService
+  ) {}
 
   handleError(response: any): void {
     if (response instanceof HttpErrorResponse) {
@@ -30,8 +34,9 @@ export class ExceptionService implements ErrorHandler {
         return;
       }
 
-      if (response.statusText === 'Unauthorized' || response.statusText === 'Forbidden') {
-        this.notificationService.error(`#${response.status} - Sem permissão.`);
+      if (response.statusText === 'Unauthorized') {
+        this.notificationService.error(`#${response.status} - Seu token expirou. Por favor, faça o login novamente.`);
+        this.authService.logout();
         return;
       }
 

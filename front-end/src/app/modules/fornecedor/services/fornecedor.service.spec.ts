@@ -58,9 +58,9 @@ describe('fornecedor.service.spec | FornecedorService', () => {
     .flush(fornecedoresMock);
   });
 
-  it('Deve retornar um fornecedor quando buscado pelo ID', () => {
+  it('Deve retornar um fornecedor ao buscar pelo ID', () => {
     const fornecedorRes = FORNECEDOR_MOCK[4];
-    service.readById(5).subscribe(fornecedor => {
+    service.readById('5').subscribe(fornecedor => {
       expect(fornecedor).toEqual(fornecedorRes);
     });
 
@@ -70,7 +70,7 @@ describe('fornecedor.service.spec | FornecedorService', () => {
         req.method === 'GET'
       );
     })
-    .flush({data: fornecedorRes});
+    .flush(fornecedorRes);
   });
 
   it('Deve atualizar o fornecedor', () => {
@@ -120,7 +120,7 @@ describe('fornecedor.service.spec | FornecedorService', () => {
 
   it('Deve atualizar o um endereço', () => {
     fornecedorMock.endereco.bairro = 'Bairro Alterado';
-    service.updateEndereco(fornecedorMock.endereco, parseInt(fornecedorMock.endereco.id, 10)).subscribe(endereco => {
+    service.updateEndereco(fornecedorMock.endereco).subscribe(endereco => {
       expect(endereco.bairro).toBe('Bairro Alterado');
     });
 
