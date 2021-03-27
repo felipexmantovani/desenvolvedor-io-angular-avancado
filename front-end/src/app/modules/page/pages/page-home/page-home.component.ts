@@ -15,7 +15,7 @@ import { PRODUTO_CONFIG } from '../../../produto/produto.config';
   providers: [FornecedorService],
 })
 export class PageHomeComponent implements OnInit, PageDefault {
-  public pageTitle = 'Olá, seja bem-vindo!';
+  public pageTitle = 'Olá, seja bem-vindo(a)!';
 
   private fornecedores: Array<Fornecedor>;
 

@@ -1,0 +1,94 @@
+<form [formGroup]="form">
+  <div class="po-row po-mt-5">
+    <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
+      <po-divider [p-label]="isPF ? 'Dados pessoais' : 'Dados empresariais'"></po-divider>
+      <po-radio-group
+        formControlName="tipoFornecedor"
+        name="tipoFornecedor"
+        p-label="Tipo"
+        [p-options]="options"
+        (p-change)="changeTipoFornecedor($event)">
+      </po-radio-group>
+      <po-input
+        formControlName="nome"
+        name="nome"
+        p-auto-focus="true"
+        p-clean="true"
+        p-error-pattern="Informe entre 2 e 100 caracteres"
+        [p-label]="isPF ? 'Nome' : 'Razão social'">
+      </po-input>
+      <po-input
+        formControlName="documento"
+        name="documento"
+        p-clean="true"
+        [p-error-pattern]="isPF ? 'Informe um CPF válido' : 'Informe um CNPJ válido'"
+        [p-mask]="isPF ? '999.999.999-99' : '99.999.999/9999-99'"
+        [p-label]="isPF ? 'CPF' : 'CNPJ'">
+      </po-input>
+      <po-switch
+        formControlName="ativo"
+        name="ativo"
+        p-label-on="Sim"
+        p-label-off="Não"
+        p-label="Ativar fornecedor">
+      </po-switch>
+    </div>
+  </div>
+
+  <div class="po-row po-mt-5">
+    <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
+      <po-divider p-label="Dados de endereço"></po-divider>
+      <div formGroupName="endereco">
+        <po-input
+          formControlName="cep"
+          name="cep"
+          p-clean="true"
+          p-error-pattern="Informe CEP válido"
+          p-label="CEP"
+          p-mask="99.999-999"
+          (p-change)="changeCep($event)">
+        </po-input>
+        <po-input
+          formControlName="logradouro"
+          name="logradouro"
+          p-clean="true"
+          p-error-pattern="Informe entre 2 e 200 caracteres"
+          p-label="Logradouro">
+        </po-input>
+        <po-input
+          formControlName="numero"
+          name="numero"
+          p-clean="true"
+          p-error-pattern="Informe entre 1 e 50 caracteres"
+          p-label="Número">
+        </po-input>
+        <po-input
+          formControlName="complemento"
+          name="complemento"
+          p-clean="true"
+          p-label="Complemento">
+        </po-input>
+        <po-input
+          formControlName="bairro"
+          name="bairro"
+          p-clean="true"
+          p-error-pattern="Informe entre 2 e 100 caracteres"
+          p-label="Bairro">
+        </po-input>
+        <po-select
+          formControlName="estado"
+          name="estado"
+          p-label="Estado"
+          [p-options]="estados">
+        </po-select>
+        <po-select
+          formControlName="cidade"
+          [p-disabled]="cidades.length <= 0"
+          name="string"
+          p-label="Cidade"
+          [p-options]="cidades">
+        </po-select>
+      </div>
+    </div>
+  </div>
+</form>

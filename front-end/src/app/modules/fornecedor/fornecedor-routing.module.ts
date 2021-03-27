@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { FornecedorNovoGuard } from './guards/fornecedor-novo.guard';
-import { FornecedorGridComponent } from './pages/fornecedor-grid/fornecedor-grid.component';
+import { FornecedorListarComponent } from './pages/fornecedor-listar/fornecedor-listar.component';
 import { FornecedorNovoComponent } from './pages/fornecedor-novo/fornecedor-novo.component';
 import { FornecedorReadResolver } from './resolvers/fornecedor-read.resolver';
 
 export const routes: Routes = [
   {
     path: '',
-    component: FornecedorGridComponent,
+    component: FornecedorListarComponent,
     resolve: {
       fornecedores: FornecedorReadResolver,
     },

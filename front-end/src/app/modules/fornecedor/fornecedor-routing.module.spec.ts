@@ -4,9 +4,9 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { FORNECEDOR_MOCK } from '../../mocks/fornecedor.mock';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { routes } from './fornecedor-routing.module';
-import { FORNECEDOR_MOCK } from './mock/fornecedor.mock';
 import { FornecedorReadResolver } from './resolvers/fornecedor-read.resolver';
 
 describe('fornecedor-routing.module.spec | FornecedorRoutingModule', () => {

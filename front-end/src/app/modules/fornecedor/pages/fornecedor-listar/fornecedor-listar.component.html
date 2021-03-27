@@ -13,16 +13,16 @@
     [p-loading]="fornecedores?.length === 0">
 
     <ng-template p-table-cell-template let-column="column" let-row="row">
-        <span
-          *ngIf="column.property === 'ativo' && row.ativo === true"
-          class="po-color-11 po-table-column-label">
-          Ativo
-        </span>
-        <span
-          *ngIf="column.property === 'ativo' && row.ativo === false"
-          class="po-color-07 po-table-column-label">
-          Inativo
-        </span>
+      <span
+        *ngIf="column.property === 'ativo' && row.ativo === true"
+        class="po-color-11 po-table-column-label">
+        Ativo
+      </span>
+      <span
+        *ngIf="column.property === 'ativo' && row.ativo === false"
+        class="po-color-07 po-table-column-label">
+        Inativo
+      </span>
     </ng-template>
 
   </po-table>

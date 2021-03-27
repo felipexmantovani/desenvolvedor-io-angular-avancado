@@ -2,8 +2,8 @@ import { HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { APP_CONFIG } from '../../../app.config';
+import { USUARIO_MOCK } from '../../../mocks/usuario.mock';
 import { Token } from '../../auth/models/auth-token.interface';
-import { USUARIO_MOCK } from '../mock/usuario.mock';
 import { UsuarioService } from './usuario.service';
 
 describe('usuario.service.spec | UsuarioService', () => {

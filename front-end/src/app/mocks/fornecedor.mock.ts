@@ -1,5 +1,5 @@
-import { Produto } from '../../produto/models/produto.interface';
-import { Fornecedor } from '../models/fornecedor.interface';
+import { Fornecedor } from '../modules/fornecedor/models/fornecedor.interface';
+import { Produto } from '../modules/produto/models/produto.interface';
 
 export const FORNECEDOR_MOCK: Array<Fornecedor> = [
   {

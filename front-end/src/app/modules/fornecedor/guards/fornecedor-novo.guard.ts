@@ -13,7 +13,7 @@ export class FornecedorNovoGuard implements CanDeactivate<FornecedorNovoComponen
 
   private verify(component: FornecedorNovoComponent): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      if (!component.form.dirty || component.fornecedor?.id) {
+      if (!component.formComponent.form.dirty || component.formComponent.fornecedor?.id) {
         resolve(true);
       } else {
         const options: PoDialogConfirmOptions = {

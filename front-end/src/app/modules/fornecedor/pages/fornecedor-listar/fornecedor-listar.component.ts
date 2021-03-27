@@ -8,10 +8,10 @@ import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { Fornecedor } from '../../models/fornecedor.interface';
 
 @Component({
-  selector: 'app-fornecedor-grid',
-  templateUrl: './fornecedor-grid.component.html'
+  selector: 'app-fornecedor-listar',
+  templateUrl: './fornecedor-listar.component.html'
 })
-export class FornecedorGridComponent implements OnInit, OnDestroy, PageDefault {
+export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault {
   public pageTitle = FORNECEDOR_CONFIG.namePlural;
 
   public readonly breadcrumb: PoBreadcrumb = {

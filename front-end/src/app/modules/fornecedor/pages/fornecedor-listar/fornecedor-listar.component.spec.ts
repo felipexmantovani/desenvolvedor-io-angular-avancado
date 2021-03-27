@@ -1,25 +1,24 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
-import { FornecedorGridComponent } from './fornecedor-grid.component';
+import { FornecedorListarComponent } from './fornecedor-listar.component';
 
-describe('fornecedor-grid.component.spec | FornecedorGridComponent', () => {
-  let component: FornecedorGridComponent;
-  let fixture: ComponentFixture<FornecedorGridComponent>;
+describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
+  let component: FornecedorListarComponent;
+  let fixture: ComponentFixture<FornecedorListarComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [FornecedorGridComponent],
+        declarations: [FornecedorListarComponent],
         imports: [RouterTestingModule, HttpClientTestingModule]
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FornecedorGridComponent);
+    fixture = TestBed.createComponent(FornecedorListarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
