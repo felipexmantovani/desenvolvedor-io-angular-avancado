@@ -6,8 +6,6 @@ import { PageDefault } from '../../../../shared/interfaces/page-default.interfac
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
 import { Fornecedor } from '../../../fornecedor/models/fornecedor.interface';
 import { FornecedorService } from '../../../fornecedor/services/fornecedor.service';
-import { Produto } from '../../../produto/models/produto.interface';
-import { PRODUTO_CONFIG } from '../../../produto/produto.config';
 
 @Component({
   selector: 'app-page-home',
@@ -15,13 +13,15 @@ import { PRODUTO_CONFIG } from '../../../produto/produto.config';
   providers: [FornecedorService],
 })
 export class PageHomeComponent implements OnInit, PageDefault {
-  public pageTitle = 'Olá, seja bem-vindo(a)!';
+  pageTitle = 'Olá, seja bem-vindo(a)!';
 
-  private fornecedores: Array<Fornecedor>;
+  fornecedores: Array<Fornecedor>;
 
-  private produtos: Array<Produto>;
+  series: Array<PoPieChartSeries>;
 
-  public series: Array<PoPieChartSeries>;
+  get fornecedoresTitle(): string {
+    return FORNECEDOR_CONFIG.namePlural;
+  }
 
   constructor(
     private fornecedorService: FornecedorService,
@@ -32,29 +32,15 @@ export class PageHomeComponent implements OnInit, PageDefault {
     this.getFornecedores();
   }
 
-  private getFornecedores(): void {
+  getFornecedores(): void {
     this.loadingService.show();
     this.fornecedorService
       .read()
       .pipe(
         finalize(() => {
           this.loadingService.hide();
-          this.createSeries();
         })
       )
       .subscribe((fornecedores) => this.fornecedores = fornecedores);
-  }
-
-  private createSeries(): void {
-    this.series = [
-      {
-        category: FORNECEDOR_CONFIG.namePlural,
-        value: this.fornecedores.length,
-      },
-      {
-        category: PRODUTO_CONFIG.namePlural,
-        value: 1,
-      },
-    ];
   }
 }

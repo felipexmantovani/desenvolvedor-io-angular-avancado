@@ -91,7 +91,7 @@ describe('fornecedor.service.spec | FornecedorService', () => {
   });
 
   it('Deve remover um fornecedor', () => {
-    service.delete(2).subscribe(fornecedor => {
+    service.delete('2').subscribe(fornecedor => {
       expect(fornecedor).toEqual(fornecedorMock);
     });
 

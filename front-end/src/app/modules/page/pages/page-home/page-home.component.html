@@ -1,5 +1,6 @@
 <po-page-default [p-title]="pageTitle">
-  <po-chart
-    [p-series]="series">
-  </po-chart>
+  <po-widget class="po-lg-3" [p-title]="fornecedoresTitle">
+    <div class="po-font-subtitle po-text-center po-text-color-12">{{ fornecedores?.length }}</div>
+    <div class="po-text-center sample-container-dashboard">cadastrados</div>
+  </po-widget>
 </po-page-default>
