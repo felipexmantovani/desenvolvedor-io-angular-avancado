@@ -1,6 +1,18 @@
 <po-page-default [p-title]="pageTitle">
-  <po-widget class="po-lg-3" [p-title]="fornecedoresTitle">
-    <div class="po-font-subtitle po-text-center po-text-color-12">{{ fornecedores?.length }}</div>
-    <div class="po-text-center sample-container-dashboard">cadastrados</div>
+  <po-widget class="po-lg-6" [p-title]="fornecedoresTitle">
+    <div class="po-row">
+      <div class="po-sm-12 po-md-4">
+        <div class="po-font-subtitle po-text-center po-text-color-01">{{ fornecedores?.length }}</div>
+        <div class="po-text-center sample-container-dashboard">cadastrado(s)</div>
+      </div>
+      <div class="po-sm-12 po-md-4">
+        <div class="po-font-subtitle po-text-center po-text-color-11">{{ fornecedoresAtivos?.length }}</div>
+        <div class="po-text-center sample-container-dashboard">ativo(s)</div>
+      </div>
+      <div class="po-sm-12 po-md-4">
+        <div class="po-font-subtitle po-text-center po-text-color-07">{{ fornecedoresInativos?.length }}</div>
+        <div class="po-text-center sample-container-dashboard">inativo(s)</div>
+      </div>
+    </div>
   </po-widget>
 </po-page-default>

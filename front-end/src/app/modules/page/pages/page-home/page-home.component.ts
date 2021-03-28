@@ -17,6 +17,10 @@ export class PageHomeComponent implements OnInit, PageDefault {
 
   fornecedores: Array<Fornecedor>;
 
+  fornecedoresAtivos: Array<Fornecedor>;
+
+  fornecedoresInativos: Array<Fornecedor>;
+
   series: Array<PoPieChartSeries>;
 
   get fornecedoresTitle(): string {
@@ -41,6 +45,10 @@ export class PageHomeComponent implements OnInit, PageDefault {
           this.loadingService.hide();
         })
       )
-      .subscribe((fornecedores) => this.fornecedores = fornecedores);
+      .subscribe((fornecedores) => {
+        this.fornecedores = fornecedores;
+        this.fornecedoresAtivos = this.fornecedores.filter(fornecedor => fornecedor.ativo);
+        this.fornecedoresInativos = this.fornecedores.filter(fornecedor => !fornecedor.ativo);
+      });
   }
 }
