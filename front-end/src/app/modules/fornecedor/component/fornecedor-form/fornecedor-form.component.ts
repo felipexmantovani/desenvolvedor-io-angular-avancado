@@ -1,7 +1,8 @@
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { PoRadioGroupOption, PoSelectOption } from '@po-ui/ng-components';
+import { PoModalComponent, PoRadioGroupOption, PoSelectOption } from '@po-ui/ng-components';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { IbgeService } from '../../../../core/modules/ibge/services/ibge.service';
@@ -11,35 +12,44 @@ import { NotificationService } from '../../../../core/services/notification/noti
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { Produto } from '../../../produto/models/produto.interface';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
+import { FornecedorEndereco } from '../../models/fornecedor-endereco.interface';
 import { Fornecedor } from '../../models/fornecedor.interface';
 import { FornecedorService } from '../../services/fornecedor.service';
 
 @Component({
   selector: 'app-fornecedor-form',
-  templateUrl: './fornecedor-form.component.html'
+  templateUrl: './fornecedor-form.component.html',
+  styleUrls: ['./fornecedor-form.component.scss']
 })
 export class FornecedorFormComponent implements OnInit, OnDestroy {
-  public readonly options: Array<PoRadioGroupOption> = [
+  options: Array<PoRadioGroupOption> = [
     { label: 'Pessoa física', value: '1' },
     { label: 'Pessoa jurídica', value: '2' }
   ];
 
-  public form: FormGroup;
+  form: FormGroup;
 
-  public estados: Array<PoSelectOption> = new Array<PoSelectOption>();
+  estados: Array<PoSelectOption> = new Array<PoSelectOption>();
 
-  public cidades: Array<PoSelectOption> = new Array<PoSelectOption>();
+  cidades: Array<PoSelectOption> = new Array<PoSelectOption>();
 
-  private subs: Subscription = new Subscription();
+  subs: Subscription = new Subscription();
 
-  private tipoFornecedor = '1';
+  tipoFornecedor = '1';
 
-  public get isPF(): boolean {
+  get isPF(): boolean {
     return this.tipoFornecedor === '1';
   }
 
+  enderecoCompleto = '';
+
+  linkGoogleMaps: any;
+
+  @ViewChild('modalMapa', { static: true })
+  modalMapa: PoModalComponent;
+
   @Input()
-  public fornecedor: Fornecedor;
+  fornecedor: Fornecedor;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,19 +58,23 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     private loadingService: LoadingService,
     private fornecedorService: FornecedorService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    public domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
     this.createForm();
     this.getEstados();
+    if (this.isEdit()) {
+      this.getMunicipio(this.fornecedor.endereco.cidade);
+    }
   }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
-  private createForm(): void {
+  createForm(): void {
     this.form = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(2)]],
       documento: [null, [Validators.required, Validators.maxLength(14), Validators.minLength(11)]],
@@ -92,7 +106,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     return this.fornecedor && this.fornecedor.id ? true : false;
   }
 
-  private onChangesForm(): void {
+  onChangesForm(): void {
     this.subs.add(
       this.form.get('endereco').get('estado').valueChanges.subscribe(value => {
         this.loadingService.show();
@@ -114,7 +128,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  public changeTipoFornecedor(value: string): void {
+  changeTipoFornecedor(value: string): void {
     this.form.get('nome').setValue('');
     this.form.get('documento').setValue('');
 
@@ -128,7 +142,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     this.form.updateValueAndValidity();
   }
 
-  public changeCep(value: string): void {
+  changeCep(value: string): void {
     const enderecoControl = this.form.get('endereco');
     if (enderecoControl.get('cep').valid) {
       this.loadingService.show();
@@ -146,7 +160,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getEstados(): void {
+  getEstados(): void {
     this.estados = new Array<PoSelectOption>();
     this.ibgeService
       .getEstados()
@@ -161,6 +175,15 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
         });
   }
 
+  getMunicipio(municipioId: string): void {
+    this.ibgeService
+      .getMunicipio(municipioId)
+      .subscribe(municipio => {
+        this.enderecoCompleto = `${this.fornecedor.endereco.logradouro}, ${this.fornecedor.endereco.numero}, ${this.fornecedor.endereco.bairro}, ${municipio.nome}-${this.fornecedor.endereco.estado}`;
+        this.linkGoogleMaps = `https://maps.google.com/maps?q=${this.enderecoCompleto}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+      });
+  }
+
   @HostListener('window:keyup', ['$event'])
   keyUp(event: KeyboardEvent): void {
     if (event.key === 'Enter' && this.form.valid) {
@@ -168,7 +191,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSubmit(): void {
+  onSubmit(): void {
     if (this.form.invalid) {
       this.notificationService.error('Verifique o formulário.');
       return;
@@ -219,5 +242,9 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
           );
         });
     }
+  }
+
+  verMapa(): void {
+    this.modalMapa.open();
   }
 }

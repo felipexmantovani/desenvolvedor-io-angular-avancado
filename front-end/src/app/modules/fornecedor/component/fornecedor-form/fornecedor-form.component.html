@@ -36,6 +36,30 @@
   <div class="po-row po-mt-5">
     <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
       <po-divider p-label="Dados de endereço"></po-divider>
+
+      <ng-container *ngIf="isEdit()">
+        <po-button
+          class="ver-no-mapa"
+          p-label="Ver no mapa"
+          p-small="true"
+          p-type="link"
+          p-icon="po-icon-map"
+          (p-click)="verMapa()">
+        </po-button>
+      </ng-container>
+
+      <po-modal #modalMapa p-title="Mapa">
+        <iframe
+          *ngIf="isEdit()"
+          width="100%"
+          height="450"
+          frameborder="0"
+          style="border:0"
+          allowfullscreen
+          [src]="domSanitizer.bypassSecurityTrustResourceUrl(linkGoogleMaps)">
+        </iframe>
+      </po-modal>
+
       <div formGroupName="endereco">
         <po-input
           formControlName="cep"

@@ -1,6 +1,7 @@
 import { HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { IbgeMunicipio } from '../models/municipio.interface';
 import { IbgeUf } from '../models/uf.interface';
 import { IbgeService } from './ibge.service';
@@ -12,7 +13,7 @@ describe('ibge.service.spec | IbgeService', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
+        imports: [HttpClientTestingModule, RouterTestingModule],
       });
     })
   );
@@ -33,7 +34,7 @@ describe('ibge.service.spec | IbgeService', () => {
 
     httpTestingController.expectOne((req: HttpRequest<any>) => {
       return (
-        req.url === IbgeService.API &&
+        req.url === IbgeService.API_ESTADOS &&
         req.method === 'GET'
       );
     })
@@ -49,7 +50,7 @@ describe('ibge.service.spec | IbgeService', () => {
 
     httpTestingController.expectOne((req: HttpRequest<any>) => {
       return (
-        req.url === `${IbgeService.API}/${estado}/municipios` &&
+        req.url === `${IbgeService.API_ESTADOS}/${estado}/municipios` &&
         req.method === 'GET'
       );
     })

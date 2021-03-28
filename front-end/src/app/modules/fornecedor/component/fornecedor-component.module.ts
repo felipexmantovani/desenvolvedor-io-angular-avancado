@@ -1,14 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PoDividerModule, PoFieldModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoDividerModule, PoFieldModule, PoModalModule } from '@po-ui/ng-components';
 import { FornecedorFormComponent } from './fornecedor-form/fornecedor-form.component';
 
 @NgModule({
   declarations: [FornecedorFormComponent],
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     PoDividerModule,
-    PoFieldModule
+    PoFieldModule,
+    PoButtonModule,
+    PoModalModule
   ],
   exports: [FornecedorFormComponent]
 })
