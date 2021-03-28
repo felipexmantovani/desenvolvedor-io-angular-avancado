@@ -17,7 +17,7 @@ import { AuthService } from './services/auth.service';
     PoButtonModule,
     PoPageModule,
     PoFieldModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, LoginGuard],
 })

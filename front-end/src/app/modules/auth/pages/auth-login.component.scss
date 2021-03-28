@@ -1,0 +1,17 @@
+.dados-acesso {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+
+  h5 {
+    display: block;
+  }
+}
+
+.infos {
+  display: flex;
+  justify-content: center;
+  div {
+    margin: 1em;
+  }
+}

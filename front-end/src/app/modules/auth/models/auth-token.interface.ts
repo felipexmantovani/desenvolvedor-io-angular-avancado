@@ -4,7 +4,7 @@ export interface Token {
   userToken?: UserToken;
 }
 
-interface UserToken {
+export interface UserToken {
   id: string;
   email: string;
   claims: Claims;

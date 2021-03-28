@@ -30,4 +30,10 @@ describe('page-home.component.spec | PageHomeComponent', () => {
   it('Deve ser criado', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Deve criar o breadcrumb corretamente', () => {
+    expect(component.breadcrumb).toBeTruthy();
+    expect(component.breadcrumb.items[0].label).toBe('Home');
+    expect(component.breadcrumb.items[0].link).toBe('/');
+  });
 });

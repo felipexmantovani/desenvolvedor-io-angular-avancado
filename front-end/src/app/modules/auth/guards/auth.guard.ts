@@ -24,7 +24,7 @@ export class AuthGuard implements CanLoad, CanActivate {
 
   private canAccess(): boolean {
     if (!this.authService.isLogged()) {
-      this.notificationService.warning('Para acessar essa página é preciso fazer o login.');
+      this.notificationService.warning('Para acessar essa página é necessário fazer o login.');
       this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
       return false;
     }

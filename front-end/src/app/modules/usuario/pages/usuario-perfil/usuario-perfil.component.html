@@ -1,2 +1,24 @@
-<po-page-default p-title="app-usuario-perfil">
+<po-page-default
+  [p-title]="pageTitle"
+  [p-breadcrumb]="breadcrumb">
+
+  <po-widget class="po-lg-6 po-mb-5" p-title="ID">
+    <div class="po-font-subtitle po-text-center po-text-color-01">{{ usuarioStorage?.id }}</div>
+  </po-widget>
+  <po-widget class="po-lg-6 po-mb-5" p-title="E-mail">
+    <div class="po-font-subtitle po-text-center po-text-color-01">{{ usuarioStorage?.email }}</div>
+  </po-widget>
+
+  <po-widget *ngIf="usuarioStorage?.claims" class="po-lg-12" p-title="Claims">
+    <div class="po-row">
+      <div
+        class="po-sm-12 po-lg-6"
+        *ngFor="let claim of usuarioStorage.claims; let i = index"
+        [ngClass]="{ 'po-mb-5' : i < usuarioStorage.claims.length - 1 }">
+        <div class="po-font-subtitle po-text-center po-text-color-01">{{ claim.value }}</div>
+        <div class="po-text-center sample-container-dashboard">{{ claim.type }}</div>
+      </div>
+    </div>
+  </po-widget>
+
 </po-page-default>

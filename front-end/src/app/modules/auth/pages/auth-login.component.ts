@@ -12,16 +12,17 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth-login',
-  templateUrl: './auth-login.component.html'
+  templateUrl: './auth-login.component.html',
+  styleUrls: ['./auth-login.component.scss']
 })
 export class AuthLoginComponent implements OnInit, PageDefault {
-  public pageTitle = 'Login';
+  pageTitle = 'Login';
 
-  public readonly breadcrumb: PoBreadcrumb = {
+  breadcrumb: PoBreadcrumb = {
     items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }],
   };
 
-  public form: FormGroup;
+  form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,7 +37,7 @@ export class AuthLoginComponent implements OnInit, PageDefault {
     this.createForm();
   }
 
-  private createForm(): void {
+  createForm(): void {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -50,16 +51,18 @@ export class AuthLoginComponent implements OnInit, PageDefault {
     }
   }
 
-  public onSubmit(): void {
+  onSubmit(): void {
     this.loadingService.show();
 
     const login: Login = this.form.value;
+    login.email = login.email.trim();
+    login.password = login.password.trim();
     this.authService
       .login(login)
       .pipe(finalize(() => this.loadingService.hide()))
       .subscribe(
         (token) => {
-          this.authService.setToken(token);
+          this.authService.setTokenLocalStorage(token);
           this.notificationService.success('Olá, seja bem-vindo(a).');
           this.router.navigateByUrl('/');
         },

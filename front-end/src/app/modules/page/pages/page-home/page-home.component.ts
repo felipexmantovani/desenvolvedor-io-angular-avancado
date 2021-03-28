@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PoPieChartSeries } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoPieChartSeries } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
@@ -14,6 +14,12 @@ import { FornecedorService } from '../../../fornecedor/services/fornecedor.servi
 })
 export class PageHomeComponent implements OnInit, PageDefault {
   pageTitle = 'Olá, seja bem-vindo(a)!';
+
+  breadcrumb: PoBreadcrumb = {
+    items: [
+      { label: 'Home', link: '/' }
+    ]
+  };
 
   fornecedores: Array<Fornecedor>;
 

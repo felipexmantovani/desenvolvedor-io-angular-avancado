@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../app.config';
-import { ExceptionService } from '../../../core/services/exception/exception.service';
 import { StorageService } from '../../../core/services/storage/storage.service';
 import { HttpUtil } from '../../../shared/utils/http.util';
 import { AUTH_CONFIG } from '../auth.config';
@@ -43,11 +42,16 @@ export class AuthService {
     return this.getToken() ? true : false;
   }
 
+  setTokenLocalStorage(token: Token): void {
+    this.storageService.localSetItem(AUTH_CONFIG.keyToken, token.accessToken);
+    this.storageService.localSetItem(AUTH_CONFIG.keyUser, token.userToken);
+  }
+
   getToken(): any {
     return this.storageService.localGetItem(AUTH_CONFIG.keyToken);
   }
 
-  setToken(token: Token): void {
-    this.storageService.localSetItem(AUTH_CONFIG.keyToken, token.accessToken);
+  getUser(): any {
+    return this.storageService.localGetItem(AUTH_CONFIG.keyUser);
   }
 }
