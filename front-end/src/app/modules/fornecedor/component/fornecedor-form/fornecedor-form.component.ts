@@ -7,7 +7,6 @@ import { finalize } from 'rxjs/operators';
 import { IbgeService } from '../../../../core/modules/ibge/services/ibge.service';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
 import { ViaCepService } from '../../../../core/modules/via-cep/services/via-cep.service';
-import { ExceptionService } from '../../../../core/services/exception/exception.service';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { Produto } from '../../../produto/models/produto.interface';
@@ -49,7 +48,6 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     private loadingService: LoadingService,
     private fornecedorService: FornecedorService,
     private notificationService: NotificationService,
-    private exceptionService: ExceptionService,
     private router: Router
   ) {}
 
@@ -159,8 +157,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
               label: estado.nome,
               value: estado.sigla
             });
-          },
-          (error: any) => this.exceptionService.handleError(error));
+          });
         });
   }
 
@@ -191,8 +188,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
             this.fornecedor = fornecedorRes;
             this.notificationService.success(`Fornecedor ${fornecedorRes.nome} cadastrado com sucesso.`);
             this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
-          },
-          (error) => this.exceptionService.handleError(error)
+          }
       );
     } else {
       const enderecoId: string = this.fornecedor.endereco.id;
@@ -219,8 +215,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
               this.fornecedor = fornecedorRes;
               this.notificationService.success(`Fornecedor ${fornecedorRes.nome} salvo com sucesso.`);
               this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
-            },
-            (error) => this.exceptionService.handleError(error)
+            }
           );
         });
     }

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
-import { ExceptionService } from '../../../../core/services/exception/exception.service';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { Usuario } from '../../models/usuario.interface';
@@ -27,7 +26,6 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
     private usuarioService: UsuarioService,
-    private exceptionService: ExceptionService,
     private loadingService: LoadingService
   ) {}
 
@@ -74,8 +72,7 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
         (token) => {
           this.notificationService.success(`${token.userToken.email} cadastrado com sucesso.`);
           this.form.reset();
-        },
-        (error) => this.exceptionService.handleError(error)
+        }
       );
   }
 }

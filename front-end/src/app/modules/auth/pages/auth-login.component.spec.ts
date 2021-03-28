@@ -1,11 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
-import { HttpStatusCodeEnum } from '../../../shared/enums/http-status-code.enum';
 import { Token } from '../models/auth-token.interface';
 import { AuthService } from '../services/auth.service';
 import { AuthLoginComponent } from './auth-login.component';
@@ -14,7 +12,6 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
   let component: AuthLoginComponent;
   let fixture: ComponentFixture<AuthLoginComponent>;
   let authService: AuthService;
-  let exceptionService: ExceptionService;
 
   const token: Token = {
     accessToken: 'abc123'
@@ -32,7 +29,6 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     fixture = TestBed.createComponent(AuthLoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    exceptionService = TestBed.inject(ExceptionService);
     authService = TestBed.inject(AuthService);
   });
 
@@ -63,16 +59,6 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     const spyAuth = spyOn(authService, 'login').and.returnValue(of(token));
     component.onSubmit();
     expect(spyAuth).toHaveBeenCalled();
-  });
-
-  it('Deve tratar o erro caso ocorra ao chamar método onSubmit()', () => {
-    spyOn(authService, 'login').and.returnValue(throwError(new HttpErrorResponse({
-      status: HttpStatusCodeEnum.InternalServerError,
-      statusText: 'Ocorreu um erro no servidor.'
-    })));
-    const spyException = spyOn(exceptionService, 'handleError');
-    component.onSubmit();
-    expect(spyException).toHaveBeenCalled();
   });
 
   it('Deve submeter o formulário ao pressionar a tecla Enter', () => {

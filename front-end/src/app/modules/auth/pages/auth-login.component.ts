@@ -27,9 +27,9 @@ export class AuthLoginComponent implements OnInit, PageDefault {
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private authService: AuthService,
-    private exceptionService: ExceptionService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private exceptionService: ExceptionService
   ) {}
 
   ngOnInit(): void {

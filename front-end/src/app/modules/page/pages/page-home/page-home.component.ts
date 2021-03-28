@@ -42,9 +42,7 @@ export class PageHomeComponent implements OnInit, PageDefault {
           this.createSeries();
         })
       )
-      .subscribe((fornecedores) => {
-        this.fornecedores = fornecedores;
-      });
+      .subscribe((fornecedores) => this.fornecedores = fornecedores);
   }
 
   private createSeries(): void {

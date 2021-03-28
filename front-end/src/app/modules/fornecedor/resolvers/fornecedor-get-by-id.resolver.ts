@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../core/modules/loading/loading.service';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
 import { Fornecedor } from '../models/fornecedor.interface';
@@ -19,12 +19,6 @@ export class FornecedorGetByIdResolver implements Resolve<Observable<Fornecedor>
     this.loadingService.show();
     return this.fornecedorService
       .readById(activatedRouteSnapshot.params['id'])
-      .pipe(
-        catchError((error) => {
-          this.exceptionService.handleError(error);
-          return throwError(error);
-        }),
-        finalize(() => this.loadingService.hide())
-      );
+      .pipe(finalize(() => this.loadingService.hide()));
   }
 }
