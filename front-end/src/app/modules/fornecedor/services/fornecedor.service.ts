@@ -69,7 +69,7 @@ export class FornecedorService {
       );
   }
 
-  public delete(id: number): Observable<Fornecedor> {
+  public delete(id: string): Observable<Fornecedor> {
     return this.httpClient
       .delete<Fornecedor>(`${this.API}/${id}`)
       .pipe(

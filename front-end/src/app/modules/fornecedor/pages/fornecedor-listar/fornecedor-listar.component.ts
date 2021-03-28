@@ -1,39 +1,47 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoBreadcrumb, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoBreadcrumb, PoDialogConfirmOptions, PoDialogService, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { LoadingService } from '../../../../core/modules/loading/loading.service';
+import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { Fornecedor } from '../../models/fornecedor.interface';
+import { FornecedorService } from '../../services/fornecedor.service';
 
 @Component({
   selector: 'app-fornecedor-listar',
   templateUrl: './fornecedor-listar.component.html'
 })
 export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault {
-  public pageTitle = FORNECEDOR_CONFIG.namePlural;
+  pageTitle = FORNECEDOR_CONFIG.namePlural;
 
-  public readonly breadcrumb: PoBreadcrumb = {
+  breadcrumb: PoBreadcrumb = {
     items: [{ label: 'Home', link: '/' }, { label: this.pageTitle }]
   };
 
-  public actionsPage: Array<PoPageAction> = new Array<PoPageAction>();
+  actionsPage: Array<PoPageAction> = new Array<PoPageAction>();
 
-  public actionsTable: Array<PoTableAction> = new Array<PoTableAction>();
+  actionsTable: Array<PoTableAction> = new Array<PoTableAction>();
 
-  public columns: Array<PoTableColumn>;
+  columns: Array<PoTableColumn>;
 
-  public fornecedores: Array<Fornecedor>;
+  fornecedores: Array<Fornecedor>;
 
-  public isLogged = false;
+  isLogged = false;
 
-  private subs: Subscription = new Subscription();
+  subs: Subscription = new Subscription();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private fornecedorService: FornecedorService,
+    private loadingService: LoadingService,
+    private notificationService: NotificationService,
+    private poDialogService: PoDialogService
   ) {}
 
   ngOnInit(): void {
@@ -93,6 +101,23 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
   }
 
   excluir(fornecedor: Fornecedor): void {
-    console.log(fornecedor);
+    const options: PoDialogConfirmOptions = {
+      title: 'Confirmação!',
+      message: 'Realmente deseja excluir o fornecedor?',
+      confirm: () => {
+        this.loadingService.show();
+        this.fornecedorService
+          .delete(fornecedor.id)
+          .pipe(finalize(() => this.loadingService.hide()))
+          .subscribe(fornecedorRes => {
+            this.notificationService.success(`Fornecedor ${fornecedorRes.nome} excluído com sucesso.`);
+            this.fornecedorService
+              .read()
+              .subscribe(fornecedores => this.fornecedores = fornecedores);
+          });
+      },
+      cancel: () => {}
+    };
+    this.poDialogService.confirm(options);
   }
 }
