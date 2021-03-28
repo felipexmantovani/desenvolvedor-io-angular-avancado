@@ -1,15 +1,12 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoModule } from '@po-ui/ng-components';
-import { of, throwError } from 'rxjs';
-import { ExceptionService } from '../../../../core/services/exception/exception.service';
+import { of } from 'rxjs';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
-import { HttpStatusCodeEnum } from '../../../../shared/enums/http-status-code.enum';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorService } from '../../services/fornecedor.service';
 import { FornecedorFormComponent } from './fornecedor-form.component';
@@ -24,9 +21,6 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
 
   let fornecedorService: jasmine.SpyObj<FornecedorService>;
   fornecedorService = jasmine.createSpyObj<FornecedorService>(['save']);
-
-  let exceptionService: jasmine.SpyObj<ExceptionService>;
-  exceptionService = jasmine.createSpyObj<ExceptionService>(['handleError']);
 
   const fornecedor = FORNECEDOR_MOCK[0];
 
@@ -48,10 +42,6 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
         {
           provide: NotificationService,
           useValue: notificationService
-        },
-        {
-          provide: ExceptionService,
-          useValue: exceptionService
         }
       ],
     }).compileComponents();
@@ -115,21 +105,6 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
         expect(notificationService.success).toHaveBeenCalledWith(`Fornecedor ${fornecedorRes.nome} cadastrado com sucesso.`);
         expect(router.navigateByUrl).toHaveBeenCalledWith(FORNECEDOR_CONFIG.pathFront);
       });
-  });
-
-  it('Deve tratar erro ao consumir fornecedorService', (done: DoneFn) => {
-    fornecedorService.save.and.returnValue(throwError(new HttpErrorResponse(
-      {
-        status: HttpStatusCodeEnum.NotFound,
-        statusText: 'Ocorreu um erro no servidor.'
-      }
-    )));
-
-    component.form.patchValue(fornecedor);
-    component.onSubmit();
-
-    expect(exceptionService.handleError).toHaveBeenCalled();
-    done();
   });
 
   it('Deve submeter o formulário ao pressionar a tecla Enter', () => {

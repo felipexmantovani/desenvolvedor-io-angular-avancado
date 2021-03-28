@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { ExceptionService } from '../../../core/services/exception/exception.service';
 import { Token } from '../models/auth-token.interface';
 import { AuthService } from '../services/auth.service';
 import { AuthLoginComponent } from './auth-login.component';
@@ -21,7 +20,7 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule],
-        providers: [FormBuilder, AuthService, ExceptionService]
+        providers: [FormBuilder]
       }).compileComponents();
   }));
 

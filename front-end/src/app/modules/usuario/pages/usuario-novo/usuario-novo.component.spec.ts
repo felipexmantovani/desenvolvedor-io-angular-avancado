@@ -1,13 +1,10 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoButtonModule, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
-import { of, throwError } from 'rxjs';
-import { ExceptionService } from '../../../../core/services/exception/exception.service';
+import { of } from 'rxjs';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
-import { HttpStatusCodeEnum } from '../../../../shared/enums/http-status-code.enum';
 import { Token } from '../../../auth/models/auth-token.interface';
 import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioNovoComponent } from './usuario-novo.component';
@@ -17,7 +14,6 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
   let fixture: ComponentFixture<UsuarioNovoComponent>;
   let notificationService: jasmine.SpyObj<NotificationService>;
   let usuarioService: jasmine.SpyObj<UsuarioService>;
-  let exceptionService: jasmine.SpyObj<ExceptionService>;
 
   notificationService = jasmine.createSpyObj<NotificationService>(['error', 'success']);
 
@@ -33,8 +29,6 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
       id: '1'
     }
   };
-
-  exceptionService = jasmine.createSpyObj<ExceptionService>(['handleError']);
 
   beforeEach(
     waitForAsync(() => {
@@ -57,10 +51,6 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
           {
             provide: NotificationService,
             useValue: notificationService
-          },
-          {
-            provide: ExceptionService,
-            useValue: exceptionService
           }
         ],
       }).compileComponents();
@@ -95,16 +85,6 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
     pathFormValid();
     component.onSubmit();
     expect(notificationService.success).toHaveBeenCalledWith(`${token.userToken.email} cadastrado com sucesso.`);
-  });
-
-  it('Deve tratar erro ao cadastrar o usuário', () => {
-    usuarioService.novo.and.returnValue(throwError(new HttpErrorResponse({
-      status: HttpStatusCodeEnum.BadRequest,
-      statusText: 'Erro no servidor'
-    })));
-    pathFormValid();
-    component.onSubmit();
-    expect(exceptionService.handleError).toHaveBeenCalled();
   });
 
   it('Deve submeter o formulário ao pressionar a tecla Enter', () => {
