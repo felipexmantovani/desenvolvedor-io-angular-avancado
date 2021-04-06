@@ -1,48 +1,63 @@
 import { Location } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { routes } from './app-routing.module';
 import { FORNECEDOR_MOCK } from './mocks/fornecedor.mock';
+import { PRODUTO_MOCK } from './mocks/produto.mock';
 import { AUTH_CONFIG } from './modules/auth/auth.config';
-import { Fornecedor } from './modules/fornecedor/models/fornecedor.interface';
-import { FornecedorService } from './modules/fornecedor/services/fornecedor.service';
+import { AuthService } from './modules/auth/services/auth.service';
+import { FORNECEDOR_CONFIG } from './modules/fornecedor/fornecedor.config';
+import { FornecedorReadResolver } from './modules/fornecedor/resolvers/fornecedor-read.resolver';
 import { PRODUTO_CONFIG } from './modules/produto/produto.config';
+import { ProdutoReadResolver } from './modules/produto/resolvers/produto-read.resolver';
 import { USUARIO_CONFIG } from './modules/usuario/usuario.config';
 
 describe('app-routing.module.spec | AppRoutingModule', () => {
   let router: Router;
   let location: Location;
-  let fornecedorService: jasmine.SpyObj<FornecedorService>;
+  let httpTestingController: HttpTestingController;
 
-  const fornecedoresMock: Array<Fornecedor> = FORNECEDOR_MOCK;
+  const authService = jasmine.createSpyObj<AuthService>(['isLogged']);
+  authService.isLogged.and.returnValue((true));
 
-  fornecedorService = jasmine.createSpyObj<FornecedorService>(['read']);
-  fornecedorService.read.and.returnValue(of(fornecedoresMock));
+  const fornecedorReadResolver = jasmine.createSpyObj<FornecedorReadResolver>(['resolve']);
+  fornecedorReadResolver.resolve.and.returnValue(of(FORNECEDOR_MOCK));
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          HttpClientTestingModule,
-          RouterTestingModule.withRoutes(routes),
-        ],
-        providers: [
-          {
-            provide: FornecedorService,
-            useValue: fornecedorService
-          }
-        ]
-      }).compileComponents();
-    })
-  );
+  const produtoReadResolver = jasmine.createSpyObj<ProdutoReadResolver>(['resolve']);
+  produtoReadResolver.resolve.and.returnValue(of(PRODUTO_MOCK));
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes(routes),
+      ],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: authService
+        }
+      ]
+    });
+
+    TestBed.overrideProvider(FornecedorReadResolver, {
+      useValue: fornecedorReadResolver
+    });
+
+    TestBed.overrideProvider(ProdutoReadResolver, {
+      useValue: produtoReadResolver
+    });
+
     router = TestBed.inject(Router);
     location = TestBed.inject(Location);
-    router.initialNavigation();
+    httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
   });
 
   it('Deve conter 3 rotas principais', () => {
@@ -72,13 +87,14 @@ describe('app-routing.module.spec | AppRoutingModule', () => {
     expect(url).toBe(AUTH_CONFIG.pathFront);
   });
 
-  // TO-DO
-  // it('Deve navegar para módulo de fornecedor', async () => {
-  //   const url = await router
-  //     .navigateByUrl(FORNECEDOR_CONFIG.path)
-  //     .then(() => location.path());
-  //   expect(url).toBe(FORNECEDOR_CONFIG.pathFront);
-  // });
+  it('Deve navegar para módulo de fornecedor', async () => {
+    const url = await router
+      .navigateByUrl(FORNECEDOR_CONFIG.path)
+      .then(() => {
+        return location.path();
+      });
+    expect(url).toBe(FORNECEDOR_CONFIG.pathFront);
+  });
 
   it('Deve navegar para módulo de produto', async () => {
     const url = await router

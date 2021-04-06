@@ -1,5 +1,4 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -56,13 +55,4 @@ describe('usuario-novo.guard.spec | UsuarioNovoGuard', () => {
     guard.canDeactivate(component);
     expect(spy).toHaveBeenCalled();
   });
-
-  // TO-DO
-  // it('Deve retornar true caso usuário clique em Confirmar', async () => {
-  //   component.form.markAsDirty();
-  //   const verify = await guard['verify'](component).then((value) => {
-  //     guard.options.confirm();
-  //     return value;
-  //   });
-  // });
 });

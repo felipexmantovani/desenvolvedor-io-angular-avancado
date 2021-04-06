@@ -44,11 +44,4 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
   it('Deve ser criado', () => {
     expect(guard).toBeTruthy();
   });
-
-  // it('Deve retornar true caso formulário não estiver dirty e o fornecedor não possuir id', async () => {
-  //   component.formComponent.fornecedor = FORNECEDOR_MOCK[1];
-  //   component.formComponent.form.markAsDirty();
-  //   const verify = await guard.canDeactivate(component);
-  //   expect(verify).toBeTruthy();
-  // });
 });

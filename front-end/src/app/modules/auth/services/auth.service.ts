@@ -34,6 +34,7 @@ export class AuthService {
 
   logout(): void {
     this.storageService.localRemoveItem(AUTH_CONFIG.keyToken);
+    this.storageService.localRemoveItem(AUTH_CONFIG.keyUser);
     this.isLoggedBS.next(false);
     this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
   }

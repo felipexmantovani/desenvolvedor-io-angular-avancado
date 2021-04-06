@@ -1,21 +1,36 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoPageModule, PoWidgetModule } from '@po-ui/ng-components';
-import { FornecedorService } from '../../../fornecedor/services/fornecedor.service';
+import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
+import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
 import { PageHomeComponent } from './page-home.component';
 
 describe('page-home.component.spec | PageHomeComponent', () => {
   let component: PageHomeComponent;
   let fixture: ComponentFixture<PageHomeComponent>;
-  let fornecedorService: FornecedorService;
+
+  const activatedRoute = {
+    snapshot: {
+      data: {
+        fornecedores: FORNECEDOR_MOCK,
+        produtos: PRODUTO_MOCK
+      }
+    }
+  };
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [PageHomeComponent],
         imports: [HttpClientTestingModule, RouterTestingModule, PoPageModule, PoWidgetModule],
-        providers: [FornecedorService]
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: activatedRoute
+          }
+        ]
       });
     })
   );
@@ -23,7 +38,6 @@ describe('page-home.component.spec | PageHomeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PageHomeComponent);
     component = fixture.componentInstance;
-    fornecedorService = TestBed.inject(FornecedorService);
     fixture.detectChanges();
   });
 

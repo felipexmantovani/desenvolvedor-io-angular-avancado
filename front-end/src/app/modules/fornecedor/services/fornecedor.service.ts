@@ -11,17 +11,17 @@ import { Fornecedor } from '../models/fornecedor.interface';
 
 @Injectable()
 export class FornecedorService {
-  private API = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}`;
-  private API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApiEndereco}`;
+  static API = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}`;
+  static API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApiEndereco}`;
 
   constructor(
     private httpClient: HttpClient,
     private exceptionService: ExceptionService
   ) {}
 
-  public save(fornecedor: Fornecedor): Observable<Fornecedor> {
+  save(fornecedor: Fornecedor): Observable<Fornecedor> {
     return this.httpClient
-      .post<Fornecedor>(this.API, fornecedor)
+      .post<Fornecedor>(FornecedorService.API, fornecedor)
       .pipe(
         take(1),
         map((result) => HttpUtil.extractData(result)),
@@ -32,9 +32,9 @@ export class FornecedorService {
       );
   }
 
-  public read(): Observable<Array<Fornecedor>> {
+  read(): Observable<Array<Fornecedor>> {
     return this.httpClient
-      .get<Array<Fornecedor>>(this.API)
+      .get<Array<Fornecedor>>(FornecedorService.API)
       .pipe(
         take(1),
         catchError((error) => {
@@ -44,9 +44,9 @@ export class FornecedorService {
       );
   }
 
-  public readById(id: string): Observable<Fornecedor> {
+  readById(id: string): Observable<Fornecedor> {
     return this.httpClient
-      .get<Fornecedor>(`${this.API}/${id}`)
+      .get<Fornecedor>(`${FornecedorService.API}/${id}`)
       .pipe(
         take(1),
         catchError((error) => {
@@ -56,22 +56,9 @@ export class FornecedorService {
       );
   }
 
-  public update(fornecedor: Fornecedor): Observable<Fornecedor> {
+  update(fornecedor: Fornecedor): Observable<Fornecedor> {
     return this.httpClient
-      .put<Fornecedor>(`${this.API}/${fornecedor.id}`, fornecedor)
-      .pipe(
-        take(1),
-        map((result) => HttpUtil.extractData(result)),
-        catchError((error) => {
-          this.exceptionService.handleError(error);
-          return throwError(error);
-        })
-      );
-  }
-
-  public delete(id: string): Observable<Fornecedor> {
-    return this.httpClient
-      .delete<Fornecedor>(`${this.API}/${id}`)
+      .put<Fornecedor>(`${FornecedorService.API}/${fornecedor.id}`, fornecedor)
       .pipe(
         take(1),
         map((result) => HttpUtil.extractData(result)),
@@ -82,9 +69,9 @@ export class FornecedorService {
       );
   }
 
-  public readEnderecoById(id: number): Observable<FornecedorEndereco> {
+  delete(id: string): Observable<Fornecedor> {
     return this.httpClient
-      .get<FornecedorEndereco>(`${this.API_ENDERECO}/${id}`)
+      .delete<Fornecedor>(`${FornecedorService.API}/${id}`)
       .pipe(
         take(1),
         map((result) => HttpUtil.extractData(result)),
@@ -95,9 +82,22 @@ export class FornecedorService {
       );
   }
 
-  public updateEndereco(endereco: FornecedorEndereco): Observable<FornecedorEndereco> {
+  readEnderecoById(id: number): Observable<FornecedorEndereco> {
     return this.httpClient
-      .put<FornecedorEndereco>(`${this.API_ENDERECO}/${endereco.id}`, endereco)
+      .get<FornecedorEndereco>(`${FornecedorService.API_ENDERECO}/${id}`)
+      .pipe(
+        take(1),
+        map((result) => HttpUtil.extractData(result)),
+        catchError((error) => {
+          this.exceptionService.handleError(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  updateEndereco(endereco: FornecedorEndereco): Observable<FornecedorEndereco> {
+    return this.httpClient
+      .put<FornecedorEndereco>(`${FornecedorService.API_ENDERECO}/${endereco.id}`, endereco)
       .pipe(
         take(1),
         map((result) => HttpUtil.extractData(result)),
