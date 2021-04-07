@@ -1,7 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoPageModule, PoTableModule } from '@po-ui/ng-components';
+import { PoDialogService } from '@po-ui/ng-components';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorService } from '../../services/fornecedor.service';
 import { FornecedorListarComponent } from './fornecedor-listar.component';
@@ -16,11 +17,10 @@ describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
         declarations: [FornecedorListarComponent],
         imports: [
           RouterTestingModule,
-          HttpClientTestingModule,
-          PoPageModule,
-          PoTableModule
+          HttpClientTestingModule
         ],
-        providers: [FornecedorService]
+        providers: [FornecedorService, PoDialogService],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
     })
   );

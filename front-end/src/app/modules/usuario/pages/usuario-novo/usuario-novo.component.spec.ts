@@ -1,8 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoButtonModule, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
+import { PoFieldModule } from '@po-ui/ng-components';
 import { of } from 'rxjs';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { Token } from '../../../auth/models/auth-token.interface';
@@ -37,9 +38,7 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
         imports: [
           HttpClientTestingModule,
           RouterTestingModule,
-          PoPageModule,
           PoFieldModule,
-          PoButtonModule,
           ReactiveFormsModule,
         ],
         providers: [
@@ -53,6 +52,7 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
             useValue: notificationService
           }
         ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
     })
   );

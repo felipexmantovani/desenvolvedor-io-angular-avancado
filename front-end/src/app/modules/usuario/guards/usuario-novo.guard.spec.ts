@@ -1,8 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoButtonModule, PoDialogService, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
+import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
 import { UsuarioNovoComponent } from '../pages/usuario-novo/usuario-novo.component';
 import { UsuarioService } from '../services/usuario.service';
 import { UsuarioNovoGuard } from './usuario-novo.guard';
@@ -18,9 +19,7 @@ describe('usuario-novo.guard.spec | UsuarioNovoGuard', () => {
         imports: [
           HttpClientTestingModule,
           PoFieldModule,
-          PoPageModule,
           RouterTestingModule,
-          PoButtonModule,
           ReactiveFormsModule
         ],
         declarations: [UsuarioNovoComponent],
@@ -30,6 +29,7 @@ describe('usuario-novo.guard.spec | UsuarioNovoGuard', () => {
           FormBuilder,
           UsuarioService,
         ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       });
     })
   );

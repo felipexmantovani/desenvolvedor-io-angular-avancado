@@ -1,8 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoDialogService, PoDividerModule, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
+import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
 import { FornecedorNovoComponent } from '../pages/fornecedor-novo/fornecedor-novo.component';
 import { FornecedorService } from '../services/fornecedor.service';
 import { FornecedorNovoGuard } from './fornecedor-novo.guard';
@@ -18,9 +19,7 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
         imports: [
           HttpClientTestingModule,
           RouterTestingModule,
-          PoPageModule,
           PoFieldModule,
-          PoDividerModule,
           ReactiveFormsModule
         ],
         declarations: [FornecedorNovoComponent],
@@ -30,6 +29,7 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
           FormBuilder,
           FornecedorService,
         ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
     })
   );

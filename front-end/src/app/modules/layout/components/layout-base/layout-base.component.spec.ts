@@ -1,8 +1,9 @@
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoAvatarModule, PoButtonModule, PoMenuModule } from '@po-ui/ng-components';
-import { take } from 'rxjs/operators';
+import { PoDialogService } from '@po-ui/ng-components';
 import { AUTH_CONFIG } from '../../../auth/auth.config';
 import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
@@ -21,10 +22,10 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
       declarations: [LayoutBaseComponent],
       imports: [
         RouterTestingModule,
-        PoMenuModule,
-        PoAvatarModule,
-        PoButtonModule,
+        HttpClientTestingModule
       ],
+      providers: [PoDialogService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
 
     fixture = TestBed.createComponent(LayoutBaseComponent);

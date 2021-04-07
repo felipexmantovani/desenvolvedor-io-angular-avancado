@@ -3,7 +3,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoModule } from '@po-ui/ng-components';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorService } from '../../services/fornecedor.service';
 import { FornecedorNovoComponent } from './fornecedor-novo.component';

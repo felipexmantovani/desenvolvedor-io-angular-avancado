@@ -1,9 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoModule } from '@po-ui/ng-components';
+import { PoFieldModule } from '@po-ui/ng-components';
 import { of } from 'rxjs';
 import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
@@ -31,7 +32,7 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule,
         ReactiveFormsModule,
-        PoModule
+        PoFieldModule
       ],
       providers: [
         FormBuilder,
@@ -44,6 +45,7 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
           useValue: notificationService
         }
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 

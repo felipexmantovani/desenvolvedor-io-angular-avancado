@@ -1,8 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoPageModule, PoWidgetModule } from '@po-ui/ng-components';
 import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
 import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
 import { PageHomeComponent } from './page-home.component';
@@ -24,13 +24,14 @@ describe('page-home.component.spec | PageHomeComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [PageHomeComponent],
-        imports: [HttpClientTestingModule, RouterTestingModule, PoPageModule, PoWidgetModule],
+        imports: [HttpClientTestingModule, RouterTestingModule],
         providers: [
           {
             provide: ActivatedRoute,
             useValue: activatedRoute
           }
-        ]
+        ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       });
     })
   );

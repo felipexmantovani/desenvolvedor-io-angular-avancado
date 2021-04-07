@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PoLoadingModule } from '@po-ui/ng-components';
 import { LoadingComponent } from './loading.component';
 
 describe('loading.component.spec | LoadingComponent', () => {
@@ -11,7 +10,7 @@ describe('loading.component.spec | LoadingComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [LoadingComponent],
-        imports: [CommonModule, PoLoadingModule],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
     })
   );

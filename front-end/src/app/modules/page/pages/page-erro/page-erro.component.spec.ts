@@ -1,6 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoPageModule } from '@po-ui/ng-components';
 import { PageErroComponent } from './page-erro.component';
 
 describe('page-erro.component.spec | PageErroComponent', () => {
@@ -10,7 +10,8 @@ describe('page-erro.component.spec | PageErroComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PageErroComponent],
-      imports: [RouterTestingModule, PoPageModule],
+      imports: [RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     });
 
     fixture = TestBed.createComponent(PageErroComponent);
