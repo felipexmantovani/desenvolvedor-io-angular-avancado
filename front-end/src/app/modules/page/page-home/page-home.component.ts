@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
-import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
-import { AuthService } from '../../../auth/services/auth.service';
-import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
-import { Fornecedor } from '../../../fornecedor/models/fornecedor.interface';
-import { Produto } from '../../../produto/models/produto.interface';
-import { PRODUTO_CONFIG } from '../../../produto/produto.config';
+import { PageDefault } from '../../../shared/interfaces/page-default.interface';
+import { AuthService } from '../../auth/services/auth.service';
+import { FORNECEDOR_CONFIG } from '../../fornecedor/fornecedor.config';
+import { Fornecedor } from '../../fornecedor/models/fornecedor.interface';
+import { Produto } from '../../produto/models/produto.interface';
+import { PRODUTO_CONFIG } from '../../produto/produto.config';
 
 @Component({
   selector: 'app-page-home',

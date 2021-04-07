@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { LayoutComponentsModule } from './modules/layout/components/layout-components.module';
+import { LayoutComponentsModule } from './modules/layout/components/layout-component.module';
 
 describe('app.component.spec | AppComponent', () => {
   let component: AppComponent;

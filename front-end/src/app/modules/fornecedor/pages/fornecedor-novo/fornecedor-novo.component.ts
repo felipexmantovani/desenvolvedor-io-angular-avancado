@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
-import { FornecedorFormComponent } from '../../component/fornecedor-form/fornecedor-form.component';
+import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 
 @Component({

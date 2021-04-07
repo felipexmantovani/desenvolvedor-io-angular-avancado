@@ -7,8 +7,8 @@ import { FornecedorService } from '../fornecedor/services/fornecedor.service';
 import { ProdutoReadResolver } from '../produto/resolvers/produto-read.resolver';
 import { ProdutoService } from '../produto/services/produto.service';
 import { PageHomeRoutingModule } from './page-routing.module';
-import { PageErroComponent } from './pages/page-erro/page-erro.component';
-import { PageHomeComponent } from './pages/page-home/page-home.component';
+import { PageErroComponent } from './page-erro/page-erro.component';
+import { PageHomeComponent } from './page-home/page-home.component';
 
 @NgModule({
   declarations: [PageHomeComponent, PageErroComponent],
