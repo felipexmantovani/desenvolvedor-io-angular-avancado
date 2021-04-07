@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoPageModule } from '@po-ui/ng-components';
@@ -16,13 +17,14 @@ describe('usuario-perfil.component.spec | UsuarioPerfilComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [UsuarioPerfilComponent],
-      imports: [RouterTestingModule, PoPageModule],
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: AuthService,
           useValue: authService
         }
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });
 

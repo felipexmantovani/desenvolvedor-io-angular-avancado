@@ -17,8 +17,7 @@ describe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
       TestBed.configureTestingModule({
         imports: [
           HttpClientTestingModule,
-          RouterTestingModule,
-          PoModule
+          RouterTestingModule
         ],
         declarations: [FornecedorNovoComponent],
         providers: [FormBuilder, FornecedorService],
