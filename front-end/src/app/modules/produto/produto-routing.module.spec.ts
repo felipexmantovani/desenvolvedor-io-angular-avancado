@@ -49,13 +49,18 @@ describe('produto-routing.module.spec | ProdutoRoutingModule', () => {
     location = TestBed.inject(Location);
   });
 
-  it('Deve conter 2 rotas', () => {
-    expect(router.config.length).toBe(2);
+  it('Deve conter 3 rotas', () => {
+    expect(router.config.length).toBe(3);
   });
 
   it('Deve navegar para listagem de produtos', async () => {
     const url = await router.navigateByUrl('').then(() => location.path());
     expect(url).toBe('/');
+  });
+
+  it('Deve navegar para /novo', async () => {
+    const url = await router.navigateByUrl('/novo').then(() => location.path());
+    expect(url).toBe('/novo');
   });
 
   it('Deve navegar para detalhes do produto', async () => {

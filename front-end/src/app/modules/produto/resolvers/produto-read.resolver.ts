@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../core/modules/loading/loading.service';
 import { AuthService } from '../../auth/services/auth.service';

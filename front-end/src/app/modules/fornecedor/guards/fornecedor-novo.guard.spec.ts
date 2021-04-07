@@ -10,7 +10,6 @@ import { FornecedorNovoGuard } from './fornecedor-novo.guard';
 
 describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
   let guard: FornecedorNovoGuard;
-  let component: FornecedorNovoComponent;
   let fixture: ComponentFixture<FornecedorNovoComponent>;
 
   beforeEach(
@@ -22,7 +21,6 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
           PoFieldModule,
           ReactiveFormsModule
         ],
-        declarations: [FornecedorNovoComponent],
         providers: [
           FornecedorNovoGuard,
           PoDialogService,
@@ -37,7 +35,6 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
   beforeEach(() => {
     guard = TestBed.inject(FornecedorNovoGuard);
     fixture = TestBed.createComponent(FornecedorNovoComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

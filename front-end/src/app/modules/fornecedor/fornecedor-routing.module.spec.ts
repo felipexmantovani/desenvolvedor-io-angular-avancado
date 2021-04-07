@@ -7,19 +7,21 @@ import { of } from 'rxjs';
 import { FORNECEDOR_MOCK } from '../../mocks/fornecedor.mock';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { routes } from './fornecedor-routing.module';
+import { FornecedorGetByIdResolver } from './resolvers/fornecedor-get-by-id.resolver';
 import { FornecedorReadResolver } from './resolvers/fornecedor-read.resolver';
 
 describe('fornecedor-routing.module.spec | FornecedorRoutingModule', () => {
   let router: Router;
   let location: Location;
-  let authGuard: jasmine.SpyObj<AuthGuard>;
-  let fornecedorReadResolver: jasmine.SpyObj<FornecedorReadResolver>;
 
-  authGuard = jasmine.createSpyObj<AuthGuard>(['canLoad', 'canActivate']);
+  const authGuard = jasmine.createSpyObj<AuthGuard>(['canLoad', 'canActivate']);
   authGuard.canActivate.and.returnValue(true);
 
-  fornecedorReadResolver = jasmine.createSpyObj<FornecedorReadResolver>(['resolve']);
+  const fornecedorReadResolver = jasmine.createSpyObj<FornecedorReadResolver>(['resolve']);
   fornecedorReadResolver.resolve.and.returnValue(of(FORNECEDOR_MOCK));
+
+  const fornecedorGetByIdResolver = jasmine.createSpyObj<FornecedorGetByIdResolver>(['resolve']);
+  fornecedorGetByIdResolver.resolve.and.returnValue(of(FORNECEDOR_MOCK[0]));
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,6 +34,10 @@ describe('fornecedor-routing.module.spec | FornecedorRoutingModule', () => {
         {
           provide: FornecedorReadResolver,
           useValue: fornecedorReadResolver
+        },
+        {
+          provide: FornecedorGetByIdResolver,
+          useValue: fornecedorGetByIdResolver
         }
       ],
     });
@@ -52,5 +58,10 @@ describe('fornecedor-routing.module.spec | FornecedorRoutingModule', () => {
   it('Deve navegar para /novo', async () => {
     const url = await router.navigateByUrl('/novo').then(() => location.path());
     expect(url).toBe('/novo');
+  });
+
+  it('Deve navegar para detalhes do fornecedor', async () => {
+    const url = await router.navigateByUrl('detalhe/123').then(() => location.path());
+    expect(url).toBe('/detalhe/123');
   });
 });

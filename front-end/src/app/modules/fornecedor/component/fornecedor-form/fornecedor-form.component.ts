@@ -12,7 +12,6 @@ import { NotificationService } from '../../../../core/services/notification/noti
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { Produto } from '../../../produto/models/produto.interface';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
-import { FornecedorEndereco } from '../../models/fornecedor-endereco.interface';
 import { Fornecedor } from '../../models/fornecedor.interface';
 import { FornecedorService } from '../../services/fornecedor.service';
 

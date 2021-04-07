@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { AUTH_CONFIG } from '../../../auth/auth.config';
-import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../../fornecedor/fornecedor.config';
 import { PRODUTO_CONFIG } from '../../../produto/produto.config';
 import { USUARIO_CONFIG } from '../../../usuario/usuario.config';
@@ -14,7 +13,6 @@ import { LayoutBaseComponent } from './layout-base.component';
 describe('layout-base.component.spec | LayoutBaseComponent', () => {
   let component: LayoutBaseComponent;
   let fixture: ComponentFixture<LayoutBaseComponent>;
-  let authService: AuthService;
   let router: Router;
 
   beforeEach(() => {
@@ -30,7 +28,6 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
 
     fixture = TestBed.createComponent(LayoutBaseComponent);
     component = fixture.componentInstance;
-    authService = TestBed.inject(AuthService);
     router =  TestBed.inject(Router);
     fixture.detectChanges();
   });
