@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
+import { ProdutoFormComponent } from '../../components/produto-form/produto-form.component';
 import { PRODUTO_CONFIG } from '../../produto.config';
 
 @Component({
@@ -8,9 +9,9 @@ import { PRODUTO_CONFIG } from '../../produto.config';
   templateUrl: './produto-novo.component.html'
 })
 export class ProdutoNovoComponent implements PageDefault {
-  public pageTitle = `Novo ${PRODUTO_CONFIG.name}`;
+  pageTitle = `Novo ${PRODUTO_CONFIG.name}`;
 
-  public readonly breadcrumb: PoBreadcrumb = {
+  breadcrumb: PoBreadcrumb = {
     items: [
       { label: 'Home', link: '/' },
       { label: PRODUTO_CONFIG.namePlural, link: PRODUTO_CONFIG.pathFront },
@@ -18,8 +19,11 @@ export class ProdutoNovoComponent implements PageDefault {
     ]
   };
 
-  public actions: Array<PoPageAction> = [
-    { label: 'Salvar', action: () => undefined },
+  @ViewChild('form', { static: true })
+  formComponent: ProdutoFormComponent;
+
+  actions: Array<PoPageAction> = [
+    { label: 'Salvar', action: () => this.formComponent.onSubmit() },
     { label: 'Cancelar', url: PRODUTO_CONFIG.pathFront },
   ];
 

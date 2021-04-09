@@ -9,9 +9,9 @@ import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
   templateUrl: './fornecedor-novo.component.html'
 })
 export class FornecedorNovoComponent implements PageDefault {
-  public pageTitle = `Novo ${FORNECEDOR_CONFIG.name}`;
+  pageTitle = `Novo ${FORNECEDOR_CONFIG.name}`;
 
-  public readonly breadcrumb: PoBreadcrumb = {
+  breadcrumb: PoBreadcrumb = {
     items: [
       { label: 'Home', link: '/' },
       { label: FORNECEDOR_CONFIG.namePlural, link: FORNECEDOR_CONFIG.pathFront },
@@ -20,9 +20,9 @@ export class FornecedorNovoComponent implements PageDefault {
   };
 
   @ViewChild('form', { static: true })
-  public formComponent: FornecedorFormComponent;
+  formComponent: FornecedorFormComponent;
 
-  public actions: Array<PoPageAction> = [
+  actions: Array<PoPageAction> = [
     { label: 'Salvar', action: () => this.formComponent.onSubmit() },
     { label: 'Cancelar', url: FORNECEDOR_CONFIG.pathFront },
   ];

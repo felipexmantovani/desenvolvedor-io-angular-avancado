@@ -1,0 +1,45 @@
+<form [formGroup]="form">
+  <div class="po-row">
+    <div class="po-sm-12">
+      <po-upload
+        formControlName="imagem"
+        p-drag-drop="true"
+        p-drag-drop-height="160"
+        p-label="Imagem"
+        [p-url]="urlUpload">
+      </po-upload>
+      <po-divider></po-divider>
+    </div>
+  </div>
+  <div class="po-row">
+    <div class="po-offset-md-3 po-offset-lg-4 po-offset-xl-4 po-xl-4 po-lg-4 po-md-6 po-sm-12">
+      <po-combo
+        appFornecedorCombo
+        formControlName="fornecedor"
+        p-icon="po-icon-truck"
+        p-label="Fornecedor">
+      </po-combo>
+      <po-input
+        formControlName="nome"
+        p-clean="true"
+        p-label="Nome">
+      </po-input>
+      <po-textarea
+        formControlName="descricao"
+        p-label="Descrição">
+      </po-textarea>
+      <po-decimal
+        formControlName="valor"
+        p-label="Valor"
+        p-icon="po-icon-finance-secure"
+        p-decimals-length="2">
+      </po-decimal>
+      <po-switch
+        formControlName="ativo"
+        p-label-on="Sim"
+        p-label-off="Não"
+        p-label="Ativar produto">
+      </po-switch>
+    </div>
+  </div>
+</form>

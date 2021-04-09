@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { PoComboFilter, PoComboOption } from '@po-ui/ng-components';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../app.config';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
@@ -10,7 +11,7 @@ import { FornecedorEndereco } from '../models/fornecedor-endereco.interface';
 import { Fornecedor } from '../models/fornecedor.interface';
 
 @Injectable()
-export class FornecedorService {
+export class FornecedorService implements PoComboFilter {
   static API = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}`;
   static API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApiEndereco}`;
 
@@ -106,5 +107,34 @@ export class FornecedorService {
           return throwError(error);
         })
       );
+  }
+
+  getFilteredData(params: { property: string, value: string }, filterParams?: any): Observable<PoComboOption[]> {
+    return this.read()
+      .pipe(
+        map(fornecedores => {
+          const combo = new Array<PoComboOption>();
+          fornecedores.forEach(fornecedor => {
+            if (
+              fornecedor.nome.toLocaleLowerCase().includes(params.value.toLocaleLowerCase()) ||
+              params.value === ''
+            ) {
+              combo.push(this.convertCombo(fornecedor));
+            }
+          });
+          return combo;
+        })
+      );
+  }
+
+  getObjectByValue(value: string, filterParams?: any): Observable<PoComboOption> {
+    return of(null);
+  }
+
+  convertCombo(fornecedor: Fornecedor): PoComboOption {
+    return {
+      label: fornecedor.nome,
+      value: fornecedor.id
+    };
   }
 }

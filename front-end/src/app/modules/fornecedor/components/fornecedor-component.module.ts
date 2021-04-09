@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PoButtonModule, PoDividerModule, PoFieldModule, PoModalModule } from '@po-ui/ng-components';
 import { FornecedorFormComponent } from './fornecedor-form/fornecedor-form.component';
-import { FornecedorSelectComponent } from './fornecedor-select/fornecedor-select.component';
 
 @NgModule({
-  declarations: [FornecedorFormComponent, FornecedorSelectComponent],
+  declarations: [FornecedorFormComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -15,6 +14,6 @@ import { FornecedorSelectComponent } from './fornecedor-select/fornecedor-select
     PoButtonModule,
     PoModalModule
   ],
-  exports: [FornecedorFormComponent, FornecedorSelectComponent]
+  exports: [FornecedorFormComponent]
 })
 export class FornecedorComponentModule {}
