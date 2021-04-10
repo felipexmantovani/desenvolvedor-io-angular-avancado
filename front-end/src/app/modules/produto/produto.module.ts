@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PoDividerModule, PoInfoModule, PoPageModule, PoTableModule, PoTagModule } from '@po-ui/ng-components';
+import { PoPageModule } from '@po-ui/ng-components';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { ProdutoComponentModule } from './components/produto-component.module';
 import { ProdutoNovoGuard } from './guards/produto-novo.guard';
@@ -23,11 +23,7 @@ import { ProdutoService } from './services/produto.service';
     ProdutoRoutingModule,
     ProdutoComponentModule,
     HttpCustomInterceptorModule,
-    PoTableModule,
-    PoPageModule,
-    PoTagModule,
-    PoDividerModule,
-    PoInfoModule
+    PoPageModule
   ],
   providers: [ProdutoService, ProdutoReadResolver, ProdutoGetByIdResolver, ProdutoNovoGuard]
 })

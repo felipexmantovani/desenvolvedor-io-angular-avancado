@@ -1,0 +1,49 @@
+<div class="tags">
+  <po-tag
+    p-color="color-01"
+    p-inverse="true"
+    p-value="{{ produtos?.length }} cadastrado(s)">
+  </po-tag>
+
+  <po-tag
+    p-color="color-11"
+    p-inverse="true"
+    p-value="{{ produtosAtivos?.length }} ativos(s)">
+  </po-tag>
+
+  <po-tag
+    p-color="color-07"
+    p-inverse="true"
+    p-value="{{ produtosInativos?.length }} inativos(s)">
+  </po-tag>
+</div>
+
+<po-divider></po-divider>
+
+<po-table
+  p-container="shadow"
+  p-sort="true"
+  p-hide-text-overflow="true"
+  [p-actions]="actionsTable"
+  [p-columns]="columns"
+  [p-items]="produtos"
+  [p-loading]="produtos?.length === 0">
+
+  <ng-template p-table-column-template p-property="ativo" let-value>
+    <span
+      *ngIf="value"
+      class="po-color-11 po-table-column-label">
+      Ativo
+    </span>
+    <span
+      *ngIf="!value"
+      class="po-color-07 po-table-column-label">
+      Inativo
+    </span>
+  </ng-template>
+
+  <ng-template p-table-column-template p-property="imagem" let-value>
+    <img width="50" class="po-mt-1" src="{{ pathImages }}{{ value }}" alt="{{ value }}">
+  </ng-template>
+
+</po-table>
