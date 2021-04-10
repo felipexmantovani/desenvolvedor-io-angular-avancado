@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProdutoNovoGuard } from './guards/produto-novo.guard';
 import { ProdutoDetalheComponent } from './pages/produto-detalhe/produto-detalhe.component';
 import { ProdutoListarComponent } from './pages/produto-listar/produto-listar.component';
 import { ProdutoNovoComponent } from './pages/produto-novo/produto-novo.component';
@@ -16,6 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'novo',
+    canDeactivate: [ProdutoNovoGuard],
     component: ProdutoNovoComponent
   },
   {

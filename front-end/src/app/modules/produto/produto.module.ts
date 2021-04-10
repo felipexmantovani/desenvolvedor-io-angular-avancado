@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { PoDividerModule, PoInfoModule, PoPageModule, PoTableModule, PoTagModule } from '@po-ui/ng-components';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { ProdutoComponentModule } from './components/produto-component.module';
+import { ProdutoNovoGuard } from './guards/produto-novo.guard';
 import { ProdutoDetalheComponent } from './pages/produto-detalhe/produto-detalhe.component';
 import { ProdutoListarComponent } from './pages/produto-listar/produto-listar.component';
 import { ProdutoNovoComponent } from './pages/produto-novo/produto-novo.component';
@@ -28,6 +29,6 @@ import { ProdutoService } from './services/produto.service';
     PoDividerModule,
     PoInfoModule
   ],
-  providers: [ProdutoService, ProdutoReadResolver, ProdutoGetByIdResolver]
+  providers: [ProdutoService, ProdutoReadResolver, ProdutoGetByIdResolver, ProdutoNovoGuard]
 })
 export class ProdutoModule {}

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PoComboFilter, PoComboOption } from '@po-ui/ng-components';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../app.config';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
