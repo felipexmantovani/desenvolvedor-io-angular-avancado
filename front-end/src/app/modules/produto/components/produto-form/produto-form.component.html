@@ -3,7 +3,7 @@
     <div class="po-sm-12 po-text-center">
       <input accept="image/jpeg,image/png" #inputFile hidden type="file" (change)="fileChangeEvent($event)">
 
-      <img width="150" *ngIf="produto?.imagem" src="{{pathImages}}{{produto.imagem}}" [alt]="produto.imagem" />
+      <img width="100" *ngIf="produto?.imagem" src="{{pathImages}}{{produto.imagem}}" [alt]="produto.imagem" />
 
       <div class="po-field-container-title">
         <span class="po-field-title">Imagem</span>

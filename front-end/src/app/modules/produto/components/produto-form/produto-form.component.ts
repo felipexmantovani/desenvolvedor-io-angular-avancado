@@ -28,6 +28,8 @@ export class ProdutoFormComponent implements OnInit {
 
   pathImages = PRODUTO_CONFIG.pathImages;
 
+  imageName = '';
+
   get isEdit(): boolean {
     return this.produto && this.produto.id ? true : false;
   }
@@ -63,8 +65,9 @@ export class ProdutoFormComponent implements OnInit {
     this.inputFile.nativeElement.click();
   }
 
-  fileChangeEvent(event: Event): void {
+  fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
+    this.imageName = event.currentTarget.files[0].name;
   }
 
   imageCropped(event: ImageCroppedEvent): void {
@@ -88,6 +91,7 @@ export class ProdutoFormComponent implements OnInit {
     if (!this.isEdit) {
       this.produto = this.form.value;
       this.produto.imagemUpload = this.croppedImage.split(',')[1];
+      this.produto.imagem = this.imageName;
 
       this.produtoService
         .save(this.produto)
@@ -103,6 +107,7 @@ export class ProdutoFormComponent implements OnInit {
       this.produto = this.form.value;
       this.produto.id = produtoId;
       this.produto.imagemUpload = this.croppedImage.split(',')[1];
+      this.produto.imagem = this.imageName;
 
       this.produtoService
         .update(this.produto)
