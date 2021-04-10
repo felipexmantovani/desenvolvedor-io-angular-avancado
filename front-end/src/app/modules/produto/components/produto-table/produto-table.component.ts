@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PoDialogConfirmOptions, PoDialogService, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
@@ -48,6 +48,7 @@ export class ProdutoTableComponent implements OnInit {
     { label: 'Excluir', icon: 'po-icon-delete', action: this.excluir.bind(this), type: 'danger' },
   ];
 
+  @Input()
   produtos = new Array<Produto>();
 
   produtosAtivos = new Array<Produto>();
@@ -66,7 +67,9 @@ export class ProdutoTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.produtos = this.activatedRoute.snapshot.data['produtos'];
+    if (!this.produtos.length) {
+      this.produtos = this.activatedRoute.snapshot.data['produtos'];
+    }
     this.produtosAtivos = this.produtos.filter(produto => produto.ativo);
     this.produtosInativos = this.produtos.filter(produto => !produto.ativo);
   }

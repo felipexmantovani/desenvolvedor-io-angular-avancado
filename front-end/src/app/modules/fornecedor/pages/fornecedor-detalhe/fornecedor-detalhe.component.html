@@ -3,6 +3,16 @@
   [p-breadcrumb]="breadcrumb"
   [p-actions]="actionsPage">
 
-  <app-fornecedor-form #form [fornecedor]="fornecedor"></app-fornecedor-form>
+  <po-tabs>
+    <po-tab
+      p-active="true"
+      p-label="Dados">
+      <app-fornecedor-form #form [fornecedor]="fornecedor"></app-fornecedor-form>
+    </po-tab>
+    <po-tab
+      p-label="Produtos">
+      <app-produto-table class="po-mt-5 d-block" [produtos]="fornecedor.produtos"></app-produto-table>
+    </po-tab>
+  </po-tabs>
 
 </po-page-default>
