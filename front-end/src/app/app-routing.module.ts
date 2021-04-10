@@ -26,8 +26,9 @@ export const routes: Routes = [
       },
       {
         path: PRODUTO_CONFIG.path,
-        loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule),
+        canLoad: [AuthGuard],
         canActivate: [AuthGuard],
+        loadChildren: () => import('./modules/produto/produto.module').then(m => m.ProdutoModule)
       },
       {
         path: USUARIO_CONFIG.path,

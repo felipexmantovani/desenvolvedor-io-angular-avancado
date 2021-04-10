@@ -21,9 +21,9 @@ export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDest
   fornecedor: Fornecedor;
 
   @ViewChild('form', { static: true })
-  public formComponent: FornecedorFormComponent;
+  formComponent: FornecedorFormComponent;
 
-  subscription = new Subscription();
+  subs = new Subscription();
 
   constructor(
     private activatedRoute: ActivatedRoute
@@ -43,11 +43,11 @@ export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subs.unsubscribe();
   }
 
   ngAfterViewInit(): void {
-    this.subscription.add(
+    this.subs.add(
       this.formComponent.form?.valueChanges.subscribe(() => {
         this.getActionsPage();
       })

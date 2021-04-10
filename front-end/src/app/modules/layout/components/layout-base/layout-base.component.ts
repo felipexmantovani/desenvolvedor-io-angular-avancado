@@ -16,17 +16,17 @@ import { USUARIO_CONFIG } from '../../../usuario/usuario.config';
   providers: [AuthService]
 })
 export class LayoutBaseComponent implements OnInit, OnDestroy {
-  readonly logo = './assets/logo/po_white.svg';
+  logo = './assets/logo/po_white.svg';
 
-  private maxShortLabel = 5;
+  maxShortLabel = 5;
 
-  public menu: Array<PoMenuItem>;
+  menu: Array<PoMenuItem>;
 
-  public isLogged = false;
+  isLogged = false;
 
-  private optionsDialog: PoDialogConfirmOptions;
+  optionsDialog: PoDialogConfirmOptions;
 
-  private subs: Subscription = new Subscription();
+  subs: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -48,7 +48,7 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  public getMenu(): void {
+  getMenu(): void {
     this.menu = new Array<PoMenuItem>();
 
     this.menu.push(
@@ -73,19 +73,19 @@ export class LayoutBaseComponent implements OnInit, OnDestroy {
     );
   }
 
-  public goUsuario(): void {
+  goUsuario(): void {
     this.router.navigateByUrl(`${USUARIO_CONFIG.pathFront}/perfil`);
   }
 
-  public goLogin(): void {
+  goLogin(): void {
     this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
   }
 
-  public goNewAccount(): void {
+  goNewAccount(): void {
     this.router.navigateByUrl(`${USUARIO_CONFIG.pathFront}/novo`);
   }
 
-  public logout(): void {
+  logout(): void {
     this.optionsDialog = {
       title: 'Confirmação!',
       message: 'Realmente deseja sair?',

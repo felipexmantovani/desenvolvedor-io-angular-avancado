@@ -11,12 +11,12 @@ import { LoadingService } from './loading.service';
   </po-loading-overlay>`
 })
 export class LoadingComponent implements OnInit, OnDestroy {
-  public showLoading = false;
+  showLoading = false;
 
   @Input()
-  public text = 'Aguarde...';
+  text = 'Aguarde...';
 
-  private subs: Subscription = new Subscription();
+  subs: Subscription = new Subscription();
 
   constructor(readonly loadingService: LoadingService) {}
 

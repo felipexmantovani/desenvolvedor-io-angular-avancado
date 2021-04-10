@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../core/modules/loading/loading.service';
@@ -24,16 +24,20 @@ export class AuthLoginComponent implements OnInit, PageDefault {
 
   form: FormGroup;
 
+  redirectTo: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private authService: AuthService,
     private router: Router,
     private notificationService: NotificationService,
-    private exceptionService: ExceptionService
+    private exceptionService: ExceptionService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.redirectTo = this.activatedRoute.snapshot.queryParams['redirectTo'];
     this.createForm();
   }
 
@@ -64,7 +68,7 @@ export class AuthLoginComponent implements OnInit, PageDefault {
         (token) => {
           this.authService.setTokenLocalStorage(token);
           this.notificationService.success('Olá, seja bem-vindo(a).');
-          this.router.navigateByUrl('/');
+          this.redirectTo ? this.router.navigateByUrl(this.redirectTo) : this.router.navigateByUrl('/');
         },
         (error) => this.exceptionService.handleError(error)
       );
