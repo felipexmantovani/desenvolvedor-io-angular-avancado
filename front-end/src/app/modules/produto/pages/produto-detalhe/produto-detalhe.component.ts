@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
+import { ProdutoFormComponent } from '../../components/produto-form/produto-form.component';
 import { Produto } from '../../models/produto.interface';
 import { PRODUTO_CONFIG } from '../../produto.config';
 
@@ -17,6 +18,9 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault {
   breadcrumb: PoBreadcrumb;
 
   actionsPage: Array<PoPageAction>;
+
+  @ViewChild('form', { static: true })
+  formComponent: ProdutoFormComponent;
 
   constructor(
     private activatedRoute: ActivatedRoute
@@ -39,10 +43,8 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault {
 
   getActionsPage(): void {
     this.actionsPage = [
-      { label: 'Salvar', action: () => this.onSubmit() },
+      { label: 'Salvar', action: () => this.formComponent.onSubmit() },
       { label: 'Cancelar', url: `${PRODUTO_CONFIG.pathFront}` },
     ];
   }
-
-  onSubmit(): void { }
 }

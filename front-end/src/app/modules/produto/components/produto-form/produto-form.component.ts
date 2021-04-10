@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
@@ -23,7 +23,14 @@ export class ProdutoFormComponent implements OnInit {
   @ViewChild('inputFile', {static: true})
   inputFile: ElementRef;
 
+  @Input()
   produto: Produto;
+
+  pathImages = PRODUTO_CONFIG.pathImages;
+
+  get isEdit(): boolean {
+    return this.produto && this.produto.id ? true : false;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,6 +53,10 @@ export class ProdutoFormComponent implements OnInit {
       ativo: [true],
       imagem: [null]
     });
+
+    if (this.isEdit) {
+      this.form.patchValue(this.produto);
+    }
   }
 
   selectImage(): void {
@@ -54,7 +65,6 @@ export class ProdutoFormComponent implements OnInit {
 
   fileChangeEvent(event: Event): void {
     this.imageChangedEvent = event;
-    console.log(this.imageChangedEvent);
   }
 
   imageCropped(event: ImageCroppedEvent): void {
@@ -73,22 +83,35 @@ export class ProdutoFormComponent implements OnInit {
       this.notificationService.error('Verifique o formulário.');
       return;
     }
-
     this.loadingService.show();
 
-    this.produto = this.form.value;
+    if (!this.isEdit) {
+      this.produto = this.form.value;
+      this.produto.imagemUpload = this.croppedImage.split(',')[1];
 
-    this.produto.imagemUpload = this.croppedImage.split(',')[1];
+      this.produtoService
+        .save(this.produto)
+        .pipe(finalize(() => this.loadingService.hide()))
+        .subscribe(produto => {
+          this.produto = produto;
+          this.notificationService.success(`Produto ${this.produto.nome} cadastrado com sucesso.`);
+          this.router.navigateByUrl(PRODUTO_CONFIG.pathFront);
+        });
+    } else {
+      const produtoId = this.produto.id;
 
-    console.log(this.produto);
+      this.produto = this.form.value;
+      this.produto.id = produtoId;
+      this.produto.imagemUpload = this.croppedImage.split(',')[1];
 
-    this.produtoService
-      .save(this.produto)
-      .pipe(finalize(() => this.loadingService.hide()))
-      .subscribe(produto => {
-        this.produto = produto;
-        this.notificationService.success(`Produto ${this.produto.nome} cadastrado com sucesso.`);
-        this.router.navigateByUrl(PRODUTO_CONFIG.pathFront);
-      });
+      this.produtoService
+        .update(this.produto)
+        .pipe(finalize(() => this.loadingService.hide()))
+        .subscribe(produto => {
+          this.produto = produto;
+          this.notificationService.success(`Produto ${this.produto.nome} salvo com sucesso.`);
+          this.router.navigateByUrl(PRODUTO_CONFIG.pathFront);
+        });
+    }
   }
 }

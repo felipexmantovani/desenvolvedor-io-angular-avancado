@@ -128,7 +128,7 @@ export class FornecedorService implements PoComboFilter {
   }
 
   getObjectByValue(value: string, filterParams?: any): Observable<PoComboOption> {
-    return of(null);
+    return this.readById(value).pipe(map(fornecedor => this.convertCombo(fornecedor)));
   }
 
   convertCombo(fornecedor: Fornecedor): PoComboOption {
