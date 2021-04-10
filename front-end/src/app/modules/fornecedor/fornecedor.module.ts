@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PoButtonModule, PoPageModule, PoTableModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoDividerModule, PoPageModule, PoTableModule, PoTagModule } from '@po-ui/ng-components';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { FornecedorComponentModule } from './components/fornecedor-component.module';
 import { FornecedorRoutingModule } from './fornecedor-routing.module';
@@ -25,7 +25,9 @@ import { FornecedorService } from './services/fornecedor.service';
     FornecedorComponentModule,
     PoPageModule,
     PoButtonModule,
-    PoTableModule
+    PoTableModule,
+    PoTagModule,
+    PoDividerModule
   ],
   providers: [
     FornecedorNovoGuard,

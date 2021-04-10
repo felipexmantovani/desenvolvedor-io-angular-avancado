@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PoPageModule, PoTableModule } from '@po-ui/ng-components';
+import { PoDividerModule, PoInfoModule, PoPageModule, PoTableModule, PoTagModule } from '@po-ui/ng-components';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { ProdutoComponentModule } from './components/produto-component.module';
 import { ProdutoDetalheComponent } from './pages/produto-detalhe/produto-detalhe.component';
@@ -23,7 +23,10 @@ import { ProdutoService } from './services/produto.service';
     ProdutoComponentModule,
     HttpCustomInterceptorModule,
     PoTableModule,
-    PoPageModule
+    PoPageModule,
+    PoTagModule,
+    PoDividerModule,
+    PoInfoModule
   ],
   providers: [ProdutoService, ProdutoReadResolver, ProdutoGetByIdResolver]
 })

@@ -3,6 +3,28 @@
   [p-breadcrumb]="breadcrumb"
   [p-actions]="actionsPage">
 
+  <div class="tags">
+    <po-tag
+      p-color="color-01"
+      p-inverse="true"
+      p-value="{{ fornecedores?.length }} cadastrado(s)">
+    </po-tag>
+
+    <po-tag
+      p-color="color-11"
+      p-inverse="true"
+      p-value="{{ fornecedoresAtivos?.length }} ativos(s)">
+    </po-tag>
+
+    <po-tag
+      p-color="color-07"
+      p-inverse="true"
+      p-value="{{ fornecedoresInativos?.length }} inativos(s)">
+    </po-tag>
+  </div>
+
+  <po-divider></po-divider>
+
   <po-table
     p-container="shadow"
     p-sort="true"

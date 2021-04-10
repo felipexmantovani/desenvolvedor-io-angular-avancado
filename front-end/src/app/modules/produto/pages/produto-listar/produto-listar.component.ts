@@ -13,7 +13,8 @@ import { ProdutoService } from '../../services/produto.service';
 
 @Component({
   selector: 'app-produto-listar',
-  templateUrl: './produto-listar.component.html'
+  templateUrl: './produto-listar.component.html',
+  styleUrls: ['./produto-listar.component.scss']
 })
 export class ProdutoListarComponent implements OnInit, PageDefault {
   pageTitle = PRODUTO_CONFIG.namePlural;
@@ -28,7 +29,11 @@ export class ProdutoListarComponent implements OnInit, PageDefault {
 
   columns: Array<PoTableColumn>;
 
-  produtos: Array<Produto>;
+  produtos = new Array<Produto>();
+
+  produtosAtivos = new Array<Produto>();
+
+  produtosInativos = new Array<Produto>();
 
   isLogged = false;
 
@@ -48,6 +53,8 @@ export class ProdutoListarComponent implements OnInit, PageDefault {
 
   ngOnInit(): void {
     this.produtos = this.activatedRoute.snapshot.data['produtos'];
+    this.produtosAtivos = this.produtos.filter(produto => produto.ativo);
+    this.produtosInativos = this.produtos.filter(produto => !produto.ativo);
 
     this.subs.add(
       this.authService.isLoggedBS.subscribe(value => {

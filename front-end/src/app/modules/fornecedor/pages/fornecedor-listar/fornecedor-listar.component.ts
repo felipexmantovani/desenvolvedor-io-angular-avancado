@@ -13,7 +13,8 @@ import { FornecedorService } from '../../services/fornecedor.service';
 
 @Component({
   selector: 'app-fornecedor-listar',
-  templateUrl: './fornecedor-listar.component.html'
+  templateUrl: './fornecedor-listar.component.html',
+  styleUrls: ['./fornecedor-listar.component.scss']
 })
 export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault {
   pageTitle = FORNECEDOR_CONFIG.namePlural;
@@ -28,7 +29,11 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
 
   columns: Array<PoTableColumn>;
 
-  fornecedores: Array<Fornecedor>;
+  fornecedores = new Array<Fornecedor>();
+
+  fornecedoresAtivos = new Array<Fornecedor>();
+
+  fornecedoresInativos = new Array<Fornecedor>();
 
   isLogged = false;
 
@@ -46,6 +51,8 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
 
   ngOnInit(): void {
     this.fornecedores = this.activatedRoute.snapshot.data['fornecedores'];
+    this.fornecedoresAtivos = this.fornecedores.filter(fornecedor => fornecedor.ativo);
+    this.fornecedoresInativos = this.fornecedores.filter(fornecedor => !fornecedor.ativo);
 
     this.subs.add(
       this.authService.isLoggedBS.subscribe(value => {
