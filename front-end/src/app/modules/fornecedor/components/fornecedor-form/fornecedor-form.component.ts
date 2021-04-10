@@ -208,7 +208,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
         .subscribe(
           fornecedorRes => {
             this.fornecedor = fornecedorRes;
-            this.notificationService.success(`Fornecedor ${fornecedorRes.nome} cadastrado com sucesso.`);
+            this.notificationService.success(`Fornecedor ${this.fornecedor.nome} cadastrado com sucesso.`);
             this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
           }
       );

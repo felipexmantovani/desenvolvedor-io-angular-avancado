@@ -1,13 +1,34 @@
 <form [formGroup]="form">
   <div class="po-row">
+    <div class="po-sm-12 po-text-center">
+      <input accept="image/jpeg,image/png" #inputFile hidden type="file" (change)="fileChangeEvent($event)">
+      <div class="po-field-container-title">
+        <span class="po-field-title">Imagem</span>
+      </div>
+      <po-button p-label="Selecionar arquivo" (click)="selectImage()"></po-button>
+    </div>
+
+    <div
+      *ngIf="imageChangedEvent"
+      class="po-offset-md-3 po-offset-lg-3 po-offset-xl-3 po-xl-6 po-lg-6 po-md-6 po-sm-12">
+      <div class="po-row" class="po-mt-3">
+        <div class="po-sm-6">
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            maintainAspectRatio="true"
+            [aspectRatio]="3 / 4"
+            format="jpg"
+            (imageCropped)="imageCropped($event)"
+            resizeToWidth="100">
+          </image-cropper>
+        </div>
+        <div class="po-sm-6">
+          <img [src]="croppedImage" />
+        </div>
+      </div>
+    </div>
+
     <div class="po-sm-12">
-      <po-upload
-        formControlName="imagem"
-        p-drag-drop="true"
-        p-drag-drop-height="160"
-        p-label="Imagem"
-        [p-url]="urlUpload">
-      </po-upload>
       <po-divider></po-divider>
     </div>
   </div>
@@ -15,7 +36,7 @@
     <div class="po-offset-md-3 po-offset-lg-4 po-offset-xl-4 po-xl-4 po-lg-4 po-md-6 po-sm-12">
       <po-combo
         appFornecedorCombo
-        formControlName="fornecedor"
+        formControlName="fornecedorId"
         p-icon="po-icon-truck"
         p-label="Fornecedor">
       </po-combo>

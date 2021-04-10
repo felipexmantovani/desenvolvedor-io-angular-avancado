@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PoDividerModule, PoFieldModule } from '@po-ui/ng-components';
+import { PoButtonModule, PoDividerModule, PoFieldModule } from '@po-ui/ng-components';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { FornecedorDirectiveModule } from '../../fornecedor/directives/fornecedor-directive.module';
 import { ProdutoFormComponent } from './produto-form/produto-form.component';
 
@@ -12,7 +13,9 @@ import { ProdutoFormComponent } from './produto-form/produto-form.component';
     ReactiveFormsModule,
     PoFieldModule,
     PoDividerModule,
-    FornecedorDirectiveModule
+    FornecedorDirectiveModule,
+    ImageCropperModule,
+    PoButtonModule
   ],
   exports: [ProdutoFormComponent]
 })
