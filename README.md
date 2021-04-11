@@ -2,6 +2,10 @@
 Projeto desenvolvido baseando-se no projeto final do curso "Desenvolvimento Avançado em Angular" da plataforma @desenvolvedor.io.
 No backend foi utilizada a API disponibilizada no curso, no frontend optei em utilizar o framework https://po-ui.io/.
 
+<div align="center">
+<img src='https://github.com/felipexmantovani/desenvolvedor-io-angular-avancado/blob/main/screen.gif' style="min-width: 100%" />
+</div>
+
 ---
 
 #### Preparando o ambiente
