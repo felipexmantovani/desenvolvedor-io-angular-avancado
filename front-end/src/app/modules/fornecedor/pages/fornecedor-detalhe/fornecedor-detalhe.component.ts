@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { Subscription } from 'rxjs';
+import { CanDeactivateGuard } from '../../../../core/guards/can-deactivate-form/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
@@ -11,7 +11,7 @@ import { Fornecedor } from '../../models/fornecedor.interface';
   selector: 'app-fornecedor-detalhe',
   templateUrl: './fornecedor-detalhe.component.html'
 })
-export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDestroy, PageDefault {
+export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeactivateGuard {
   pageTitle = '';
 
   breadcrumb: PoBreadcrumb;
@@ -25,7 +25,7 @@ export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDest
 
   formSave = false;
 
-  subs = new Subscription();
+  canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar a alteração do fornecedor?';
 
   constructor(
     private activatedRoute: ActivatedRoute
@@ -42,23 +42,13 @@ export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDest
         { label: this.pageTitle }
       ]
     };
-  }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
-
-  ngAfterViewInit(): void {
-    this.subs.add(
-      this.formComponent.form?.valueChanges.subscribe(() => {
-        this.getActionsPage();
-      })
-    );
+    this.getActionsPage();
   }
 
   getActionsPage(): void {
     this.actionsPage = [
-      { label: 'Salvar', action: () => this.onSubmit(), disabled: !this.formComponent.form.dirty },
+      { label: 'Salvar', action: () => this.onSubmit() },
       { label: 'Cancelar', url: `${FORNECEDOR_CONFIG.pathFront}` },
     ];
   }
@@ -66,5 +56,9 @@ export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDest
   onSubmit(): void {
     this.formSave = true;
     this.formComponent.onSubmit();
+  }
+
+  canDeactivate(): boolean {
+    return !this.formComponent.form.dirty || this.formSave;
   }
 }

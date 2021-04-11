@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProdutoDetalheGuard } from './guards/produto-detalhe.guard';
-import { ProdutoNovoGuard } from './guards/produto-novo.guard';
+import { CanDeactivateFormGuard } from '../../core/guards/can-deactivate-form/can-deactivate-form.guard';
 import { ProdutoDetalheComponent } from './pages/produto-detalhe/produto-detalhe.component';
 import { ProdutoListarComponent } from './pages/produto-listar/produto-listar.component';
 import { ProdutoNovoComponent } from './pages/produto-novo/produto-novo.component';
@@ -18,13 +17,13 @@ export const routes: Routes = [
   },
   {
     path: 'novo',
-    canDeactivate: [ProdutoNovoGuard],
+    canDeactivate: [CanDeactivateFormGuard],
     component: ProdutoNovoComponent
   },
   {
     path: 'detalhe/:id',
     component: ProdutoDetalheComponent,
-    canDeactivate: [ProdutoDetalheGuard],
+    canDeactivate: [CanDeactivateFormGuard],
     resolve: {
       produto: ProdutoGetByIdResolver
     }

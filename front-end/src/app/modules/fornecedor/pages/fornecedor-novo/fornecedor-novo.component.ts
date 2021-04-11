@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
+import { CanDeactivateGuard } from '../../../../core/guards/can-deactivate-form/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
@@ -8,7 +9,7 @@ import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
   selector: 'app-fornecedor-novo',
   templateUrl: './fornecedor-novo.component.html'
 })
-export class FornecedorNovoComponent implements PageDefault {
+export class FornecedorNovoComponent implements PageDefault, CanDeactivateGuard {
   pageTitle = `Novo ${FORNECEDOR_CONFIG.name}`;
 
   breadcrumb: PoBreadcrumb = {
@@ -27,5 +28,11 @@ export class FornecedorNovoComponent implements PageDefault {
     { label: 'Cancelar', url: FORNECEDOR_CONFIG.pathFront },
   ];
 
+  canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar o cadastro do fornecedor?';
+
   constructor() {}
+
+  canDeactivate(): boolean {
+    return !this.formComponent.form.dirty;
+  }
 }

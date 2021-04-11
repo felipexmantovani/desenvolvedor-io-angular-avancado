@@ -8,8 +8,8 @@ import { CoreServiceModule } from './services/core-services.module';
 
 @NgModule({
   imports: [
-    HttpCustomInterceptorModule,
     HttpClientModule,
+    HttpCustomInterceptorModule,
     CoreServiceModule,
     LoadingModule,
     ViaCepModule,

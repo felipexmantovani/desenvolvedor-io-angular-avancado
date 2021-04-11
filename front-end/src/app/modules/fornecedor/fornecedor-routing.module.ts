@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CanDeactivateFormGuard } from '../../core/guards/can-deactivate-form/can-deactivate-form.guard';
 import { AuthGuard } from '../auth/guards/auth.guard';
-import { FornecedorDetalheGuard } from './guards/fornecedor-detalhe.guard';
-import { FornecedorNovoGuard } from './guards/fornecedor-novo.guard';
 import { FornecedorDetalheComponent } from './pages/fornecedor-detalhe/fornecedor-detalhe.component';
 import { FornecedorListarComponent } from './pages/fornecedor-listar/fornecedor-listar.component';
 import { FornecedorNovoComponent } from './pages/fornecedor-novo/fornecedor-novo.component';
@@ -20,13 +19,13 @@ export const routes: Routes = [
   {
     path: 'novo',
     canActivate: [AuthGuard],
-    canDeactivate: [FornecedorNovoGuard],
+    canDeactivate: [CanDeactivateFormGuard],
     component: FornecedorNovoComponent,
   },
   {
     path: 'detalhe/:id',
     component: FornecedorDetalheComponent,
-    canDeactivate: [FornecedorDetalheGuard],
+    canDeactivate: [CanDeactivateFormGuard],
     resolve: {
       fornecedor: FornecedorGetByIdResolver
     }
