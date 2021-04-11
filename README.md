@@ -25,6 +25,7 @@ docker-compose -f docker-compose.backend.yml up
 `
 cd frontend
 `
+
 `
 npm install
 `
