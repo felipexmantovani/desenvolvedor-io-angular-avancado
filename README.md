@@ -13,9 +13,11 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 - Arquivos disponibilizados pela plataforma do curso (não é necessário baixar):
   - https://github.com/desenvolvedor-io/curso-angular-avancado
 - Siga os passos abaixo:
+
 `
 cd backend
 `
+
 `
 docker-compose -f docker-compose.backend.yml up
 `
