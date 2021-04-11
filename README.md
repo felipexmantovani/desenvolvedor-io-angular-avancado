@@ -12,7 +12,7 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 - Instalar extensão no vsCode (https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 - Arquivos disponibilizados pela plataforma do curso (não é necessário baixar):
   - https://github.com/desenvolvedor-io/curso-angular-avancado
-- Siga os passos abaixo:
+- Execute os comandos abaixo no seu terminal:
 
 `
 cd backend
@@ -22,6 +22,7 @@ cd backend
 docker-compose -f docker-compose.backend.yml up
 `
 - Após o processo finalizar, os containers irão aparecer na sua extensão do vsCode.
+- Documentação da API, com os containers rodando acesse: http://localhost:5001/swagger/index.html
 
 # frontend
 `
