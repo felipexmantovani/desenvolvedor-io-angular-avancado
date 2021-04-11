@@ -4,10 +4,10 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 
 ---
 
-####Preparando o ambiente
+#### Preparando o ambiente
 
-#backend
-###Docker
+# backend
+### Docker
 - Instalar (https://www.docker.com/products/docker-desktop)
 - Instalar extensão no vsCode (https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 - Arquivos disponibilizados pela plataforma do curso (não é necessário baixar):
@@ -21,7 +21,7 @@ docker-compose -f docker-compose.backend.yml up
 `
 - Após o processo finalizar, os containers irão aparecer na sua extensão do vsCode.
 
-#frontend
+# frontend
 `
 cd frontend
 `
@@ -29,12 +29,12 @@ cd frontend
 npm install
 `
 
-####Server
+#### Server
 `
 npm start
 `
 
-####Testes unitários
+#### Testes unitários
 `
 npm run test:coverage
 `
