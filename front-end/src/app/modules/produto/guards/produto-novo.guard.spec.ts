@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
+import { FornecedorService } from '../../fornecedor/services/fornecedor.service';
 import { ProdutoNovoComponent } from '../pages/produto-novo/produto-novo.component';
 import { ProdutoService } from '../services/produto.service';
 import { ProdutoNovoGuard } from './produto-novo.guard';
@@ -26,6 +27,7 @@ describe('produto-novo.guard.spec | ProdutoNovoGuard', () => {
           PoDialogService,
           FormBuilder,
           ProdutoService,
+          FornecedorService
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();

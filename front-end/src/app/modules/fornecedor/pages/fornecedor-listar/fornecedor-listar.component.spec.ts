@@ -1,8 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
+import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorService } from '../../services/fornecedor.service';
 import { FornecedorListarComponent } from './fornecedor-listar.component';
@@ -10,6 +12,14 @@ import { FornecedorListarComponent } from './fornecedor-listar.component';
 describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
   let component: FornecedorListarComponent;
   let fixture: ComponentFixture<FornecedorListarComponent>;
+
+  const activatedRoute = {
+    snapshot: {
+      data: {
+        fornecedores: FORNECEDOR_MOCK
+      }
+    }
+  };
 
   beforeEach(
     waitForAsync(() => {
@@ -19,7 +29,14 @@ describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
           RouterTestingModule,
           HttpClientTestingModule
         ],
-        providers: [FornecedorService, PoDialogService],
+        providers: [
+          FornecedorService,
+          PoDialogService,
+          {
+            provide: ActivatedRoute,
+            useValue: activatedRoute
+          }
+        ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
     })
@@ -48,7 +65,7 @@ describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
 
   it('Deve carregar as actions da página caso usuário esteja logado', () => {
     component.isLogged = true;
-    component['getActionsPage']();
+    component.getActionsPage();
     expect(component.actionsPage).toBeTruthy();
   });
 });

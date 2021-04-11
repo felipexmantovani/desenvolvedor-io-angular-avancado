@@ -41,7 +41,7 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
   });
 
   it('Deve conter 3 itens no menu', () => {
-    component['getMenu']();
+    component.getMenu();
     expect(component.menu).toBeTruthy();
     expect(component.menu.length).toBe(3);
     expect(component.menu[0].label).toBe('Home');
@@ -75,7 +75,7 @@ describe('layout-base.component.spec | LayoutBaseComponent', () => {
     spyOn(component['poDialogService'], 'confirm');
 
     component.logout();
-    component['optionsDialog'].confirm();
+    component.optionsDialog.confirm();
 
     expect(component['poDialogService'].confirm).toHaveBeenCalled();
     expect(router.navigateByUrl).toHaveBeenCalledWith('/');

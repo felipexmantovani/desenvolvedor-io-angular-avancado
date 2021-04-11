@@ -24,7 +24,7 @@ describe('http-custom-interceptor.service.spec | HttpCustomInterceptor', () => {
           HttpClient,
           HttpCustomInterceptor
         ],
-      }).compileComponents();
+      });
     })
   );
 

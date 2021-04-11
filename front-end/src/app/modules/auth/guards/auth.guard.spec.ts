@@ -46,14 +46,18 @@ describe('auth.guard.spec | AuthGuard', () => {
     expect(guard.canLoad()).toBeTruthy();
   });
 
-  it('Deve retornar false, exibir notificação e redirecionar para rota de login caso o usuário não estiver autenticado', () => {
+  it('Deve retornar false, exibir notificação e redirecionar para rota de login caso o usuário não estiver autenticado',
+  () => {
     const spy = spyOn(service, 'isLogged').and.returnValue(false);
-    const spyRouter = spyOn(router, 'navigateByUrl');
+    const spyRouter = spyOn(router, 'navigate');
     const spyNotification = spyOn(notification, 'warning');
     guard.canLoad();
     expect(spy).toHaveBeenCalled();
     expect(guard.canLoad()).toBeFalsy();
-    expect(spyRouter).toHaveBeenCalledWith(`${AUTH_CONFIG.pathFront}/login`);
-    expect(spyNotification).toHaveBeenCalled();
+    expect(spyRouter).toHaveBeenCalledWith(
+      [`${AUTH_CONFIG.pathFront}/login`],
+      { queryParams: { redirectTo: null } }
+    );
+    expect(spyNotification).toHaveBeenCalledWith('Para acessar essa página é necessário fazer o login.');
   });
 });
