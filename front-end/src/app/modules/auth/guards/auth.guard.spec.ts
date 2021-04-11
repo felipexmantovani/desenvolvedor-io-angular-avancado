@@ -17,8 +17,7 @@ describe('auth.guard.spec | AuthGuard', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)],
-        providers: [AuthService],
+        imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)]
       }).compileComponents();
     })
   );

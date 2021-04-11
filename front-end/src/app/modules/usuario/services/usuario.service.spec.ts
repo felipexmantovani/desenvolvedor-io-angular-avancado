@@ -13,8 +13,7 @@ describe('usuario.service.spec | UsuarioService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [UsuarioService]
+      imports: [HttpClientTestingModule, RouterTestingModule]
     });
 
     httpTestingController = TestBed.inject(HttpTestingController);

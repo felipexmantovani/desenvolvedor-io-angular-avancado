@@ -18,8 +18,7 @@ describe('fornecedor.service.spec | FornecedorService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [FornecedorService]
+      imports: [HttpClientTestingModule, RouterTestingModule]
     });
 
     httpTestingController = TestBed.inject(HttpTestingController);

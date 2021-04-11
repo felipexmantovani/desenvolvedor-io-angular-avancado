@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
-import { FornecedorService } from '../../services/fornecedor.service';
 import { FornecedorNovoComponent } from './fornecedor-novo.component';
 
 describe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
@@ -19,7 +18,7 @@ describe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
           RouterTestingModule
         ],
         declarations: [FornecedorNovoComponent],
-        providers: [FormBuilder, FornecedorService],
+        providers: [FormBuilder],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
     })

@@ -14,8 +14,7 @@ describe('login.guard.spec | LoginGuard', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)],
-        providers: [AuthService, LoginGuard],
+        imports: [HttpClientTestingModule, RouterTestingModule.withRoutes(routes)]
       }).compileComponents();
     })
   );

@@ -5,7 +5,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
 import { UsuarioNovoComponent } from '../pages/usuario-novo/usuario-novo.component';
-import { UsuarioService } from '../services/usuario.service';
 import { UsuarioNovoGuard } from './usuario-novo.guard';
 
 describe('usuario-novo.guard.spec | UsuarioNovoGuard', () => {
@@ -24,10 +23,8 @@ describe('usuario-novo.guard.spec | UsuarioNovoGuard', () => {
         ],
         declarations: [UsuarioNovoComponent],
         providers: [
-          UsuarioNovoGuard,
           PoDialogService,
           FormBuilder,
-          UsuarioService,
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       });

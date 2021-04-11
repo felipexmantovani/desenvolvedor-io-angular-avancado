@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ProdutoService } from '../services/produto.service';
 import { ProdutoGetByIdResolver } from './produto-get-by-id.resolver';
 
 describe('produto-get-by-id.resolver.spec | ProdutoGetByIdResolver', () => {
@@ -9,8 +8,7 @@ describe('produto-get-by-id.resolver.spec | ProdutoGetByIdResolver', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [ProdutoGetByIdResolver, ProdutoService]
+      imports: [HttpClientTestingModule, RouterTestingModule]
     });
 
     guard = TestBed.inject(ProdutoGetByIdResolver);

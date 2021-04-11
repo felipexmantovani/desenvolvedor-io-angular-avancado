@@ -67,11 +67,11 @@ export class ProdutoTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.produtos.length) {
+    if (!this.produtos?.length) {
       this.produtos = this.activatedRoute.snapshot.data['produtos'];
     }
-    this.produtosAtivos = this.produtos.filter(produto => produto.ativo);
-    this.produtosInativos = this.produtos.filter(produto => !produto.ativo);
+    this.produtosAtivos = this.produtos?.filter(produto => produto.ativo);
+    this.produtosInativos = this.produtos?.filter(produto => !produto.ativo);
   }
 
   detalhes(produto: Produto): void {

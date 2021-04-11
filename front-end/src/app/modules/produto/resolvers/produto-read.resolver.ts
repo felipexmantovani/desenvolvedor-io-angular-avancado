@@ -7,7 +7,9 @@ import { AuthService } from '../../auth/services/auth.service';
 import { Produto } from '../models/produto.interface';
 import { ProdutoService } from '../services/produto.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProdutoReadResolver implements Resolve<Array<Produto>> {
   constructor(
     private loadingService: LoadingService,

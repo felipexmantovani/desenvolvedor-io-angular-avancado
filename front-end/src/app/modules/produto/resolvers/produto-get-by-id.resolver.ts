@@ -6,7 +6,9 @@ import { LoadingService } from '../../../core/modules/loading/loading.service';
 import { Produto } from '../models/produto.interface';
 import { ProdutoService } from '../services/produto.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProdutoGetByIdResolver implements Resolve<Observable<Produto>> {
   constructor(
     private loadingService: LoadingService,

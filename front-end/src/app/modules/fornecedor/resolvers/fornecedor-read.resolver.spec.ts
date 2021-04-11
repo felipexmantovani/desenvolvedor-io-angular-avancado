@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { APP_CONFIG } from '../../../app.config';
 import { FORNECEDOR_MOCK } from '../../../mocks/fornecedor.mock';
 import { FORNECEDOR_CONFIG } from '../fornecedor.config';
-import { FornecedorService } from '../services/fornecedor.service';
 import { FornecedorReadResolver } from './fornecedor-read.resolver';
 
 describe('fornecedor-read.resolver.spec | FornecedorReadResolver', () => {
@@ -14,8 +13,7 @@ describe('fornecedor-read.resolver.spec | FornecedorReadResolver', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [FornecedorReadResolver, FornecedorService]
+      imports: [HttpClientTestingModule, RouterTestingModule]
     });
     resolver = TestBed.inject(FornecedorReadResolver);
     httpTestingController = TestBed.inject(HttpTestingController);

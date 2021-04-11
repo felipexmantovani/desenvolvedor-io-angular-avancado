@@ -16,7 +16,7 @@ export class LoadingComponent implements OnInit, OnDestroy {
   @Input()
   text = 'Aguarde...';
 
-  subs: Subscription = new Subscription();
+  subs = new Subscription();
 
   constructor(readonly loadingService: LoadingService) {}
 

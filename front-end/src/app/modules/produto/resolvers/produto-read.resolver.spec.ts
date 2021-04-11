@@ -6,7 +6,6 @@ import { APP_CONFIG } from '../../../app.config';
 import { PRODUTO_MOCK } from '../../../mocks/produto.mock';
 import { AuthService } from '../../auth/services/auth.service';
 import { PRODUTO_CONFIG } from '../produto.config';
-import { ProdutoService } from '../services/produto.service';
 import { ProdutoReadResolver } from './produto-read.resolver';
 
 describe('produto-read.resolver.spec | ProdutoReadResolver', () => {
@@ -20,8 +19,6 @@ describe('produto-read.resolver.spec | ProdutoReadResolver', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [
-        ProdutoReadResolver,
-        ProdutoService,
         {
           provide: AuthService,
           useValue: authService

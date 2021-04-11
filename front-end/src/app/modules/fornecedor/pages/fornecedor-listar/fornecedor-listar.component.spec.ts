@@ -6,7 +6,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
-import { FornecedorService } from '../../services/fornecedor.service';
 import { FornecedorListarComponent } from './fornecedor-listar.component';
 
 describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
@@ -30,7 +29,6 @@ describe('fornecedor-listar.component.spec | FornecedorListarComponent', () => {
           HttpClientTestingModule
         ],
         providers: [
-          FornecedorService,
           PoDialogService,
           {
             provide: ActivatedRoute,

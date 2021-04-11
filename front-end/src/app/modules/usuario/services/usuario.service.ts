@@ -8,7 +8,9 @@ import { HttpUtil } from '../../../shared/utils/http.util';
 import { Token } from '../../auth/models/auth-token.interface';
 import { Usuario } from '../models/usuario.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsuarioService {
   constructor(
     private httpClient: HttpClient,

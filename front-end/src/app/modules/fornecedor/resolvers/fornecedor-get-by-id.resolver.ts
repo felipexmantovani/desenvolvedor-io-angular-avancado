@@ -6,7 +6,9 @@ import { LoadingService } from '../../../core/modules/loading/loading.service';
 import { Fornecedor } from '../models/fornecedor.interface';
 import { FornecedorService } from '../services/fornecedor.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FornecedorGetByIdResolver implements Resolve<Observable<Fornecedor>> {
   constructor(
     private loadingService: LoadingService,

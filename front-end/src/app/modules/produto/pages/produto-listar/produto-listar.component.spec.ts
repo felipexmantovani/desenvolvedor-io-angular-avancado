@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
-import { ProdutoService } from '../../services/produto.service';
 import { ProdutoListarComponent } from './produto-listar.component';
 
 describe('produto-listar.component.spec | ProdutoListarComponent', () => {
@@ -25,7 +24,6 @@ describe('produto-listar.component.spec | ProdutoListarComponent', () => {
       imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [ProdutoListarComponent],
       providers: [
-        ProdutoService,
         PoDialogService,
         {
           provide: ActivatedRoute,

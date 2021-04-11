@@ -3,16 +3,11 @@ import { NgModule } from '@angular/core';
 import { PoButtonModule, PoDividerModule, PoPageModule, PoTableModule, PoTabsModule, PoTagModule } from '@po-ui/ng-components';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { ProdutoComponentModule } from '../produto/components/produto-component.module';
-import { ProdutoService } from '../produto/services/produto.service';
 import { FornecedorComponentModule } from './components/fornecedor-component.module';
 import { FornecedorRoutingModule } from './fornecedor-routing.module';
-import { FornecedorNovoGuard } from './guards/fornecedor-novo.guard';
 import { FornecedorDetalheComponent } from './pages/fornecedor-detalhe/fornecedor-detalhe.component';
 import { FornecedorListarComponent } from './pages/fornecedor-listar/fornecedor-listar.component';
 import { FornecedorNovoComponent } from './pages/fornecedor-novo/fornecedor-novo.component';
-import { FornecedorGetByIdResolver } from './resolvers/fornecedor-get-by-id.resolver';
-import { FornecedorReadResolver } from './resolvers/fornecedor-read.resolver';
-import { FornecedorService } from './services/fornecedor.service';
 
 @NgModule({
   declarations: [
@@ -32,13 +27,6 @@ import { FornecedorService } from './services/fornecedor.service';
     PoDividerModule,
     PoTabsModule,
     ProdutoComponentModule
-  ],
-  providers: [
-    FornecedorNovoGuard,
-    FornecedorService,
-    FornecedorReadResolver,
-    FornecedorGetByIdResolver,
-    ProdutoService
   ]
 })
 export class FornecedorModule {}

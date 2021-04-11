@@ -5,7 +5,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
 import { FornecedorNovoComponent } from '../pages/fornecedor-novo/fornecedor-novo.component';
-import { FornecedorService } from '../services/fornecedor.service';
 import { FornecedorNovoGuard } from './fornecedor-novo.guard';
 
 describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
@@ -22,10 +21,8 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
           ReactiveFormsModule
         ],
         providers: [
-          FornecedorNovoGuard,
           PoDialogService,
-          FormBuilder,
-          FornecedorService,
+          FormBuilder
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       });

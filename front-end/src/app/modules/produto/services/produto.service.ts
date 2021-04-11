@@ -8,7 +8,9 @@ import { HttpUtil } from '../../../shared/utils/http.util';
 import { Produto } from '../models/produto.interface';
 import { PRODUTO_CONFIG } from '../produto.config';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProdutoService {
   private API = `${APP_CONFIG.apiV1}${PRODUTO_CONFIG.pathApi}`;
 

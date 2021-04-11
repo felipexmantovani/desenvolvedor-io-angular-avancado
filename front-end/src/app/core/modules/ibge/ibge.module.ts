@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { IbgeService } from './services/ibge.service';
 
 @NgModule({
-  providers: [IbgeService]
+  declarations: []
 })
 export class IbgeModule {}

@@ -10,7 +10,9 @@ import { FORNECEDOR_CONFIG } from '../fornecedor.config';
 import { FornecedorEndereco } from '../models/fornecedor-endereco.interface';
 import { Fornecedor } from '../models/fornecedor.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FornecedorService implements PoComboFilter {
   static API = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}`;
   static API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApiEndereco}`;

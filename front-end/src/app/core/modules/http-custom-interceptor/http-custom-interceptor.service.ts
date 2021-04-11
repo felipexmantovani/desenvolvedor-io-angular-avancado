@@ -6,7 +6,9 @@ import { AuthService } from '../../../modules/auth/services/auth.service';
 import { HttpHeadersEnum } from '../../../shared/enums/http-headers.enum';
 import { MimeTypesEnum } from '../../../shared/enums/mime-types.enum';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HttpCustomInterceptor implements HttpInterceptor {
   private httpHeaders = new HttpHeaders();
 

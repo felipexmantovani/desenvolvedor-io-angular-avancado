@@ -3,7 +3,9 @@ import { CanDeactivate } from '@angular/router';
 import { PoDialogConfirmOptions, PoDialogService } from '@po-ui/ng-components';
 import { ProdutoNovoComponent } from '../pages/produto-novo/produto-novo.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProdutoNovoGuard implements CanDeactivate<ProdutoNovoComponent> {
   constructor(public poDialogService: PoDialogService) {}
 

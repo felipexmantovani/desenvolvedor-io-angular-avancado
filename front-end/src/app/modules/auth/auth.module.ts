@@ -4,9 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PoButtonModule, PoFieldModule, PoPageModule } from '@po-ui/ng-components';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { AuthRoutingModule } from './auth-routing.module';
-import { LoginGuard } from './guards/login.guard';
 import { AuthLoginComponent } from './pages/auth-login.component';
-import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [AuthLoginComponent],
@@ -18,7 +16,6 @@ import { AuthService } from './services/auth.service';
     PoPageModule,
     PoFieldModule,
     ReactiveFormsModule
-  ],
-  providers: [AuthService, LoginGuard],
+  ]
 })
 export class AuthModule {}

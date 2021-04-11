@@ -5,7 +5,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
 import { ProdutoDetalheComponent } from '../pages/produto-detalhe/produto-detalhe.component';
-import { ProdutoService } from '../services/produto.service';
 import { ProdutoDetalheGuard } from './produto-detalhe.guard';
 
 describe('produto-detalhe.guard.spec | ProdutoDetalheGuard', () => {
@@ -22,10 +21,8 @@ describe('produto-detalhe.guard.spec | ProdutoDetalheGuard', () => {
           ReactiveFormsModule
         ],
         providers: [
-          ProdutoDetalheGuard,
           PoDialogService,
           FormBuilder,
-          ProdutoService,
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       });

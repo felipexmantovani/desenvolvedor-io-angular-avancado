@@ -3,7 +3,9 @@ import { CanDeactivate } from '@angular/router';
 import { PoDialogConfirmOptions, PoDialogService } from '@po-ui/ng-components';
 import { FornecedorNovoComponent } from '../pages/fornecedor-novo/fornecedor-novo.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FornecedorNovoGuard implements CanDeactivate<FornecedorNovoComponent> {
   constructor(public poDialogService: PoDialogService) {}
 
