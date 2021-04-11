@@ -4,6 +4,7 @@ import { PoComboFilter, PoComboOption } from '@po-ui/ng-components';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../app.config';
+import { CrudGenericService } from '../../../core/services/crud-generic/crud-generic.service';
 import { ExceptionService } from '../../../core/services/exception/exception.service';
 import { HttpUtil } from '../../../shared/utils/http.util';
 import { FORNECEDOR_CONFIG } from '../fornecedor.config';
@@ -13,76 +14,19 @@ import { Fornecedor } from '../models/fornecedor.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class FornecedorService implements PoComboFilter {
-  static API = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}`;
-  static API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApiEndereco}`;
+export class FornecedorService extends CrudGenericService<Fornecedor> implements PoComboFilter {
+  static readonly API = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}`;
+  static readonly API_ENDERECO = `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApiEndereco}`;
 
   constructor(
-    private httpClient: HttpClient,
-    private exceptionService: ExceptionService
-  ) {}
-
-  save(fornecedor: Fornecedor): Observable<Fornecedor> {
-    return this.httpClient
-      .post<Fornecedor>(FornecedorService.API, fornecedor)
-      .pipe(
-        take(1),
-        map((result) => HttpUtil.extractData(result)),
-        catchError((error) => {
-          this.exceptionService.handleError(error);
-          return throwError(error);
-        })
-      );
-  }
-
-  read(): Observable<Array<Fornecedor>> {
-    return this.httpClient
-      .get<Array<Fornecedor>>(FornecedorService.API)
-      .pipe(
-        take(1),
-        catchError((error) => {
-          this.exceptionService.handleError(error);
-          return throwError(error);
-        })
-      );
-  }
-
-  readById(id: string): Observable<Fornecedor> {
-    return this.httpClient
-      .get<Fornecedor>(`${FornecedorService.API}/${id}`)
-      .pipe(
-        take(1),
-        catchError((error) => {
-          this.exceptionService.handleError(error);
-          return throwError(error);
-        })
-      );
-  }
-
-  update(fornecedor: Fornecedor): Observable<Fornecedor> {
-    return this.httpClient
-      .put<Fornecedor>(`${FornecedorService.API}/${fornecedor.id}`, fornecedor)
-      .pipe(
-        take(1),
-        map((result) => HttpUtil.extractData(result)),
-        catchError((error) => {
-          this.exceptionService.handleError(error);
-          return throwError(error);
-        })
-      );
-  }
-
-  delete(id: string): Observable<Fornecedor> {
-    return this.httpClient
-      .delete<Fornecedor>(`${FornecedorService.API}/${id}`)
-      .pipe(
-        take(1),
-        map((result) => HttpUtil.extractData(result)),
-        catchError((error) => {
-          this.exceptionService.handleError(error);
-          return throwError(error);
-        })
-      );
+    public httpClient: HttpClient,
+    public exceptionService: ExceptionService
+  ) {
+    super(
+      httpClient,
+      exceptionService,
+      FornecedorService.API
+    );
   }
 
   readEnderecoById(id: number): Observable<FornecedorEndereco> {

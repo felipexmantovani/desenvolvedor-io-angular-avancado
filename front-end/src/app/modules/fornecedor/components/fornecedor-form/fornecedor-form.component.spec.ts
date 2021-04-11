@@ -21,7 +21,7 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
   notificationService = jasmine.createSpyObj<NotificationService>(['error', 'success']);
 
   let fornecedorService: jasmine.SpyObj<FornecedorService>;
-  fornecedorService = jasmine.createSpyObj<FornecedorService>(['save']);
+  fornecedorService = jasmine.createSpyObj<FornecedorService>(['create']);
 
   const fornecedor = FORNECEDOR_MOCK[0];
 
@@ -96,13 +96,13 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
   });
 
   it('Deve exibir notificação de sucesso caso formulário esteja válido', () => {
-    fornecedorService.save.and.returnValue(of(fornecedor));
+    fornecedorService.create.and.returnValue(of(fornecedor));
     spyOn(router, 'navigateByUrl');
 
     component.form.patchValue(fornecedor);
     component.onSubmit();
     fornecedorService
-      .save(component.fornecedor)
+      .create(component.fornecedor)
       .subscribe(fornecedorRes => {
         expect(notificationService.success).toHaveBeenCalledWith(`Fornecedor ${fornecedorRes.nome} cadastrado com sucesso.`);
         expect(router.navigateByUrl).toHaveBeenCalledWith(FORNECEDOR_CONFIG.pathFront);

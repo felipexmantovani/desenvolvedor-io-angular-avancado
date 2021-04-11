@@ -14,8 +14,6 @@ describe('fornecedor.service.spec | FornecedorService', () => {
 
   const fornecedorMock: Fornecedor = FORNECEDOR_MOCK[1];
 
-  const fornecedoresMock: Array<Fornecedor> = FORNECEDOR_MOCK;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule]
@@ -27,80 +25,6 @@ describe('fornecedor.service.spec | FornecedorService', () => {
 
   it('Deve ser criado', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('Deve retornar o fornecedor após cadastra-lo corretamente', () => {
-    service.save(fornecedorMock).subscribe(fornecedor => {
-      expect(fornecedor).toEqual(fornecedorMock);
-    });
-
-    httpTestingController.expectOne((req: HttpRequest<any>) => {
-      return (
-        req.url === `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}` &&
-        req.method === 'POST' &&
-        req.body === fornecedorMock
-      );
-    })
-    .flush({data: fornecedorMock});
-  });
-
-  it('Deve retornar uma lista de fornecedores', () => {
-    service.read().subscribe(fornecedores => {
-      expect(fornecedores.length).toBe(5);
-    });
-
-    httpTestingController.expectOne((req: HttpRequest<any>) => {
-      return (
-        req.url === `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}` &&
-        req.method === 'GET'
-      );
-    })
-    .flush(fornecedoresMock);
-  });
-
-  it('Deve retornar um fornecedor ao buscar pelo ID', () => {
-    const fornecedorRes = FORNECEDOR_MOCK[4];
-    service.readById('5').subscribe(fornecedor => {
-      expect(fornecedor).toEqual(fornecedorRes);
-    });
-
-    httpTestingController.expectOne((req: HttpRequest<any>) => {
-      return (
-        req.url === `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}/${fornecedorRes.id}` &&
-        req.method === 'GET'
-      );
-    })
-    .flush(fornecedorRes);
-  });
-
-  it('Deve atualizar o fornecedor', () => {
-    fornecedorMock.nome = 'Nome Alterado';
-    service.update(fornecedorMock).subscribe(fornecedor => {
-      expect(fornecedor.nome).toBe('Nome Alterado');
-    });
-
-    httpTestingController.expectOne((req: HttpRequest<any>) => {
-      return (
-        req.url === `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}/${fornecedorMock.id}` &&
-        req.method === 'PUT' &&
-        req.body === fornecedorMock
-      );
-    })
-    .flush({data: fornecedorMock});
-  });
-
-  it('Deve remover um fornecedor', () => {
-    service.delete('2').subscribe(fornecedor => {
-      expect(fornecedor).toEqual(fornecedorMock);
-    });
-
-    httpTestingController.expectOne((req: HttpRequest<any>) => {
-      return (
-        req.url === `${APP_CONFIG.apiV1}${FORNECEDOR_CONFIG.pathApi}/${fornecedorMock.id}` &&
-        req.method === 'DELETE'
-      );
-    })
-    .flush({data: fornecedorMock});
   });
 
   it('Deve retornar um endereço quando buscado pelo ID', () => {

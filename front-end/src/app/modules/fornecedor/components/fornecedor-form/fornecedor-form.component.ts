@@ -203,7 +203,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
       this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString(), 10);
 
       this.fornecedorService
-        .save(this.fornecedor)
+        .create(this.fornecedor)
         .pipe(finalize(() => this.loadingService.hide()))
         .subscribe(
           fornecedorRes => {

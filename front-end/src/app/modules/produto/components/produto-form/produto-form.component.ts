@@ -94,7 +94,7 @@ export class ProdutoFormComponent implements OnInit {
       this.produto.imagem = this.imageName;
 
       this.produtoService
-        .save(this.produto)
+        .create(this.produto)
         .pipe(finalize(() => this.loadingService.hide()))
         .subscribe(produto => {
           this.produto = produto;

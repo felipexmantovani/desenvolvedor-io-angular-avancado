@@ -13,8 +13,8 @@ describe('produto-form.component.spec | ProdutoFormComponent', () => {
   let component: ProdutoFormComponent;
   let fixture: ComponentFixture<ProdutoFormComponent>;
 
-  const produtoService = jasmine.createSpyObj<ProdutoService>(['save', 'update']);
-  produtoService.save.and.returnValue(of(PRODUTO_MOCK[0]));
+  const produtoService = jasmine.createSpyObj<ProdutoService>(['create', 'update']);
+  produtoService.create.and.returnValue(of(PRODUTO_MOCK[0]));
   produtoService.update.and.returnValue(of(PRODUTO_MOCK[0]));
 
   beforeEach(
