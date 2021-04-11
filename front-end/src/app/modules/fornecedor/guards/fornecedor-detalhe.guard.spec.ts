@@ -4,13 +4,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
-import { FornecedorNovoComponent } from '../pages/fornecedor-novo/fornecedor-novo.component';
+import { FornecedorDetalheComponent } from '../pages/fornecedor-detalhe/fornecedor-detalhe.component';
 import { FornecedorService } from '../services/fornecedor.service';
-import { FornecedorNovoGuard } from './fornecedor-novo.guard';
+import { FornecedorDetalheGuard } from './fornecedor-detalhe.guard';
 
-describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
-  let guard: FornecedorNovoGuard;
-  let fixture: ComponentFixture<FornecedorNovoComponent>;
+describe('fornecedor-detalhe.guard.spec | FornecedorDetalheGuard', () => {
+  let guard: FornecedorDetalheGuard;
+  let fixture: ComponentFixture<FornecedorDetalheComponent>;
 
   beforeEach(
     waitForAsync(() => {
@@ -22,7 +22,7 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
           ReactiveFormsModule
         ],
         providers: [
-          FornecedorNovoGuard,
+          FornecedorDetalheGuard,
           PoDialogService,
           FormBuilder,
           FornecedorService,
@@ -33,8 +33,8 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
   );
 
   beforeEach(() => {
-    guard = TestBed.inject(FornecedorNovoGuard);
-    fixture = TestBed.createComponent(FornecedorNovoComponent);
+    guard = TestBed.inject(FornecedorDetalheGuard);
+    fixture = TestBed.createComponent(FornecedorDetalheComponent);
     fixture.detectChanges();
   });
 

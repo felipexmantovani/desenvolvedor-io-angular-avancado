@@ -23,6 +23,8 @@ export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDest
   @ViewChild('form', { static: true })
   formComponent: FornecedorFormComponent;
 
+  formSave = false;
+
   subs = new Subscription();
 
   constructor(
@@ -62,6 +64,7 @@ export class FornecedorDetalheComponent implements OnInit, AfterViewInit, OnDest
   }
 
   onSubmit(): void {
+    this.formSave = true;
     this.formComponent.onSubmit();
   }
 }

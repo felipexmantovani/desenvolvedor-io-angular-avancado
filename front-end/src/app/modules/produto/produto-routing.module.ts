@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProdutoDetalheGuard } from './guards/produto-detalhe.guard';
 import { ProdutoNovoGuard } from './guards/produto-novo.guard';
 import { ProdutoDetalheComponent } from './pages/produto-detalhe/produto-detalhe.component';
 import { ProdutoListarComponent } from './pages/produto-listar/produto-listar.component';
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {
     path: 'detalhe/:id',
     component: ProdutoDetalheComponent,
+    canDeactivate: [ProdutoDetalheGuard],
     resolve: {
       produto: ProdutoGetByIdResolver
     }

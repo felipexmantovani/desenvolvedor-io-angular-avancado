@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/guards/auth.guard';
+import { FornecedorDetalheGuard } from './guards/fornecedor-detalhe.guard';
 import { FornecedorNovoGuard } from './guards/fornecedor-novo.guard';
 import { FornecedorDetalheComponent } from './pages/fornecedor-detalhe/fornecedor-detalhe.component';
 import { FornecedorListarComponent } from './pages/fornecedor-listar/fornecedor-listar.component';
@@ -25,6 +26,7 @@ export const routes: Routes = [
   {
     path: 'detalhe/:id',
     component: FornecedorDetalheComponent,
+    canDeactivate: [FornecedorDetalheGuard],
     resolve: {
       fornecedor: FornecedorGetByIdResolver
     }

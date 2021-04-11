@@ -4,13 +4,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService, PoFieldModule } from '@po-ui/ng-components';
-import { FornecedorNovoComponent } from '../pages/fornecedor-novo/fornecedor-novo.component';
-import { FornecedorService } from '../services/fornecedor.service';
-import { FornecedorNovoGuard } from './fornecedor-novo.guard';
+import { ProdutoDetalheComponent } from '../pages/produto-detalhe/produto-detalhe.component';
+import { ProdutoService } from '../services/produto.service';
+import { ProdutoDetalheGuard } from './produto-detalhe.guard';
 
-describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
-  let guard: FornecedorNovoGuard;
-  let fixture: ComponentFixture<FornecedorNovoComponent>;
+describe('produto-detalhe.guard.spec | ProdutoDetalheGuard', () => {
+  let guard: ProdutoDetalheGuard;
+  let fixture: ComponentFixture<ProdutoDetalheComponent>;
 
   beforeEach(
     waitForAsync(() => {
@@ -22,10 +22,10 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
           ReactiveFormsModule
         ],
         providers: [
-          FornecedorNovoGuard,
+          ProdutoDetalheGuard,
           PoDialogService,
           FormBuilder,
-          FornecedorService,
+          ProdutoService,
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       });
@@ -33,8 +33,8 @@ describe('fornecedor-novo.guard.spec | FornecedorNovoGuard', () => {
   );
 
   beforeEach(() => {
-    guard = TestBed.inject(FornecedorNovoGuard);
-    fixture = TestBed.createComponent(FornecedorNovoComponent);
+    guard = TestBed.inject(ProdutoDetalheGuard);
+    fixture = TestBed.createComponent(ProdutoDetalheComponent);
     fixture.detectChanges();
   });
 

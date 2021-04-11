@@ -30,7 +30,7 @@ describe('produto-novo.guard.spec | ProdutoNovoGuard', () => {
           FornecedorService
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
-      }).compileComponents();
+      });
     })
   );
 

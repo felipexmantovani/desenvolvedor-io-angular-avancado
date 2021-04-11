@@ -22,13 +22,15 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault {
   @ViewChild('form', { static: true })
   formComponent: ProdutoFormComponent;
 
+  formSave = false;
+
   constructor(
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.produto = this.activatedRoute.snapshot.data['produto'];
-    this.pageTitle = this.produto.nome;
+    this.pageTitle = this.produto?.nome;
 
     this.breadcrumb = {
       items: [
@@ -43,8 +45,13 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault {
 
   getActionsPage(): void {
     this.actionsPage = [
-      { label: 'Salvar', action: () => this.formComponent.onSubmit() },
+      { label: 'Salvar', action: () => this.onSubmit() },
       { label: 'Cancelar', url: `${PRODUTO_CONFIG.pathFront}` },
     ];
+  }
+
+  onSubmit(): void {
+    this.formSave = true;
+    this.formComponent.onSubmit();
   }
 }
