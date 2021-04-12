@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../modules/auth/services/auth.service';
-import { HttpStatusCodeEnum } from '../../../shared/enums/http-status-code.enum';
+import { HttpStatusCodeEnum } from '../../enums/http-status-code.enum';
 import { NotificationService } from '../notification/notification.service';
 import { Erros, ExceptionService } from './exception.service';
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CanDeactivateFormGuard } from '../../core/guards/can-deactivate-form/can-deactivate-form.guard';
+import { CanDeactivateFormGuard } from '../../shared/guards/can-deactivate-form/can-deactivate-form.guard';
 import { ProdutoDetalheComponent } from './pages/produto-detalhe/produto-detalhe.component';
 import { ProdutoListarComponent } from './pages/produto-listar/produto-listar.component';
 import { ProdutoNovoComponent } from './pages/produto-novo/produto-novo.component';

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APP_CONFIG } from '../../../app.config';
-import { CrudGenericService } from '../../../core/services/crud-generic/crud-generic.service';
-import { ExceptionService } from '../../../core/services/exception/exception.service';
+import { CrudGenericService } from '../../../shared/services/crud-generic/crud-generic.service';
+import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { Produto } from '../models/produto.interface';
 import { PRODUTO_CONFIG } from '../produto.config';
 

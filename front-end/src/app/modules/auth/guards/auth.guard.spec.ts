@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NotificationService } from '../../../core/services/notification/notification.service';
+import { NotificationService } from '../../../shared/services/notification/notification.service';
 import { routes } from '../auth-routing.module';
 import { AUTH_CONFIG } from '../auth.config';
 import { AuthService } from '../services/auth.service';

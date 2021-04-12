@@ -5,7 +5,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoFieldModule } from '@po-ui/ng-components';
 import { of } from 'rxjs';
-import { NotificationService } from '../../../../core/services/notification/notification.service';
+import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { Token } from '../../../auth/models/auth-token.interface';
 import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioNovoComponent } from './usuario-novo.component';

@@ -8,7 +8,7 @@ import { finalize } from 'rxjs/operators';
 import { IbgeService } from '../../../../core/modules/ibge/services/ibge.service';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
 import { ViaCepService } from '../../../../core/modules/via-cep/services/via-cep.service';
-import { NotificationService } from '../../../../core/services/notification/notification.service';
+import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { Produto } from '../../../produto/models/produto.interface';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';

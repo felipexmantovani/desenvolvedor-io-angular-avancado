@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { ExceptionService } from '../../../../shared/services/exception/exception.service';
 import { StringUtil } from '../../../../shared/utils/string.util';
-import { ExceptionService } from '../../../services/exception/exception.service';
 import { IbgeMunicipio } from '../models/municipio.interface';
 import { IbgeUf } from '../models/uf.interface';
 

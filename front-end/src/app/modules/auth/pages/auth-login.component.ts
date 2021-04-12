@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../core/modules/loading/loading.service';
-import { ExceptionService } from '../../../core/services/exception/exception.service';
-import { NotificationService } from '../../../core/services/notification/notification.service';
 import { PageDefault } from '../../../shared/interfaces/page-default.interface';
+import { ExceptionService } from '../../../shared/services/exception/exception.service';
+import { NotificationService } from '../../../shared/services/notification/notification.service';
 import { Login } from '../models/login.interface';
 import { AuthService } from '../services/auth.service';
 

@@ -4,8 +4,8 @@ import { PoBreadcrumb, PoDialogConfirmOptions, PoDialogService, PoPageAction, Po
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
-import { NotificationService } from '../../../../core/services/notification/notification.service';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
+import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { Fornecedor } from '../../models/fornecedor.interface';

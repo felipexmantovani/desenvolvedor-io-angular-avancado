@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PoDialogConfirmOptions, PoDialogService, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
-import { NotificationService } from '../../../../core/services/notification/notification.service';
+import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { Produto } from '../../models/produto.interface';
 import { PRODUTO_CONFIG } from '../../produto.config';
 import { ProdutoService } from '../../services/produto.service';

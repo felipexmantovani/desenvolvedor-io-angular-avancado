@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { AuthService } from '../../../modules/auth/services/auth.service';
-import { HttpStatusCodeEnum } from '../../../shared/enums/http-status-code.enum';
+import { HttpStatusCodeEnum } from '../../enums/http-status-code.enum';
 import { NotificationService } from '../notification/notification.service';
 
 export interface Erros {

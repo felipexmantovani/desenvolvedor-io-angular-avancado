@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { CanDeactivateGuard } from '../../../../core/guards/can-deactivate-form/can-deactivate-form.interface';
+import { CanDeactivateGuard } from '../../../../shared/interfaces/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { ProdutoFormComponent } from '../../components/produto-form/produto-form.component';
 import { PRODUTO_CONFIG } from '../../produto.config';

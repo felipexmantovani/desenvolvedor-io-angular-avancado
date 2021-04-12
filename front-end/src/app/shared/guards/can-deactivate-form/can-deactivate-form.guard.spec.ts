@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { Observable } from 'rxjs';
 import { CanDeactivateFormGuard } from './can-deactivate-form.guard';
-import { CanDeactivateGuard } from './can-deactivate-form.interface';
+import { CanDeactivateGuard } from '../../interfaces/can-deactivate-form.interface';
 
 @Component({
   selector: 'app-mock-component',

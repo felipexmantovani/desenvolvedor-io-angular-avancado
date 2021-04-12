@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APP_CONFIG } from './app.config';
-import { StorageService } from './core/services/storage/storage.service';
 import { AUTH_CONFIG } from './modules/auth/auth.config';
+import { StorageService } from './shared/services/storage/storage.service';
 
 @Component({
   selector: 'app-root',

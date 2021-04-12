@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 import { PoDialogConfirmOptions, PoDialogService } from '@po-ui/ng-components';
-import { CanDeactivateGuard } from './can-deactivate-form.interface';
+import { CanDeactivateGuard } from '../../interfaces/can-deactivate-form.interface';
 
 @Injectable({
   providedIn: 'root'

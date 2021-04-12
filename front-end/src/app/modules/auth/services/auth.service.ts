@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../app.config';
-import { StorageService } from '../../../core/services/storage/storage.service';
+import { StorageService } from '../../../shared/services/storage/storage.service';
 import { HttpUtil } from '../../../shared/utils/http.util';
 import { AUTH_CONFIG } from '../auth.config';
 import { Token } from '../models/auth-token.interface';

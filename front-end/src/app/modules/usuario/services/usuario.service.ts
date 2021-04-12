@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { APP_CONFIG } from '../../../app.config';
-import { ExceptionService } from '../../../core/services/exception/exception.service';
+import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { HttpUtil } from '../../../shared/utils/http.util';
 import { Token } from '../../auth/models/auth-token.interface';
 import { Usuario } from '../models/usuario.interface';
