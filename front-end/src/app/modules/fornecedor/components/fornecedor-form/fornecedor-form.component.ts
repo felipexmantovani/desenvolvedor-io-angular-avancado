@@ -77,7 +77,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
   createForm(): void {
     this.form = this.formBuilder.group({
       nome: [null, [Validators.required]],
-      documento: [null, [Validators.required]],
+      documento: [null, [Validators.required, StringUtil.isValidCpf()]],
       tipoFornecedor: [this.tipoFornecedor],
       ativo: [true],
       endereco: this.formBuilder.group({
@@ -133,13 +133,16 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     this.form.get('documento').setValue('');
 
     this.tipoFornecedor = value;
+
     const documentoControl = this.form.get('documento');
+    documentoControl.clearAsyncValidators();
     if (this.isPF) {
-      documentoControl.setValidators([Validators.required, Validators.maxLength(11), Validators.minLength(11)]);
+      documentoControl.setValidators([Validators.required, StringUtil.isValidCpf()]);
     } else {
-      documentoControl.setValidators([Validators.required, Validators.maxLength(14), Validators.minLength(14)]);
+      documentoControl.setValidators([Validators.required, StringUtil.isValidCnpj()]);
     }
-    this.form.updateValueAndValidity();
+    documentoControl.updateValueAndValidity();
+    documentoControl.setErrors(null);
   }
 
   changeCep(value: string): void {
