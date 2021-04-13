@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
+import { CanDeactivateGuard } from '../../../../shared/interfaces/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { Usuario } from '../../models/usuario.interface';
@@ -13,7 +14,7 @@ import { USUARIO_CONFIG } from '../../usuario.config';
   selector: 'app-usuario-novo',
   templateUrl: './usuario-novo.component.html'
 })
-export class UsuarioNovoComponent implements OnInit, PageDefault {
+export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateGuard {
   public pageTitle = `Novo ${USUARIO_CONFIG.name}`;
 
   public readonly breadcrumb: PoBreadcrumb = {
@@ -21,6 +22,12 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
   };
 
   public form: FormGroup;
+
+  get passwordValid(): boolean {
+    return this.form.get('password').valid;
+  }
+
+  canDeactivateTextModal = 'Realmente deseja cancelar o cadastro de usuário?';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +40,7 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
     this.createForm();
   }
 
-  private createForm(): void {
+  createForm(): void {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)]],
@@ -41,11 +48,7 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
     });
   }
 
-  get passwordValid(): boolean {
-    return this.form.get('password').valid;
-  }
-
-  private passwordEquals(): boolean {
+  passwordEquals(): boolean {
     return this.form.get('password').value === this.form.get('confirmPassword').value;
   }
 
@@ -56,7 +59,7 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
     }
   }
 
-  public onSubmit(): void {
+  onSubmit(): void {
     if (!this.passwordEquals()) {
       this.notificationService.error('As senhas devem ser iguais.');
       return;
@@ -74,5 +77,9 @@ export class UsuarioNovoComponent implements OnInit, PageDefault {
           this.form.reset();
         }
       );
+  }
+
+  canDeactivate(): boolean {
+    return !this.form.dirty;
   }
 }
