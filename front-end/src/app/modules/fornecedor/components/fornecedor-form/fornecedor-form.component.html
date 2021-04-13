@@ -11,16 +11,19 @@
       </po-radio-group>
       <po-input
         formControlName="nome"
+        p-maxlength="100"
+        p-minlength="2"
         p-auto-focus="true"
         p-clean="true"
+        p-pattern="^.{2,100}$"
         p-error-pattern="Informe entre 2 e 100 caracteres"
         [p-label]="isPF ? 'Nome' : 'Razão social'">
       </po-input>
       <po-input
         formControlName="documento"
         p-clean="true"
-        [p-disabled]="isEdit()"
         [p-error-pattern]="isPF ? 'Informe um CPF válido' : 'Informe um CNPJ válido'"
+        [p-disabled]="isEdit()"
         [p-mask]="isPF ? '999.999.999-99' : '99.999.999/9999-99'"
         [p-label]="isPF ? 'CPF' : 'CNPJ'">
       </po-input>
@@ -71,13 +74,19 @@
         </po-input>
         <po-input
           formControlName="logradouro"
+          p-maxlength="200"
+          p-minlength="2"
           p-clean="true"
+          p-pattern="^.{2,200}$"
           p-error-pattern="Informe entre 2 e 200 caracteres"
           p-label="Logradouro">
         </po-input>
         <po-input
           formControlName="numero"
           p-clean="true"
+          p-maxlength="50"
+          p-minlength="1"
+          p-pattern="^.{1,50}$"
           p-error-pattern="Informe entre 1 e 50 caracteres"
           p-label="Número">
         </po-input>
@@ -88,7 +97,11 @@
         </po-input>
         <po-input
           formControlName="bairro"
+          class="error"
           p-clean="true"
+          p-maxlength="100"
+          p-minlength="2"
+          p-pattern="^.{2,100}$"
           p-error-pattern="Informe entre 2 e 100 caracteres"
           p-label="Bairro">
         </po-input>

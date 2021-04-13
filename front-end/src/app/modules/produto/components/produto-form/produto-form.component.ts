@@ -5,6 +5,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
+import { FormUtil } from '../../../../shared/utils/form.util';
 import { Produto } from '../../models/produto.interface';
 import { PRODUTO_CONFIG } from '../../produto.config';
 import { ProdutoService } from '../../services/produto.service';
@@ -83,6 +84,7 @@ export class ProdutoFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.invalid) {
+      FormUtil.validade(this.form);
       this.notificationService.error('Verifique o formulário.');
       return;
     }

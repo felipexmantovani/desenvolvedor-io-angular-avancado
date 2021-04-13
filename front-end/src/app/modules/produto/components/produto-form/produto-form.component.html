@@ -45,11 +45,15 @@
       </po-combo>
       <po-input
         formControlName="nome"
+        p-pattern="^.{2,200}$"
+        p-error-pattern="Informe entre 2 e 200 caracteres"
         p-clean="true"
         p-label="Nome">
       </po-input>
       <po-textarea
         formControlName="descricao"
+        p-maxlength="1000"
+        p-minlength="2"
         p-label="Descrição">
       </po-textarea>
       <po-decimal

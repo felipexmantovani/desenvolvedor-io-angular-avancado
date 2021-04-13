@@ -9,6 +9,7 @@ import { LoadingService } from '../../../../core/modules/loading/loading.service
 import { IbgeService } from '../../../../shared/modules/ibge/services/ibge.service';
 import { ViaCepService } from '../../../../shared/modules/via-cep/services/via-cep.service';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
+import { FormUtil } from '../../../../shared/utils/form.util';
 import { StringUtil } from '../../../../shared/utils/string.util';
 import { Produto } from '../../../produto/models/produto.interface';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
@@ -75,18 +76,18 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
 
   createForm(): void {
     this.form = this.formBuilder.group({
-      nome: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(2)]],
-      documento: [null, [Validators.required, Validators.maxLength(14), Validators.minLength(11)]],
+      nome: [null, [Validators.required]],
+      documento: [null, [Validators.required]],
       tipoFornecedor: [this.tipoFornecedor],
       ativo: [true],
       endereco: this.formBuilder.group({
-        cep: [null, [Validators.required, Validators.maxLength(8), Validators.minLength(8)]],
-        logradouro: [null, [Validators.required, Validators.maxLength(200), Validators.minLength(2)]],
-        numero: [null, [Validators.required, Validators.maxLength(50), Validators.minLength(1)]],
+        cep: [null, [Validators.required]],
+        logradouro: [null, [Validators.required]],
+        numero: [null, [Validators.required]],
         complemento: [null],
-        bairro: [null, [Validators.required, Validators.maxLength(100), Validators.minLength(2)]],
-        estado: [null, [Validators.required, Validators.maxLength(50), Validators.minLength(2)]],
-        cidade: [null, [Validators.required, Validators.maxLength(10), Validators.minLength(2)]],
+        bairro: [null, [Validators.required]],
+        estado: [null, [Validators.required]],
+        cidade: [null, [Validators.required]],
       })
     });
     this.onChangesForm();
@@ -192,6 +193,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.form.invalid) {
+      FormUtil.validade(this.form);
       this.notificationService.error('Verifique o formulário.');
       return;
     }
