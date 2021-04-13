@@ -16,4 +16,21 @@ export class StringUtil {
   public static onlyDigits(value: string): string {
     return value.replace(/\D/g, '');
   }
+
+  public static maskCpf(value: string): string {
+    value = value.replace(/\D/g, ''); // Remove tudo o que não é dígito
+    value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca um ponto entre o terceiro e o quarto dígito
+    value = value.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca um ponto entre o sexto e o sétimo dígito
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca um hífen entre o nono e o décimo dígito
+    return value;
+  }
+
+  public static maskCnpj(value: string): string {
+    value = value.replace(/\D/g, ''); // Remove tudo o que não é dígito
+    value = value.replace(/^(\d{2})(\d)/, '$1.$2'); // Coloca ponto entre o segundo e o terceiro dígito
+    value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3'); // Coloca ponto entre o quinto e o sexto dígito
+    value = value.replace(/\.(\d{3})(\d)/, '.$1/$2'); // Coloca uma barra entre o oitavo e o nono dígito
+    value = value.replace(/(\d{4})(\d)/, '$1-$2'); // Coloca um hífen depois do bloco de quatro dígitos
+    return value;
+  }
 }

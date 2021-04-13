@@ -47,5 +47,9 @@
       </span>
     </ng-template>
 
+    <ng-template p-table-column-template p-property="documento" let-value>
+      {{ value | cpfCnpj }}
+    </ng-template>
+
   </po-table>
 </po-page-default>

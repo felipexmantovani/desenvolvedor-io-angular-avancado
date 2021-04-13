@@ -46,4 +46,18 @@ describe('string.util.spec | StringUtil', () => {
       expect(StringUtil.onlyDigits(value)).toBe('12345667890');
     });
   });
+
+  describe('maskCpf()', () => {
+    it('Deve aplicar máscara de CPF corretamente', () => {
+      const cpf = '39222808037';
+      expect(StringUtil.maskCpf(cpf)).toBe('392.228.080-37');
+    });
+  });
+
+  describe('maskCnpj()', () => {
+    it('Deve aplicar máscara de CNPJ corretamente', () => {
+      const cpf = '75130307000106';
+      expect(StringUtil.maskCnpj(cpf)).toBe('75.130.307/0001-06');
+    });
+  });
 });

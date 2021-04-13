@@ -201,6 +201,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     if (!this.isEdit()) {
       this.fornecedor = this.form.value;
       this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString(), 10);
+      this.fornecedor.endereco.cidade = this.fornecedor.endereco.cidade.toString();
 
       this.fornecedorService
         .create(this.fornecedor)

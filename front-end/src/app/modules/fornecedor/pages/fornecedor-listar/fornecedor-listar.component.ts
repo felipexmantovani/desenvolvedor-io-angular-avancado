@@ -78,7 +78,11 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
         type: 'columnTemplate',
       },
       { label: 'Nome', property: 'nome' },
-      { label: 'Documento', property: 'documento' }
+      {
+        label: 'Documento',
+        property: 'documento',
+        type: 'columnTemplate'
+      }
     ];
   }
 
