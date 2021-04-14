@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PoPageModule } from '@po-ui/ng-components';
+import { PoPageDynamicSearchModule } from '@po-ui/ng-templates';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { ProdutoComponentModule } from './components/produto-component.module';
 import { ProdutoDetalheComponent } from './pages/produto-detalhe/produto-detalhe.component';
@@ -19,7 +20,8 @@ import { ProdutoRoutingModule } from './produto-routing.module';
     ProdutoRoutingModule,
     ProdutoComponentModule,
     HttpCustomInterceptorModule,
-    PoPageModule
+    PoPageModule,
+    PoPageDynamicSearchModule
   ]
 })
 export class ProdutoModule {}

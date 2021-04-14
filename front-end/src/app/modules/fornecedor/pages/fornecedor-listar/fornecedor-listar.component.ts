@@ -32,7 +32,7 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
 
   fornecedores = new Array<Fornecedor>();
 
-  fornecedoresInicial = new Array<Fornecedor>();
+  fornecedoresImmutable = new Array<Fornecedor>();
 
   fornecedoresAtivos = new Array<Fornecedor>();
 
@@ -57,10 +57,9 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
   ) {}
 
   ngOnInit(): void {
-    this.fornecedores = this.activatedRoute.snapshot.data['fornecedores'];
-    this.fornecedoresInicial = this.fornecedores;
-    this.fornecedoresAtivos = this.fornecedores.filter(fornecedor => fornecedor.ativo);
-    this.fornecedoresInativos = this.fornecedores.filter(fornecedor => !fornecedor.ativo);
+    this.fornecedoresImmutable = this.activatedRoute.snapshot.data['fornecedores'];
+    this.fornecedores = this.fornecedoresImmutable;
+    this.setAtivosInativos();
 
     this.subs.add(
       this.authService.isLoggedBS.subscribe(value => {
@@ -140,15 +139,22 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
     this.poDialogService.confirm(options);
   }
 
+  setAtivosInativos(): void {
+    this.fornecedoresAtivos = this.fornecedores.filter(fornecedor => fornecedor.ativo);
+    this.fornecedoresInativos = this.fornecedores.filter(fornecedor => !fornecedor.ativo);
+  }
+
   onQuickSearch(filtro: string): void {
     filtro === '' ?
     this.onChangeDisclaimers() :
-    this.fornecedores = this.fornecedoresInicial.filter(
+    this.fornecedores = this.fornecedoresImmutable.filter(
       (fornecedor) => fornecedor.nome.toLowerCase().includes(filtro.toLowerCase())
     );
+    this.setAtivosInativos();
   }
 
   onChangeDisclaimers(): void {
-    this.fornecedores = this.fornecedoresInicial;
+    this.fornecedores = this.fornecedoresImmutable;
+    this.setAtivosInativos();
   }
 }

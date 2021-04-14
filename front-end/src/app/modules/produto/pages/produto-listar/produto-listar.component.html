@@ -1,7 +1,10 @@
-<po-page-default
-  [p-title]="pageTitle"
+<po-page-dynamic-search
+  [p-actions]="actionsPage"
   [p-breadcrumb]="breadcrumb"
-  [p-actions]="actionsPage">
+  [p-title]="pageTitle"
+  [p-literals]="literals"
+  (p-change-disclaimers)="onChangeDisclaimers()"
+  (p-quick-search)="onQuickSearch($event)">
 
-  <app-produto-table></app-produto-table>
-</po-page-default>
+  <app-produto-table #table></app-produto-table>
+</po-page-dynamic-search>

@@ -51,6 +51,8 @@ export class ProdutoTableComponent implements OnInit {
   @Input()
   produtos = new Array<Produto>();
 
+  produtosImmutable = new Array<Produto>();
+
   produtosAtivos = new Array<Produto>();
 
   produtosInativos = new Array<Produto>();
@@ -68,10 +70,10 @@ export class ProdutoTableComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.produtos?.length) {
-      this.produtos = this.activatedRoute.snapshot.data['produtos'];
+      this.produtosImmutable = this.activatedRoute.snapshot.data['produtos'];
+      this.produtos = this.produtosImmutable;
     }
-    this.produtosAtivos = this.produtos?.filter(produto => produto.ativo);
-    this.produtosInativos = this.produtos?.filter(produto => !produto.ativo);
+    this.setAtivosInativos();
   }
 
   detalhes(produto: Produto): void {
@@ -97,5 +99,10 @@ export class ProdutoTableComponent implements OnInit {
       cancel: () => {}
     };
     this.poDialogService.confirm(options);
+  }
+
+  setAtivosInativos(): void {
+    this.produtosAtivos = this.produtos?.filter(produto => produto.ativo);
+    this.produtosInativos = this.produtos?.filter(produto => !produto.ativo);
   }
 }
