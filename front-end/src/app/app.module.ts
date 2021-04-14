@@ -11,7 +11,7 @@ import { LayoutComponentsModule } from './modules/layout/components/layout-compo
     BrowserModule,
     AppRoutingModule,
     LayoutComponentsModule,
-    CoreModule,
+    CoreModule
   ],
   bootstrap: [AppComponent],
 })

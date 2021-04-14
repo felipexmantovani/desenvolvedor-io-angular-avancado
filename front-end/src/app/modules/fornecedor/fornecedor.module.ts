@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PoButtonModule, PoDividerModule, PoPageModule, PoTableModule, PoTabsModule, PoTagModule } from '@po-ui/ng-components';
+import { PoPageDynamicSearchModule } from '@po-ui/ng-templates';
 import { HttpCustomInterceptorModule } from '../../core/modules/http-custom-interceptor/http-custom-interceptor.module';
 import { PipeModule } from '../../shared/modules/pipes/pipe.module';
 import { ProdutoComponentModule } from '../produto/components/produto-component.module';
@@ -21,6 +22,7 @@ import { FornecedorNovoComponent } from './pages/fornecedor-novo/fornecedor-novo
     HttpCustomInterceptorModule,
     FornecedorRoutingModule,
     FornecedorComponentModule,
+    PoPageDynamicSearchModule,
     PoPageModule,
     PoButtonModule,
     PoTableModule,

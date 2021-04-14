@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb, PoDialogConfirmOptions, PoDialogService, PoPageAction, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoPageDynamicSearchLiterals } from '@po-ui/ng-templates';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
@@ -31,11 +32,17 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
 
   fornecedores = new Array<Fornecedor>();
 
+  fornecedoresInicial = new Array<Fornecedor>();
+
   fornecedoresAtivos = new Array<Fornecedor>();
 
   fornecedoresInativos = new Array<Fornecedor>();
 
   isLogged = false;
+
+  literals: PoPageDynamicSearchLiterals = {
+    searchPlaceholder: 'Pesquise pelo nome'
+  };
 
   subs: Subscription = new Subscription();
 
@@ -51,6 +58,7 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
 
   ngOnInit(): void {
     this.fornecedores = this.activatedRoute.snapshot.data['fornecedores'];
+    this.fornecedoresInicial = this.fornecedores;
     this.fornecedoresAtivos = this.fornecedores.filter(fornecedor => fornecedor.ativo);
     this.fornecedoresInativos = this.fornecedores.filter(fornecedor => !fornecedor.ativo);
 
@@ -130,5 +138,17 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
       cancel: () => {}
     };
     this.poDialogService.confirm(options);
+  }
+
+  onQuickSearch(filtro: string): void {
+    filtro === '' ?
+    this.onChangeDisclaimers() :
+    this.fornecedores = this.fornecedoresInicial.filter(
+      (fornecedor) => fornecedor.nome.toLowerCase().includes(filtro.toLowerCase())
+    );
+  }
+
+  onChangeDisclaimers(): void {
+    this.fornecedores = this.fornecedoresInicial;
   }
 }
