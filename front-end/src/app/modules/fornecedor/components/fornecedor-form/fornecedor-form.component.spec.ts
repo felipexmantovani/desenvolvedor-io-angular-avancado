@@ -80,13 +80,11 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
     spyOn(component.form, 'updateValueAndValidity');
 
     component.changeTipoFornecedor('1');
-    expect(component.form.get('documento').status).toBe('INVALID');
-    expect(component.form.get('documento').errors.hasOwnProperty('required')).toBeTrue();
+    expect(component.form.get('documento').status).toBe('VALID');
     expect(component.form.updateValueAndValidity).toHaveBeenCalled();
 
     component.changeTipoFornecedor('2');
-    expect(component.form.get('documento').status).toBe('INVALID');
-    expect(component.form.get('documento').errors.hasOwnProperty('required')).toBeTrue();
+    expect(component.form.get('documento').status).toBe('VALID');
     expect(component.form.updateValueAndValidity).toHaveBeenCalled();
   });
 

@@ -4,7 +4,7 @@ import { Produto } from '../modules/produto/models/produto.interface';
 export const FORNECEDOR_MOCK: Array<Fornecedor> = [
   {
     ativo: true,
-    documento: '21705488000122',
+    documento: '80102499047',
     endereco: {
       bairro: 'Parque Paulista',
       cep: '04850020',
@@ -19,11 +19,11 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
     id: '1',
     nome: 'Paulista Atacado',
     produtos: new Array<Produto>(),
-    tipoFornecedor: 2
+    tipoFornecedor: 1
   },
   {
     ativo: false,
-    documento: '65029823000195',
+    documento: '60786427000199',
     endereco: {
       bairro: 'Sítio Cercado',
       cep: '81935020',
@@ -42,7 +42,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
   },
   {
     ativo: true,
-    documento: '86857583000197',
+    documento: '10404343000175',
     endereco: {
       bairro: 'Centro',
       cep: '87580970',
@@ -61,7 +61,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
   },
   {
     ativo: true,
-    documento: '52625286008',
+    documento: '54491318018',
     endereco: {
       bairro: 'Itaum',
       cep: '89210050',
@@ -80,7 +80,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
   },
   {
     ativo: false,
-    documento: '91149575077',
+    documento: '22337689069',
     endereco: {
       bairro: 'Centro',
       cep: '36152973',
