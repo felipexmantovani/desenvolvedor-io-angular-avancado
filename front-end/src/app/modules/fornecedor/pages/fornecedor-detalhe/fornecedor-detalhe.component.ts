@@ -23,7 +23,7 @@ export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeact
   @ViewChild('form', { static: true })
   formComponent: FornecedorFormComponent;
 
-  formSave = false;
+  formClickSave = false;
 
   canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar a alteração do fornecedor?';
 
@@ -54,11 +54,11 @@ export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeact
   }
 
   onSubmit(): void {
-    this.formSave = true;
+    this.formClickSave = true;
     this.formComponent.onSubmit();
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.formSave;
+    return !this.formComponent.form.dirty || this.formClickSave;
   }
 }

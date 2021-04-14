@@ -24,15 +24,22 @@ export class FornecedorNovoComponent implements PageDefault, CanDeactivateGuard 
   formComponent: FornecedorFormComponent;
 
   actions: Array<PoPageAction> = [
-    { label: 'Salvar', action: () => this.formComponent.onSubmit() },
+    { label: 'Salvar', action: () => this.onSubmit() },
     { label: 'Cancelar', url: FORNECEDOR_CONFIG.pathFront },
   ];
+
+  formClickSave = false;
 
   canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar o cadastro do fornecedor?';
 
   constructor() {}
 
+  onSubmit(): void {
+    this.formClickSave = true;
+    this.formComponent.onSubmit();
+  }
+
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty;
+    return !this.formComponent.form.dirty || this.formClickSave;
   }
 }

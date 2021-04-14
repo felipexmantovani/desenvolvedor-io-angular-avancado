@@ -23,7 +23,7 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault, CanDeactiva
   @ViewChild('form', { static: true })
   formComponent: ProdutoFormComponent;
 
-  formSave = false;
+  formClickSave = false;
 
   canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar a alteração do produto?';
 
@@ -54,11 +54,11 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault, CanDeactiva
   }
 
   onSubmit(): void {
-    this.formSave = true;
+    this.formClickSave = true;
     this.formComponent.onSubmit();
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.formSave;
+    return !this.formComponent.form.dirty || this.formClickSave;
   }
 }
