@@ -5,5 +5,5 @@ export interface CanDeactivateGuard {
 
   canDeactivateTextModal: string;
 
-  formClickSave: boolean;
+  formClickSave?: boolean;
 }
