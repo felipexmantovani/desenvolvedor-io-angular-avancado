@@ -46,7 +46,7 @@ describe('exception.service.spec | ExceptionService', () => {
       statusText: 'Unauthorized'
     });
     exception.handleError(httpErrorResponseUnauthorized);
-    expect(notification.error).toHaveBeenCalledWith(`#${httpErrorResponseUnauthorized.status} - Seu token expirou. Por favor, faça o login novamente.`);
+    expect(notification.error).toHaveBeenCalledWith(`#${httpErrorResponseUnauthorized.status} - Seu token expirou ou você não tem permissão. Por favor, faça o login novamente.`);
   });
 
   it('Deve tratar o erro do array de erros', () => {

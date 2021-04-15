@@ -34,8 +34,8 @@ export class ExceptionService implements ErrorHandler {
         return;
       }
 
-      if (response.statusText === 'Unauthorized') {
-        this.notificationService.error(`#${response.status} - Seu token expirou. Por favor, faça o login novamente.`);
+      if (response.statusText === 'Unauthorized' || response.statusText === 'Forbidden') {
+        this.notificationService.error(`#${response.status} - Seu token expirou ou você não tem permissão. Por favor, faça o login novamente.`);
         this.authService.logout();
         return;
       }

@@ -1,11 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
 import { CanDeactivateGuard } from '../../../../shared/interfaces/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
+import { AUTH_CONFIG } from '../../../auth/auth.config';
 import { Usuario } from '../../models/usuario.interface';
 import { UsuarioService } from '../../services/usuario.service';
 import { USUARIO_CONFIG } from '../../usuario.config';
@@ -29,11 +31,14 @@ export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateG
 
   canDeactivateTextModal = 'Realmente deseja cancelar o cadastro de usuário?';
 
+  formClickSave = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
     private usuarioService: UsuarioService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +70,8 @@ export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateG
       return;
     }
 
+    this.formClickSave = true;
+
     this.loadingService.show();
 
     const usuario: Usuario = this.form.value;
@@ -74,12 +81,12 @@ export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateG
       .subscribe(
         (token) => {
           this.notificationService.success(`${token.userToken.email} cadastrado com sucesso.`);
-          this.form.reset();
+          this.router.navigateByUrl(`${AUTH_CONFIG.pathFront}/login`);
         }
       );
   }
 
   canDeactivate(): boolean {
-    return !this.form.dirty;
+    return !this.form.dirty || this.formClickSave;
   }
 }
