@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { CanDeactivateGuard } from '../../../../shared/interfaces/can-deactivate-form.interface';
+import { CanDeactivateForm } from '../../../../shared/interfaces/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
@@ -11,7 +11,7 @@ import { Fornecedor } from '../../models/fornecedor.interface';
   selector: 'app-fornecedor-detalhe',
   templateUrl: './fornecedor-detalhe.component.html'
 })
-export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeactivateGuard {
+export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeactivateForm {
   pageTitle = '';
 
   breadcrumb: PoBreadcrumb;

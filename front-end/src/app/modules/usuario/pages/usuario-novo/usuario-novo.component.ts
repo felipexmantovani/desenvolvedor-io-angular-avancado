@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
-import { CanDeactivateGuard } from '../../../../shared/interfaces/can-deactivate-form.interface';
+import { CanDeactivateForm } from '../../../../shared/interfaces/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { AUTH_CONFIG } from '../../../auth/auth.config';
@@ -16,7 +16,7 @@ import { USUARIO_CONFIG } from '../../usuario.config';
   selector: 'app-usuario-novo',
   templateUrl: './usuario-novo.component.html'
 })
-export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateGuard {
+export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateForm {
   public pageTitle = `Novo ${USUARIO_CONFIG.name}`;
 
   public readonly breadcrumb: PoBreadcrumb = {

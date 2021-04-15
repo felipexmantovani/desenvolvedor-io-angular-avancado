@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { CanDeactivateGuard } from '../../../../shared/interfaces/can-deactivate-form.interface';
+import { CanDeactivateForm } from '../../../../shared/interfaces/can-deactivate-form.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
@@ -9,7 +9,7 @@ import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
   selector: 'app-fornecedor-novo',
   templateUrl: './fornecedor-novo.component.html'
 })
-export class FornecedorNovoComponent implements PageDefault, CanDeactivateGuard {
+export class FornecedorNovoComponent implements PageDefault, CanDeactivateForm {
   pageTitle = `Novo ${FORNECEDOR_CONFIG.name}`;
 
   breadcrumb: PoBreadcrumb = {

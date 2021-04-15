@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export interface CanDeactivateGuard {
+export interface CanDeactivateForm {
   canDeactivate: () => boolean | Promise<boolean> | Observable<boolean>;
 
   canDeactivateTextModal: string;
