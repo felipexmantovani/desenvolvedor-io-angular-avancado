@@ -1,4 +1,4 @@
-import { AbstractControl, Validators } from '@angular/forms';
+import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
 export class StringUtil {
   static resume(value: string, maxCharacters: number, suspensionPoints?: boolean): string {
@@ -36,7 +36,7 @@ export class StringUtil {
     return value;
   }
 
-  static isValidCpf(): any {
+  static isValidCpf(): ValidatorFn {
     return (control: AbstractControl): Validators => {
       const cpf: string = control.value?.replace(/[^\d]+/g, '');
       if (cpf) {
@@ -92,7 +92,7 @@ export class StringUtil {
     };
   }
 
-  static isValidCnpj(): any {
+  static isValidCnpj(): ValidatorFn {
     return (control: AbstractControl): Validators => {
       const cnpj: string = control.value?.replace(/[^\d]+/g, '');
       if (cnpj) {
