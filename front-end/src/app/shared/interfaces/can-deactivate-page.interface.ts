@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 
-export interface CanDeactivateForm {
+export interface CanDeactivatePage {
   canDeactivate: () => boolean | Promise<boolean> | Observable<boolean>;
 
   canDeactivateTextModal: string;
 
-  formClickSave?: boolean;
+  onSubmitForm?: boolean;
 }

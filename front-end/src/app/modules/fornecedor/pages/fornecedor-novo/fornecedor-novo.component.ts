@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { CanDeactivateForm } from '../../../../shared/interfaces/can-deactivate-form.interface';
+import { CanDeactivatePage } from '../../../../shared/interfaces/can-deactivate-page.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
@@ -9,7 +9,7 @@ import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
   selector: 'app-fornecedor-novo',
   templateUrl: './fornecedor-novo.component.html'
 })
-export class FornecedorNovoComponent implements PageDefault, CanDeactivateForm {
+export class FornecedorNovoComponent implements PageDefault, CanDeactivatePage {
   pageTitle = `Novo ${FORNECEDOR_CONFIG.name}`;
 
   breadcrumb: PoBreadcrumb = {
@@ -28,18 +28,18 @@ export class FornecedorNovoComponent implements PageDefault, CanDeactivateForm {
     { label: 'Cancelar', url: FORNECEDOR_CONFIG.pathFront },
   ];
 
-  formClickSave = false;
+  onSubmitForm = false;
 
   canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar o cadastro do fornecedor?';
 
   constructor() {}
 
   onSubmit(): void {
-    this.formClickSave = true;
+    this.onSubmitForm = true;
     this.formComponent.onSubmit();
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.formClickSave;
+    return !this.formComponent.form.dirty || this.onSubmitForm;
   }
 }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
 import { finalize } from 'rxjs/operators';
 import { LoadingService } from '../../../../core/modules/loading/loading.service';
-import { CanDeactivateForm } from '../../../../shared/interfaces/can-deactivate-form.interface';
+import { CanDeactivatePage } from '../../../../shared/interfaces/can-deactivate-page.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { AUTH_CONFIG } from '../../../auth/auth.config';
@@ -16,7 +16,7 @@ import { USUARIO_CONFIG } from '../../usuario.config';
   selector: 'app-usuario-novo',
   templateUrl: './usuario-novo.component.html'
 })
-export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateForm {
+export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivatePage {
   public pageTitle = `Novo ${USUARIO_CONFIG.name}`;
 
   public readonly breadcrumb: PoBreadcrumb = {
@@ -31,7 +31,7 @@ export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateF
 
   canDeactivateTextModal = 'Realmente deseja cancelar o cadastro de usuário?';
 
-  formClickSave = false;
+  onSubmitForm = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,7 +70,7 @@ export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateF
       return;
     }
 
-    this.formClickSave = true;
+    this.onSubmitForm = true;
 
     this.loadingService.show();
 
@@ -87,6 +87,6 @@ export class UsuarioNovoComponent implements OnInit, PageDefault, CanDeactivateF
   }
 
   canDeactivate(): boolean {
-    return !this.form.dirty || this.formClickSave;
+    return !this.form.dirty || this.onSubmitForm;
   }
 }

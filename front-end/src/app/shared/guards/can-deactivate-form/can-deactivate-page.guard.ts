@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 import { PoDialogConfirmOptions, PoDialogService } from '@po-ui/ng-components';
-import { CanDeactivateForm } from '../../interfaces/can-deactivate-form.interface';
+import { CanDeactivatePage } from '../../interfaces/can-deactivate-page.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CanDeactivateFormGuard implements CanDeactivate<CanDeactivateForm> {
+export class CanDeactivatePageGuard implements CanDeactivate<CanDeactivatePage> {
   constructor(public poDialogService: PoDialogService) {}
 
-  async canDeactivate(component: CanDeactivateForm): Promise<boolean> {
+  async canDeactivate(component: CanDeactivatePage): Promise<boolean> {
     return await this.verify(component);
   }
 
-  private verify(component: CanDeactivateForm): Promise<boolean> {
+  private verify(component: CanDeactivatePage): Promise<boolean> {
     return new Promise((resolve, reject) => {
       if (component.canDeactivate()) {
         resolve(true);
@@ -21,12 +21,8 @@ export class CanDeactivateFormGuard implements CanDeactivate<CanDeactivateForm> 
         const options: PoDialogConfirmOptions = {
           title: 'Confirmação!',
           message: component.canDeactivateTextModal,
-          confirm: () => {
-            resolve(true);
-          },
-          cancel: () => {
-            resolve(false);
-          }
+          confirm: () => resolve(true),
+          cancel: () => resolve(false)
         };
         this.poDialogService.confirm(options);
       }

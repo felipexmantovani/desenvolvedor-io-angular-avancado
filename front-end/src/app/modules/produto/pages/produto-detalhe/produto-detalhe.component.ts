@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { CanDeactivateForm } from '../../../../shared/interfaces/can-deactivate-form.interface';
+import { CanDeactivatePage } from '../../../../shared/interfaces/can-deactivate-page.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { ProdutoFormComponent } from '../../components/produto-form/produto-form.component';
 import { Produto } from '../../models/produto.interface';
@@ -11,7 +11,7 @@ import { PRODUTO_CONFIG } from '../../produto.config';
   selector: 'app-produto-detalhe',
   templateUrl: './produto-detalhe.component.html'
 })
-export class ProdutoDetalheComponent implements OnInit, PageDefault, CanDeactivateForm {
+export class ProdutoDetalheComponent implements OnInit, PageDefault, CanDeactivatePage {
   pageTitle = '';
 
   breadcrumb: PoBreadcrumb;
@@ -23,7 +23,7 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault, CanDeactiva
   @ViewChild('form', { static: true })
   formComponent: ProdutoFormComponent;
 
-  formClickSave = false;
+  onSubmitForm = false;
 
   canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar a alteração do produto?';
 
@@ -54,11 +54,11 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault, CanDeactiva
   }
 
   onSubmit(): void {
-    this.formClickSave = true;
+    this.onSubmitForm = true;
     this.formComponent.onSubmit();
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.formClickSave;
+    return !this.formComponent.form.dirty || this.onSubmitForm;
   }
 }

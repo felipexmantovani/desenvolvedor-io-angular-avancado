@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CanDeactivateFormGuard } from '../../shared/guards/can-deactivate-form/can-deactivate-form.guard';
+import { CanDeactivatePageGuard } from '../../shared/guards/can-deactivate-form/can-deactivate-page.guard';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { LoginGuard } from '../auth/guards/login.guard';
 import { UsuarioNovoComponent } from './pages/usuario-novo/usuario-novo.component';
@@ -10,7 +10,7 @@ export const routes: Routes = [
   {
     path: 'novo',
     canActivate: [LoginGuard],
-    canDeactivate: [CanDeactivateFormGuard],
+    canDeactivate: [CanDeactivatePageGuard],
     component: UsuarioNovoComponent
   },
   {

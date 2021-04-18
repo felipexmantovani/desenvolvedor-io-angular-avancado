@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PoBreadcrumb, PoPageAction } from '@po-ui/ng-components';
-import { CanDeactivateForm } from '../../../../shared/interfaces/can-deactivate-form.interface';
+import { CanDeactivatePage } from '../../../../shared/interfaces/can-deactivate-page.interface';
 import { PageDefault } from '../../../../shared/interfaces/page-default.interface';
 import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
@@ -11,7 +11,7 @@ import { Fornecedor } from '../../models/fornecedor.interface';
   selector: 'app-fornecedor-detalhe',
   templateUrl: './fornecedor-detalhe.component.html'
 })
-export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeactivateForm {
+export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeactivatePage {
   pageTitle = '';
 
   breadcrumb: PoBreadcrumb;
@@ -23,7 +23,7 @@ export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeact
   @ViewChild('form', { static: true })
   formComponent: FornecedorFormComponent;
 
-  formClickSave = false;
+  onSubmitForm = false;
 
   canDeactivateTextModal = 'Realmente deseja sair desta página e cancelar a alteração do fornecedor?';
 
@@ -54,11 +54,11 @@ export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeact
   }
 
   onSubmit(): void {
-    this.formClickSave = true;
+    this.onSubmitForm = true;
     this.formComponent.onSubmit();
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.formClickSave;
+    return !this.formComponent.form.dirty || this.onSubmitForm;
   }
 }

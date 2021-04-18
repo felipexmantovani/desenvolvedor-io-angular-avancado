@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { Observable } from 'rxjs';
-import { CanDeactivateFormGuard } from './can-deactivate-form.guard';
-import { CanDeactivateForm } from '../../interfaces/can-deactivate-form.interface';
+import { CanDeactivatePageGuard } from './can-deactivate-page.guard';
+import { CanDeactivatePage } from '../../interfaces/can-deactivate-page.interface';
 
 @Component({
   selector: 'app-mock-component',
   template: ''
 })
-class MockComponent implements CanDeactivateForm {
+class MockComponent implements CanDeactivatePage {
   canDeactivateTextModal: string;
 
   canDeactivate(): boolean | Promise<boolean> | Observable<boolean> {
@@ -17,8 +17,8 @@ class MockComponent implements CanDeactivateForm {
   }
 }
 
-describe('can-deactivate-form.guard.spec | CanDeactivateFormGuard', () => {
-  let guard: CanDeactivateFormGuard;
+describe('can-deactivate-page.guard.spec | CanDeactivatePageGuard', () => {
+  let guard: CanDeactivatePageGuard;
   let fixture: ComponentFixture<MockComponent>;
 
   beforeEach(
@@ -32,7 +32,7 @@ describe('can-deactivate-form.guard.spec | CanDeactivateFormGuard', () => {
   );
 
   beforeEach(() => {
-    guard = TestBed.inject(CanDeactivateFormGuard);
+    guard = TestBed.inject(CanDeactivatePageGuard);
     fixture = TestBed.createComponent(MockComponent);
     fixture.detectChanges();
   });
