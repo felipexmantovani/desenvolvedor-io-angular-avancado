@@ -86,14 +86,4 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
     component.onSubmit();
     expect(notificationService.success).toHaveBeenCalledWith(`${token.userToken.email} cadastrado com sucesso.`);
   });
-
-  it('Deve submeter o formulário ao pressionar a tecla Enter', () => {
-    pathFormValid();
-    const spy = spyOn(component, 'onSubmit');
-    const event = new KeyboardEvent('window:keyup', {
-      key: 'Enter'
-    });
-    component.keyUp(event);
-    expect(spy).toHaveBeenCalled();
-  });
 });

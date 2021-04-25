@@ -9,7 +9,7 @@
         <img class="w-100" src="./assets/nova-conta.png">
       </div>
 
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <po-email
           formControlName="email"
           name="email"
@@ -45,15 +45,15 @@
           p-required="true"
           [p-disabled]="!passwordValid">
         </po-password>
-      </form>
 
-      <po-button
-        class="po-sm-12 po-mt-2 po-p-0"
-        (p-click)="onSubmit()"
-        [p-disabled]="!form.valid"
-        p-label="Enviar"
-        p-type="primary">
-      </po-button>
+        <button hidden type="submit"></button>
+        <po-button
+          class="po-sm-12 po-mt-2 po-p-0"
+          (p-click)="onSubmit()"
+          p-label="Enviar"
+          p-type="primary">
+        </po-button>
+      </form>
 
     </div>
   </div>
