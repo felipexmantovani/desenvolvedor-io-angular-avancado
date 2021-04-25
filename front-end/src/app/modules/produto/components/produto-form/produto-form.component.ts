@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
@@ -75,13 +75,6 @@ export class ProdutoFormComponent implements OnInit {
     this.croppedImage = event.base64;
   }
 
-  @HostListener('window:keyup', ['$event'])
-  keyUp(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && this.form.valid) {
-      this.onSubmit();
-    }
-  }
-
   onSubmit(): void {
     if (this.form.invalid) {
       FormUtil.validade(this.form);
@@ -98,10 +91,12 @@ export class ProdutoFormComponent implements OnInit {
       this.produtoService
         .create(this.produto)
         .pipe(finalize(() => this.loadingService.hide()))
-        .subscribe(produto => {
-          this.produto = produto;
-          this.notificationService.success(`Produto ${this.produto.nome} cadastrado com sucesso.`);
-          this.router.navigateByUrl(PRODUTO_CONFIG.pathFront);
+        .subscribe({
+          next: produto => {
+            this.produto = produto;
+            this.notificationService.success(`Produto ${this.produto.nome} cadastrado com sucesso.`);
+            this.router.navigateByUrl(PRODUTO_CONFIG.pathFront);
+          }
         });
     } else {
       const produtoId = this.produto.id;
@@ -114,10 +109,12 @@ export class ProdutoFormComponent implements OnInit {
       this.produtoService
         .update(this.produto)
         .pipe(finalize(() => this.loadingService.hide()))
-        .subscribe(produto => {
-          this.produto = produto;
-          this.notificationService.success(`Produto ${this.produto.nome} salvo com sucesso.`);
-          this.router.navigateByUrl(PRODUTO_CONFIG.pathFront);
+        .subscribe({
+          next: produto => {
+            this.produto = produto;
+            this.notificationService.success(`Produto ${this.produto.nome} salvo com sucesso.`);
+            this.router.navigateByUrl(PRODUTO_CONFIG.pathFront);
+          }
         });
     }
   }

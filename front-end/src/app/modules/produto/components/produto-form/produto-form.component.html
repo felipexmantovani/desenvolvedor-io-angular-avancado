@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="po-row">
     <div class="po-sm-12 po-text-center">
       <input accept="image/jpeg,image/png" #inputFile hidden type="file" (change)="fileChangeEvent($event)">
@@ -22,11 +22,11 @@
             [aspectRatio]="3 / 4"
             format="jpg"
             (imageCropped)="imageCropped($event)"
-            resizeToWidth="100">
+            resizeToWidth="500">
           </image-cropper>
         </div>
         <div class="po-sm-6">
-          <img [src]="croppedImage" />
+          <img width="100" [src]="croppedImage" />
         </div>
       </div>
     </div>
@@ -70,4 +70,6 @@
       </po-switch>
     </div>
   </div>
+
+  <button hidden type="submit"></button>
 </form>
