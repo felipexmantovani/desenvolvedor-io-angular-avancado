@@ -106,14 +106,4 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
         expect(router.navigateByUrl).toHaveBeenCalledWith(FORNECEDOR_CONFIG.pathFront);
       });
   });
-
-  it('Deve submeter o formulário ao pressionar a tecla Enter', () => {
-    component.form.patchValue(fornecedor);
-    const spy = spyOn(component, 'onSubmit');
-    const event = new KeyboardEvent('window:keyup', {
-      key: 'Enter'
-    });
-    component.keyUp(event);
-    expect(spy).toHaveBeenCalled();
-  });
 });

@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="po-row po-mt-5">
     <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
       <po-divider [p-label]="isPF ? 'Dados pessoais' : 'Dados empresariais'"></po-divider>
@@ -119,4 +119,6 @@
       </div>
     </div>
   </div>
+
+  <button hidden type="submit"></button>
 </form>

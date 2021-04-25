@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -108,22 +108,26 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
 
   onChangesForm(): void {
     this.subs.add(
-      this.form.get('endereco').get('estado').valueChanges.subscribe(value => {
-        this.loadingService.show();
-        this.cidades = new Array<PoSelectOption>();
-        this.ibgeService.getMunicipios(value)
-          .pipe(finalize(() => this.loadingService.hide()))
-          .subscribe(municipios => {
-            municipios.forEach(municipio => {
-              this.cidades.push({
-                label: municipio.nome,
-                value: municipio.id
-              });
+      this.form.get('endereco').get('estado').valueChanges.subscribe({
+        next: value => {
+          this.loadingService.show();
+          this.cidades = new Array<PoSelectOption>();
+          this.ibgeService.getMunicipios(value)
+            .pipe(finalize(() => this.loadingService.hide()))
+            .subscribe({
+              next: municipios => {
+                municipios.forEach(municipio => {
+                  this.cidades.push({
+                    label: municipio.nome,
+                    value: municipio.id
+                  });
+                });
+                if (this.isEdit()) {
+                  this.form.get('endereco').get('cidade').setValue(this.fornecedor.endereco.cidade);
+                }
+              }
             });
-            if (this.isEdit()) {
-              this.form.get('endereco').get('cidade').setValue(this.fornecedor.endereco.cidade);
-            }
-          });
+        }
       })
     );
   }
@@ -151,14 +155,16 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
       this.loadingService.show();
       this.viaCepService.get(StringUtil.onlyDigits(value))
         .pipe(finalize(() => this.loadingService.hide()))
-        .subscribe(viaCep => {
-          enderecoControl.get('complemento').setValue(viaCep.complemento);
-          enderecoControl.get('logradouro').setValue(viaCep.logradouro);
-          enderecoControl.get('estado').setValue(viaCep.uf);
-          enderecoControl.get('bairro').setValue(viaCep.bairro);
-          setTimeout(() => {
-            enderecoControl.get('cidade').setValue(viaCep.ibge);
-          }, 250);
+        .subscribe({
+          next: viaCep => {
+            enderecoControl.get('complemento').setValue(viaCep.complemento);
+            enderecoControl.get('logradouro').setValue(viaCep.logradouro);
+            enderecoControl.get('estado').setValue(viaCep.uf);
+            enderecoControl.get('bairro').setValue(viaCep.bairro);
+            setTimeout(() => {
+              enderecoControl.get('cidade').setValue(viaCep.ibge);
+            }, 250);
+          }
         });
     }
   }
@@ -167,31 +173,27 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     this.estados = new Array<PoSelectOption>();
     this.ibgeService
       .getEstados()
-      .subscribe(
-        estados => {
+      .subscribe({
+        next: estados => {
           estados.forEach(estado => {
             this.estados.push({
               label: estado.nome,
               value: estado.sigla
             });
           });
-        });
+        }
+      });
   }
 
   getMunicipio(municipioId: string): void {
     this.ibgeService
       .getMunicipio(municipioId)
-      .subscribe(municipio => {
-        this.enderecoCompleto = `${this.fornecedor.endereco.logradouro}, ${this.fornecedor.endereco.numero}, ${this.fornecedor.endereco.bairro}, ${municipio.nome}-${this.fornecedor.endereco.estado}`;
-        this.linkGoogleMaps = `https://maps.google.com/maps?q=${this.enderecoCompleto}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+      .subscribe({
+        next: municipio => {
+          this.enderecoCompleto = `${this.fornecedor.endereco.logradouro}, ${this.fornecedor.endereco.numero}, ${this.fornecedor.endereco.bairro}, ${municipio.nome}-${this.fornecedor.endereco.estado}`;
+          this.linkGoogleMaps = `https://maps.google.com/maps?q=${this.enderecoCompleto}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+        }
       });
-  }
-
-  @HostListener('window:keyup', ['$event'])
-  keyUp(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && this.form.valid) {
-      this.onSubmit();
-    }
   }
 
   onSubmit(): void {
@@ -211,13 +213,13 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
       this.fornecedorService
         .create(this.fornecedor)
         .pipe(finalize(() => this.loadingService.hide()))
-        .subscribe(
-          fornecedorRes => {
+        .subscribe({
+          next: fornecedorRes => {
             this.fornecedor = fornecedorRes;
             this.notificationService.success(`Fornecedor ${this.fornecedor.nome} cadastrado com sucesso.`);
             this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
           }
-      );
+        });
     } else {
       const enderecoId: string = this.fornecedor.endereco.id;
       const fornecedorId: string = this.fornecedor.id;
@@ -238,13 +240,13 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
           this.fornecedorService
           .update(this.fornecedor)
           .pipe(finalize(() => this.loadingService.hide()))
-          .subscribe(
-            fornecedorRes => {
+          .subscribe({
+            next: fornecedorRes => {
               this.fornecedor = fornecedorRes;
               this.notificationService.success(`Fornecedor ${fornecedorRes.nome} salvo com sucesso.`);
               this.router.navigateByUrl(FORNECEDOR_CONFIG.pathFront);
             }
-          );
+          });
         });
     }
   }
