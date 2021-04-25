@@ -74,7 +74,7 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
   });
 
   it('Deve exibir notificação de erro caso passwords não forem iguais', () => {
-    component.form.get('password').setValue('Teste@123');
+    pathFormValid();
     component.form.get('confirmPassword').setValue('123@Teste');
     component.onSubmit();
     expect(notificationService.error).toHaveBeenCalledWith('As senhas devem ser iguais.');

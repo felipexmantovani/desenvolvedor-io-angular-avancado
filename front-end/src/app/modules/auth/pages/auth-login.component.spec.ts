@@ -49,13 +49,15 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
 
   it('Deve criar o formulário corretamente', () => {
     expect(component.form).toBeTruthy();
-    expect(component.form.get('email').value).toBe('');
-    expect(component.form.get('password').value).toBe('');
+    expect(component.form.get('email').value).toBe(null);
+    expect(component.form.get('password').value).toBe(null);
     expect(component.form.status).toBe('INVALID');
   });
 
   it('Deve fazer requisição ao backend ao chamar método onSubmit()', () => {
     const spyAuth = spyOn(authService, 'login').and.returnValue(of(token));
+    expect(component.form.get('email').setValue('teste@email.com'));
+    expect(component.form.get('password').setValue('Teste@123'));
     component.onSubmit();
     expect(spyAuth).toHaveBeenCalled();
   });
