@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PoBreadcrumb } from '@po-ui/ng-components';
@@ -7,6 +7,7 @@ import { LoadingService } from '../../../core/modules/loading/loading.service';
 import { PageDefault } from '../../../shared/interfaces/page-default.interface';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { NotificationService } from '../../../shared/services/notification/notification.service';
+import { FormUtil } from '../../../shared/utils/form.util';
 import { Login } from '../models/login.interface';
 import { AuthService } from '../services/auth.service';
 
@@ -43,19 +44,18 @@ export class AuthLoginComponent implements OnInit, PageDefault {
 
   createForm(): void {
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
     });
   }
 
-  @HostListener('window:keyup', ['$event'])
-  keyUp(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && this.form.valid) {
-      this.onSubmit();
-    }
-  }
-
   onSubmit(): void {
+    if (this.form.invalid) {
+      FormUtil.validade(this.form);
+      this.notificationService.error('Verifique o formulário');
+      return;
+    }
+
     this.loadingService.show();
 
     const login: Login = this.form.value;
@@ -64,13 +64,13 @@ export class AuthLoginComponent implements OnInit, PageDefault {
     this.authService
       .login(login)
       .pipe(finalize(() => this.loadingService.hide()))
-      .subscribe(
-        (token) => {
+      .subscribe({
+        next: (token) => {
           this.authService.setTokenLocalStorage(token);
           this.notificationService.success('Olá, seja bem-vindo(a).');
           this.redirectTo ? this.router.navigateByUrl(this.redirectTo) : this.router.navigateByUrl('/');
         },
-        (error) => this.exceptionService.handleError(error)
-      );
+        error: (error) => this.exceptionService.handleError(error)
+      });
   }
 }
