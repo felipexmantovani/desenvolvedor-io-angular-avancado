@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { APP_CONFIG } from '../../../app.config';
+import { StorageService } from '../../../shared/services/storage/storage.service';
 import { Token } from '../models/auth-token.interface';
 import { Login } from '../models/login.interface';
 import { AuthService } from './auth.service';
@@ -16,9 +17,17 @@ describe('auth.service.spec | AuthService', () => {
     password: 'Teste@123'
   };
 
+  const storageService = jasmine.createSpyObj<StorageService>(['localGetItem']);
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        {
+          provide: StorageService,
+          useValue: storageService
+        }
+      ]
     });
 
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -71,5 +80,10 @@ describe('auth.service.spec | AuthService', () => {
       );
     })
     .flush(data);
+  });
+
+  it('Deve chamar método do serviço de storage para obter o usuário', () => {
+    service.getUser();
+    expect(storageService.localGetItem).toHaveBeenCalled();
   });
 });

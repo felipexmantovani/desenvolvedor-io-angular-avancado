@@ -2,7 +2,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { ExceptionService } from '../../../shared/services/exception/exception.service';
+import { NotificationService } from '../../../shared/services/notification/notification.service';
 import { Token } from '../models/auth-token.interface';
 import { AuthService } from '../services/auth.service';
 import { AuthLoginComponent } from './auth-login.component';
@@ -12,6 +14,10 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
   let fixture: ComponentFixture<AuthLoginComponent>;
   let authService: AuthService;
 
+  const notificationService = jasmine.createSpyObj<NotificationService>(['success', 'error']);
+
+  const exceptionService = jasmine.createSpyObj<ExceptionService>(['handleError'])
+
   const token: Token = {
     accessToken: 'abc123'
   };
@@ -20,15 +26,29 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule],
-        providers: [FormBuilder]
-      }).compileComponents();
-  }));
+        providers: [
+          FormBuilder,
+          {
+            provide: NotificationService,
+            useValue: notificationService
+          },
+          {
+            provide: ExceptionService,
+            useValue: exceptionService
+          }
+        ]
+      });
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AuthLoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     authService = TestBed.inject(AuthService);
+
+    expect(component.form.get('email').setValue(null));
+    expect(component.form.get('password').setValue(null));
   });
 
   it('Deve ser criado', () => {
@@ -49,8 +69,6 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
 
   it('Deve criar o formulário corretamente', () => {
     expect(component.form).toBeTruthy();
-    expect(component.form.get('email').value).toBe(null);
-    expect(component.form.get('password').value).toBe(null);
     expect(component.form.status).toBe('INVALID');
   });
 
@@ -59,6 +77,22 @@ describe('auth-login.component.spec | AuthLoginComponent', () => {
     expect(component.form.get('email').setValue('teste@email.com'));
     expect(component.form.get('password').setValue('Teste@123'));
     component.onSubmit();
+    expect(notificationService.success).toHaveBeenCalledWith('Olá, seja bem-vindo(a).');
     expect(spyAuth).toHaveBeenCalled();
+  });
+
+  it('Deve apresentar mensagem de erro e não deve fazer requisição ao backend caso formulário estiver inválido', () => {
+    spyOn(authService, 'login');
+    component.onSubmit();
+    expect(notificationService.error).toHaveBeenCalledWith('Verifique o formulário.');
+    expect(authService.login).not.toHaveBeenCalled();
+  });
+
+  it('Deve tratar erro caso o ocorra ao fazer o login', () => {
+    spyOn(authService, 'login').and.returnValue(throwError({status: 400}));
+    expect(component.form.get('email').setValue('teste@email.com'));
+    expect(component.form.get('password').setValue('Teste@123'));
+    component.onSubmit();
+    expect(exceptionService.handleError).toHaveBeenCalled();
   });
 });

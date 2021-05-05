@@ -52,7 +52,7 @@ export class AuthLoginComponent implements OnInit, PageDefault {
   onSubmit(): void {
     if (this.form.invalid) {
       FormUtil.validade(this.form);
-      this.notificationService.error('Verifique o formulário');
+      this.notificationService.error('Verifique o formulário.');
       return;
     }
 
