@@ -4,9 +4,14 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PoFieldModule } from '@po-ui/ng-components';
+import { PoFieldModule, PoModalComponent } from '@po-ui/ng-components';
 import { of } from 'rxjs';
 import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
+import { IBGE_MUNICIPIO_MOCK } from '../../../../mocks/ibge-municipio.mock';
+import { IBGE_UF_MOCK } from '../../../../mocks/ibge-uf.mock';
+import { IbgeService } from '../../../../shared/modules/ibge/services/ibge.service';
+import { ViaCep } from '../../../../shared/modules/via-cep/models/via-cep.interface';
+import { ViaCepService } from '../../../../shared/modules/via-cep/services/via-cep.service';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorService } from '../../services/fornecedor.service';
@@ -17,17 +22,27 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
   let fixture: ComponentFixture<FornecedorFormComponent>;
   let router: Router;
 
-  let notificationService: jasmine.SpyObj<NotificationService>;
-  notificationService = jasmine.createSpyObj<NotificationService>(['error', 'success']);
-
-  let fornecedorService: jasmine.SpyObj<FornecedorService>;
-  fornecedorService = jasmine.createSpyObj<FornecedorService>(['create']);
-
   const fornecedor = FORNECEDOR_MOCK[0];
+
+  const fornecedorEndereco = FORNECEDOR_MOCK[0].endereco;
+
+  const notificationService = jasmine.createSpyObj<NotificationService>(['error', 'success']);
+
+  const fornecedorService = jasmine.createSpyObj<FornecedorService>(['create', 'update', 'updateEndereco']);
+  fornecedorService.create.and.returnValue(of(fornecedor));
+  fornecedorService.update.and.returnValue(of(fornecedor));
+  fornecedorService.updateEndereco.and.returnValue(of(fornecedorEndereco));
+
+  const ibgeService = jasmine.createSpyObj<IbgeService>(['getMunicipios', 'getMunicipio', 'getEstados']);
+  ibgeService.getMunicipios.and.returnValue(of(IBGE_MUNICIPIO_MOCK));
+  ibgeService.getMunicipio.and.returnValue(of(IBGE_MUNICIPIO_MOCK[0]));
+  ibgeService.getEstados.and.returnValue(of(IBGE_UF_MOCK));
+
+  const viaCepService = jasmine.createSpyObj<ViaCepService>(['get']);
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [FornecedorFormComponent],
+      declarations: [FornecedorFormComponent, PoModalComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
@@ -43,6 +58,14 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
         {
           provide: NotificationService,
           useValue: notificationService
+        },
+        {
+          provide: IbgeService,
+          useValue: ibgeService
+        },
+        {
+          provide: ViaCepService,
+          useValue: viaCepService
         }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -94,7 +117,6 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
   });
 
   it('Deve exibir notificação de sucesso caso formulário esteja válido', () => {
-    fornecedorService.create.and.returnValue(of(fornecedor));
     spyOn(router, 'navigateByUrl');
 
     component.form.patchValue(fornecedor);
@@ -105,5 +127,50 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
         expect(notificationService.success).toHaveBeenCalledWith(`Fornecedor ${fornecedorRes.nome} cadastrado com sucesso.`);
         expect(router.navigateByUrl).toHaveBeenCalledWith(FORNECEDOR_CONFIG.pathFront);
       });
+  });
+
+  it('Deve chamar serviço para preencher o município caso for edição de formulário', () => {
+    component.fornecedor = fornecedor;
+    component.ngOnInit();
+    expect(ibgeService.getMunicipio).toHaveBeenCalled();
+  });
+
+  it('Deve preencher endereço corretamente ao alterar o CEP', () => {
+    component.form.get('endereco').get('cep').setValue('87.580-000');
+
+    const viaCep: ViaCep = {
+      bairro: 'Centro',
+      cep: '87580000',
+      complemento: 'Casa',
+      ddd: 44,
+      gia: 123,
+      ibge: 123123,
+      localidade: 'Localidade',
+      logradouro: 'Logradouro',
+      siafi: 123123,
+      uf: 'PR'
+    };
+
+    viaCepService.get.and.returnValue(of(viaCep));
+
+    component.changeCep(component.form.get('endereco').get('cep').value);
+
+    expect(component.form.get('endereco').get('complemento').value).toBe(viaCep.complemento);
+    expect(component.form.get('endereco').get('logradouro').value).toBe(viaCep.logradouro);
+    expect(component.form.get('endereco').get('estado').value).toBe(viaCep.uf);
+    expect(component.form.get('endereco').get('bairro').value).toBe(viaCep.bairro);
+  });
+
+  it('Deve chamar o serviço de update ao clicar no botão salvar caso o formulário for de edição', () => {
+    component.fornecedor = fornecedor;
+    component.ngOnInit();
+    component.onSubmit();
+    expect(fornecedorService.update).toHaveBeenCalled();
+  });
+
+  it('Deve abrir modal do mapa', () => {
+    spyOn(component.modalMapa,  'open');
+    component.verMapa();
+    expect(component.modalMapa.open).toHaveBeenCalled();
   });
 });
