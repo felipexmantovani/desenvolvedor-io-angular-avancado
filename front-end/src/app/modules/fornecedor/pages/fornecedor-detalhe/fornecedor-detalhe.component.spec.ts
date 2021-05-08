@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoPageModule } from '@po-ui/ng-components';
 import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
+import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorDetalheComponent } from './fornecedor-detalhe.component';
 
@@ -57,5 +58,18 @@ describe('fornecedor-detalhe.component.spec | FornecedorDetalheComponent', () =>
     expect(component.breadcrumb.items[1].label).toBe(FORNECEDOR_CONFIG.namePlural);
     expect(component.breadcrumb.items[1].link).toBe(FORNECEDOR_CONFIG.pathFront);
     expect(component.breadcrumb.items[2].label).toBe(component.pageTitle);
+  });
+
+  it('Deve submeter formulário ao clicar no botão salvar', () => {
+    component.formComponent = new FornecedorFormComponent(null, null, null, null, null, null, null, null);
+    spyOn(component.formComponent, 'onSubmit');
+    const btn = component.actionsPage.find(item => item.label === 'Salvar');
+    btn.action();
+    expect(component.formComponent.onSubmit).toHaveBeenCalled();
+  });
+
+  it('Deve retornar true caso o form não estiver sujo e não foi submetido', () => {
+    const retorno = component.canDeactivate();
+    expect(retorno).toBeTrue();
   });
 });

@@ -59,6 +59,6 @@ export class FornecedorDetalheComponent implements OnInit, PageDefault, CanDeact
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.onSubmitForm;
+    return !this.formComponent.form?.dirty || this.onSubmitForm;
   }
 }
