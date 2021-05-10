@@ -40,6 +40,8 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
 
   isLogged = false;
 
+  optionsDialogConfirm: PoDialogConfirmOptions;
+
   literals: PoPageDynamicSearchLiterals = {
     searchPlaceholder: 'Pesquise pelo nome'
   };
@@ -119,7 +121,7 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
   }
 
   excluir(fornecedor: Fornecedor): void {
-    const options: PoDialogConfirmOptions = {
+    this.optionsDialogConfirm = {
       title: 'Confirmação!',
       message: 'Realmente deseja excluir o fornecedor?',
       confirm: () => {
@@ -133,10 +135,9 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
               .read()
               .subscribe(fornecedores => this.fornecedores = fornecedores);
           });
-      },
-      cancel: () => {}
+      }
     };
-    this.poDialogService.confirm(options);
+    this.poDialogService.confirm(this.optionsDialogConfirm);
   }
 
   setAtivosInativos(): void {
