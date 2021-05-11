@@ -2,6 +2,25 @@
 Projeto desenvolvido baseando-se no projeto final do curso "Desenvolvimento Avançado em Angular" da plataforma @desenvolvedor.io.
 No backend foi utilizada a API disponibilizada no curso, no frontend optei em utilizar o framework https://po-ui.io/.
 
+#### O sitema possui:
+- Cadastro de usuário;
+- Login;
+- CRUD de fornecedor;
+- CRUD de produto.
+
+#### Foi aplicado:
+- Testes unitários;
+- Lazy Loading para carregamento de módulos;
+- Guarda de rotas;
+- HttpCustomInterceptor;
+- Validação de formulário;
+- Verificação de CPF/CNPJ válidos;
+- Redirect à rota não autorizada após fazer o login;
+- Resolvers;
+- Pipes;
+- Diretivas;
+- Upload de imagem.
+
 <div align="center">
 <img src='https://github.com/felipexmantovani/desenvolvedor-io-angular-avancado/blob/main/screen.gif' style="min-width: 100%" />
 </div>
