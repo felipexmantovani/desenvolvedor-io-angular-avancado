@@ -6,6 +6,25 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 <img src='https://github.com/felipexmantovani/desenvolvedor-io-angular-avancado/blob/main/screen.gif' style="min-width: 100%" />
 </div>
 
+#### O sistema possui:
+- Cadastro de usuário;
+- Login;
+- CRUD de fornecedor;
+- CRUD de produto.
+
+#### Foi aplicado:
+- Testes unitários;
+- Lazy Loading para carregamento de módulos;
+- Guarda de rotas;
+- HttpCustomInterceptor;
+- Validação de formulário;
+- Verificação de CPF/CNPJ válidos;
+- Redirect à rota não autorizada após fazer o login;
+- Resolvers;
+- Pipes;
+- Diretivas;
+- Upload de imagem.
+
 ---
 
 #### Preparando o ambiente
