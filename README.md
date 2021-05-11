@@ -6,7 +6,7 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 <img src='https://github.com/felipexmantovani/desenvolvedor-io-angular-avancado/blob/main/screen.gif' style="min-width: 100%" />
 </div>
 
-#### O sitema possui:
+#### O sistema possui:
 - Cadastro de usuário;
 - Login;
 - CRUD de fornecedor;
