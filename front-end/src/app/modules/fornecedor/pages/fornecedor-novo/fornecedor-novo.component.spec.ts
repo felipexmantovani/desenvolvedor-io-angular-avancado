@@ -3,10 +3,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorNovoComponent } from './fornecedor-novo.component';
 
-describe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
+fdescribe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
   let component: FornecedorNovoComponent;
   let fixture: ComponentFixture<FornecedorNovoComponent>;
 
@@ -50,5 +51,18 @@ describe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
     expect(component.actions[0].label).toBe('Salvar');
     expect(component.actions[1].label).toBe('Cancelar');
     expect(component.actions[1].url).toBe(FORNECEDOR_CONFIG.pathFront);
+  });
+
+  it('Deve exutar o método onSubmit do component do formulário ao clicar em Salvar', () => {
+    component.formComponent = new FornecedorFormComponent(null, null, null, null, null, null, null, null);
+    spyOn(component.formComponent, 'onSubmit');
+    const btnSalvar = component.actions.find((item) => item.label === 'Salvar');
+    btnSalvar.action();
+    expect(component.formComponent.onSubmit).toHaveBeenCalled();
+  });
+
+  it('Deve retornar true caso o form não estiver sujo e não foi submetido', () => {
+    const retorno = component.canDeactivate();
+    expect(retorno).toBeTrue();
   });
 });

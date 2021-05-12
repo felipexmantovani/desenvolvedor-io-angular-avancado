@@ -40,6 +40,6 @@ export class FornecedorNovoComponent implements PageDefault, CanDeactivatePage {
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.onSubmitForm;
+    return !this.formComponent.form?.dirty || this.onSubmitForm;
   }
 }
