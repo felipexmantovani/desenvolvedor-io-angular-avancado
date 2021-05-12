@@ -7,7 +7,7 @@ import { FornecedorFormComponent } from '../../components/fornecedor-form/fornec
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorNovoComponent } from './fornecedor-novo.component';
 
-fdescribe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
+describe('fornecedor-novo.component.spec | FornecedorNovoComponent', () => {
   let component: FornecedorNovoComponent;
   let fixture: ComponentFixture<FornecedorNovoComponent>;
 
