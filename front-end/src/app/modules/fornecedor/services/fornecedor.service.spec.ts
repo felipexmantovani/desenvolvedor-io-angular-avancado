@@ -10,7 +10,7 @@ import { FORNECEDOR_CONFIG } from '../fornecedor.config';
 import { Fornecedor } from '../models/fornecedor.interface';
 import { FornecedorService } from './fornecedor.service';
 
-fdescribe('fornecedor.service.spec | FornecedorService', () => {
+describe('fornecedor.service.spec | FornecedorService', () => {
 
   let service: FornecedorService;
   let httpTestingController: HttpTestingController;
