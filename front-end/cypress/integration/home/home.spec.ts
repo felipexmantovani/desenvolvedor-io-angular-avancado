@@ -1,36 +1,40 @@
 /// <reference types="cypress" />
 
 import { Home } from '../../support/home/home.interface';
+import { Page } from '../../support/_shared/interfaces/page.interface';
 
 describe('home.spec', () => {
 
-  let fixture: Home;
+  let fixturePage: Page;
+
+  let fixtureHome: Home;
 
   beforeEach(() => {
-    cy.fixture('./../fixtures/home/home').then(fixtureRes => fixture = fixtureRes);
+    cy.fixture('./../fixtures/_shared/page').then(fixture => fixturePage = fixture);
+    cy.fixture('./../fixtures/home/home').then(fixture => fixtureHome = fixture);
   });
 
-  it('Deve navegar para home da aplicação', () => {
+  it('Deve criar a página corretamente', () => {
     // Ir para home
     cy.visit('/')
-    .location('href')
-    .should('contain', '/home')
+    .url()
+    .should('include', '/home')
 
     // Exibe corretamente o breadcrumb da página
-    .get(fixture.page.breadcrumb)
+    .get(fixturePage.breadcrumb)
     .should(($breadcrumb) => {
       expect(($breadcrumb.length)).equal(1);
       expect(($breadcrumb[0])).to.contain('Home');
     })
 
     // Exibe corremente o título da página
-    .get(fixture.page.title)
+    .get(fixturePage.title)
     .should(($title) => {
       expect($title[0]).to.contain('Olá, seja bem-vindo(a)!');
     })
 
     // Exibe apenas o card dos fornecedores pois usuário está deslogado
-    .get(fixture.cards)
+    .get(fixtureHome.cards)
     .should(($cards) => {
       expect(($cards.length)).to.equal(1);
       expect(($cards[0])).to.contain('Fornecedores');
