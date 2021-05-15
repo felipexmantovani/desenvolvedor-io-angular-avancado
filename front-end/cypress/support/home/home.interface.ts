@@ -1,4 +1,6 @@
+import { Page } from '../_shared/interfaces/page.interface';
+
 export interface Home {
-  mensagemBoasVindas: string;
+  page: Page;
   cards: string;
 }

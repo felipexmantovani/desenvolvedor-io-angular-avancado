@@ -16,17 +16,24 @@ describe('home.spec', () => {
     .location('href')
     .should('contain', '/home')
 
-    // Exibe corremente mensagem de boas vindas
-    .get(fixture.mensagemBoasVindas)
-    .should(($mensagem) => {
-      expect($mensagem.first()).to.contain('Olá, seja bem-vindo(a)!');
+    // Exibe corretamente o breadcrumb da página
+    .get(fixture.page.breadcrumb)
+    .should(($breadcrumb) => {
+      expect(($breadcrumb.length)).equal(1);
+      expect(($breadcrumb[0])).to.contain('Home');
+    })
+
+    // Exibe corremente o título da página
+    .get(fixture.page.title)
+    .should(($title) => {
+      expect($title[0]).to.contain('Olá, seja bem-vindo(a)!');
     })
 
     // Exibe apenas o card dos fornecedores pois usuário está deslogado
     .get(fixture.cards)
     .should(($cards) => {
       expect(($cards.length)).to.equal(1);
-      expect(($cards.first()).children()).to.contain('Fornecedores');
+      expect(($cards[0])).to.contain('Fornecedores');
     });
   });
 
