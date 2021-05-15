@@ -59,6 +59,6 @@ export class ProdutoDetalheComponent implements OnInit, PageDefault, CanDeactiva
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.onSubmitForm;
+    return !this.formComponent.form?.dirty || this.onSubmitForm;
   }
 }

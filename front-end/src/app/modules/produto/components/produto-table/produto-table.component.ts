@@ -59,6 +59,8 @@ export class ProdutoTableComponent implements OnInit {
 
   pathImages = PRODUTO_CONFIG.pathImages;
 
+  optionsDialog: PoDialogConfirmOptions;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -81,7 +83,7 @@ export class ProdutoTableComponent implements OnInit {
   }
 
   excluir(produto: Produto): void {
-    const options: PoDialogConfirmOptions = {
+    this.optionsDialog = {
       title: 'Confirmação!',
       message: 'Realmente deseja excluir o produto?',
       confirm: () => {
@@ -98,7 +100,7 @@ export class ProdutoTableComponent implements OnInit {
       },
       cancel: () => {}
     };
-    this.poDialogService.confirm(options);
+    this.poDialogService.confirm(this.optionsDialog);
   }
 
   setAtivosInativos(): void {
