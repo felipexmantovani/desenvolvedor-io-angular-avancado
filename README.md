@@ -39,7 +39,7 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 - Execute os comandos abaixo no seu terminal:
 
 `
-cd backend
+cd back-end
 `
 
 `
@@ -50,7 +50,7 @@ docker-compose -f docker-compose.backend.yml up
 
 # frontend
 `
-cd frontend
+cd front-end
 `
 
 `
@@ -73,7 +73,7 @@ Subir pelo app do Docker ou extensão do vsCode
 ou
 
 `
-cd backend
+cd back-end
 `
 
 `
@@ -83,6 +83,10 @@ docker-compose -f docker-compose.backend.yml up
 ---
 
 - Subir frontend
+
+`
+cd front-end
+`
 
 `
 npm start
