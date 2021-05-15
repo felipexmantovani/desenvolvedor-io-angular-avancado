@@ -123,8 +123,8 @@ describe('fornecedor.service.spec | FornecedorService', () => {
   it('Deve retornar um PoComboOption após fazer busca por id', () => {
     spyOn(service, 'readById').and.returnValue(of(FORNECEDOR_MOCK[0]));
     service.getObjectByValue(FORNECEDOR_MOCK[0].id).subscribe(combo => {
-      expect(combo[0].label).toBe(FORNECEDOR_MOCK[0].nome);
-      expect(combo[0].value).toBe(FORNECEDOR_MOCK[0].id);
+      expect(combo.label).toBe(FORNECEDOR_MOCK[0].nome);
+      expect(combo.value).toBe(FORNECEDOR_MOCK[0].id);
     });
   });
 

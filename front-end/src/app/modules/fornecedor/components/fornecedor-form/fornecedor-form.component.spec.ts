@@ -161,11 +161,13 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
     expect(component.form.get('endereco').get('bairro').value).toBe(viaCep.bairro);
   });
 
-  it('Deve chamar o serviço de update ao clicar no botão salvar caso o formulário for de edição', () => {
+  it('Deve chamar o serviço de update ao clicar no botão salvar caso o formulário for de edição e navegar para listagem de fornecedores', () => {
+    spyOn(router, 'navigateByUrl');
     component.fornecedor = fornecedor;
     component.ngOnInit();
     component.onSubmit();
     expect(fornecedorService.update).toHaveBeenCalled();
+    expect(router.navigateByUrl).toHaveBeenCalledWith(FORNECEDOR_CONFIG.pathFront);
   });
 
   it('Deve abrir modal do mapa', () => {

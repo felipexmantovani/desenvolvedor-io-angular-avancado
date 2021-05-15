@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FORNECEDOR_MOCK } from '../../../mocks/fornecedor.mock';
 import { PRODUTO_MOCK } from '../../../mocks/produto.mock';
+import { AuthService } from '../../auth/services/auth.service';
 import { PageHomeComponent } from './page-home.component';
 
 describe('page-home.component.spec | PageHomeComponent', () => {
@@ -20,6 +21,8 @@ describe('page-home.component.spec | PageHomeComponent', () => {
     }
   };
 
+  const authService = jasmine.createSpyObj<AuthService>(['isLogged']);
+
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -29,6 +32,10 @@ describe('page-home.component.spec | PageHomeComponent', () => {
           {
             provide: ActivatedRoute,
             useValue: activatedRoute
+          },
+          {
+            provide: AuthService,
+            useValue: authService
           }
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -50,5 +57,13 @@ describe('page-home.component.spec | PageHomeComponent', () => {
     expect(component.breadcrumb).toBeTruthy();
     expect(component.breadcrumb.items[0].label).toBe('Home');
     expect(component.breadcrumb.items[0].link).toBe('/');
+  });
+
+  it('Deve popular as propriedades produtosAtivos e produtosInativos caso usuário estiver logado', () => {
+    authService.isLogged.and.returnValue(true);
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.produtosAtivos.length).toBe(5);
+    expect(component.produtosInativos.length).toBe(2);
   });
 });
