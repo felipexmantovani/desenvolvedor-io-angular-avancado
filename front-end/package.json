@@ -8,7 +8,8 @@
     "test": "ng test",
     "test:coverage": "ng test --code-coverage",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test:cy": "npx cypress open"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "@po-ui/ng-components": "4.13.0",
     "@po-ui/ng-templates": "4.13.0",
     "@totvs/po-theme": "^4.13.0",
+    "cypress": "^7.3.0",
     "hammerjs": "^2.0.8",
     "ngx-image-cropper": "^3.3.5",
     "rxjs": "~6.6.7",

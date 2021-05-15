@@ -13,7 +13,8 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 - CRUD de produto.
 
 #### Foi aplicado:
-- Testes unitários;
+- Testes unitários com Jasmine;
+- Testes e2e com Cypress;
 - Lazy Loading para carregamento de módulos;
 - Guarda de rotas;
 - HttpCustomInterceptor;
@@ -40,7 +41,6 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 `
 cd backend
 `
-
 `
 docker-compose -f docker-compose.backend.yml up
 `
@@ -51,7 +51,6 @@ docker-compose -f docker-compose.backend.yml up
 `
 cd frontend
 `
-
 `
 npm install
 `
@@ -64,4 +63,25 @@ npm start
 #### Testes unitários
 `
 npm run test:coverage
+`
+
+#### Testes e2e
+- Subir backend
+Subir pelo app do Docker ou extensão do vsCode
+ou
+`
+cd backend
+`
+`
+docker-compose -f docker-compose.backend.yml up
+`
+---
+- Subir frontend
+`
+npm start
+`
+---
+- Rodar teste
+`
+npm run test:cy
 `
