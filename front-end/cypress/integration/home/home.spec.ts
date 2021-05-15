@@ -14,7 +14,7 @@ describe('home.spec', () => {
     cy.fixture('./../fixtures/home/home').then(fixture => fixtureHome = fixture);
   });
 
-  it('Deve criar a página corretamente', () => {
+  it('Deve montar a página corretamente', () => {
     // Ir para home
     cy.visit('/')
     .url()

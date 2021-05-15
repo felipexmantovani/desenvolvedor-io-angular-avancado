@@ -1,0 +1,16 @@
+{
+  "logo": ".po-menu-header-container-logo .po-menu-logo",
+  "access": {
+    "btnEntrar": ".po-menu-header-template .links po-button[p-label='Entrar']",
+    "btnCriarConta": ".po-menu-header-template .links po-button[p-label='Criar conta']",
+    "btnSair": ".po-menu-header-template .links po-button[p-label='Sair']"
+  },
+  "menu": {
+    "search": ".po-menu-filter-container .po-menu-filter",
+    "nav": {
+      "home": ".po-menu-body po-menu-item[ng-reflect-label='Home'] .po-menu-item-link",
+      "fornecedores": ".po-menu-body po-menu-item[ng-reflect-label='Fornecedores'] .po-menu-item-link",
+      "produtos": ".po-menu-body po-menu-item[ng-reflect-label='Produtos'] .po-menu-item-link"
+    }
+  }
+}
