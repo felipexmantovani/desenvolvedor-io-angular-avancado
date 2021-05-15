@@ -3,7 +3,7 @@
 import { Home } from '../../support/home/home.interface';
 import { Page } from '../../support/_shared/interfaces/page.interface';
 
-describe('home.spec', () => {
+describe('home-e2e.spec', () => {
 
   let fixturePage: Page;
 

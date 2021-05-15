@@ -4,7 +4,7 @@ import { Page } from '../../support/_shared/interfaces/page.interface';
 import { Sidebar } from '../../support/_shared/interfaces/sidebar.interface';
 import { DateUtil } from '../../support/_shared/util/date.util';
 
-describe('usuario-novo.spec', () => {
+describe('usuario-novo-e2e.spec', () => {
 
   let fixturePage: Page;
 
