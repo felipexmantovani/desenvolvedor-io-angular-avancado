@@ -69,6 +69,8 @@ npm run test:coverage
 
 #### Testes e2e
 - Subir backend
+
+
 Subir pelo app do Docker ou extensão do vsCode
 ou
 
