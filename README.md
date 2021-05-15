@@ -41,6 +41,7 @@ No backend foi utilizada a API disponibilizada no curso, no frontend optei em ut
 `
 cd backend
 `
+
 `
 docker-compose -f docker-compose.backend.yml up
 `
@@ -51,6 +52,7 @@ docker-compose -f docker-compose.backend.yml up
 `
 cd frontend
 `
+
 `
 npm install
 `
@@ -69,19 +71,27 @@ npm run test:coverage
 - Subir backend
 Subir pelo app do Docker ou extensão do vsCode
 ou
+
 `
 cd backend
 `
+
 `
 docker-compose -f docker-compose.backend.yml up
 `
+
 ---
+
 - Subir frontend
+
 `
 npm start
 `
+
 ---
+
 - Rodar teste
+
 `
 npm run test:cy
 `
