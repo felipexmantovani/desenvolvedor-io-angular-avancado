@@ -1,0 +1,8 @@
+{
+  "image": ".po-page-content div img",
+  "form": {
+    "email": ".po-page-content form po-field-container[ng-reflect-label='E-mail'] .po-input",
+    "password": ".po-page-content form po-field-container[ng-reflect-label='Senha'] .po-input",
+    "btnSubmit": ".po-page-content form po-button[p-label='Entrar'] .po-button"
+  }
+}

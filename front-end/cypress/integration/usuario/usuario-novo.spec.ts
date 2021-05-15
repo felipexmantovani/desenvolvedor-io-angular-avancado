@@ -1,3 +1,4 @@
+import { Login } from '../../support/auth/login.interface';
 import { UsuarioNovo } from '../../support/usuario/usuario-novo.interface';
 import { Page } from '../../support/_shared/interfaces/page.interface';
 import { Sidebar } from '../../support/_shared/interfaces/sidebar.interface';
@@ -11,6 +12,8 @@ describe('usuario-novo.spec', () => {
 
   let fixtureUsuarioNovo: UsuarioNovo;
 
+  let fixtureLogin: Login;
+
   const emailUser = `cy_${DateUtil.getTime()}@email.com`;
 
   const passwordDefault = 'Teste@123';
@@ -19,6 +22,7 @@ describe('usuario-novo.spec', () => {
     cy.fixture('./../fixtures/_shared/page').then(fixture => fixturePage = fixture);
     cy.fixture('./../fixtures/_shared/sidebar').then(fixture => fixtureSidebar = fixture);
     cy.fixture('./../fixtures/usuario/usuario-novo').then(fixture => fixtureUsuarioNovo = fixture);
+    cy.fixture('./../fixtures/auth/login').then(fixture => fixtureLogin = fixture);
   });
 
   it('Deve cadastrar um novo usuário', () => {
@@ -106,7 +110,33 @@ describe('usuario-novo.spec', () => {
     .should('be.visible')
     .should($element => expect($element.attr('class')).to.contain('po-toaster-success'))
     .get(fixturePage.toaster.msg)
-    .should('contain', `${emailUser} cadastrado com sucesso.`);
+    .should('contain', `${emailUser} cadastrado com sucesso.`)
+    .wait(2000)
+    .get(fixturePage.toaster.element)
+    .click()
+
+    // Faz login com usuário criado, navega para home e faz logout
+    .get(fixtureLogin.form.email)
+    .type(emailUser)
+    .get(fixtureLogin.form.password)
+    .type(passwordDefault)
+    .get(fixtureLogin.form.btnSubmit)
+    .click()
+    .get(fixturePage.toaster.element)
+    .should('be.visible')
+    .should($element => expect($element.attr('class')).to.contain('po-toaster-success'))
+    .get(fixturePage.toaster.msg)
+    .should('contain', 'Olá, seja bem-vindo(a).')
+    .wait(2000)
+    .get(fixturePage.toaster.element)
+    .click()
+    .url()
+    .should('include', '/home')
+    .get(fixtureSidebar.access.btnSair)
+    .click()
+    .wait(2000)
+    .get(fixtureSidebar.access.modalConfirmLogout)
+    .click();
   });
 
 });

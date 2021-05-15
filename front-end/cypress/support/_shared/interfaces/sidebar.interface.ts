@@ -4,6 +4,7 @@ export interface Sidebar {
     btnEntrar: string;
     btnCriarConta: string;
     btnSair: string;
+    modalConfirmLogout: string;
   };
   menu: {
     search: string;

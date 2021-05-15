@@ -3,7 +3,8 @@
   "access": {
     "btnEntrar": ".po-menu-header-template .links po-button[p-label='Entrar']",
     "btnCriarConta": ".po-menu-header-template .links po-button[p-label='Criar conta']",
-    "btnSair": ".po-menu-header-template .links po-button[p-label='Sair']"
+    "btnSair": ".po-menu-header-template .links po-button[p-label='Sair']",
+    "modalConfirmLogout": ".po-modal .po-modal-content .po-modal-footer po-button[ng-reflect-label='Confirmar']"
   },
   "menu": {
     "search": ".po-menu-filter-container .po-menu-filter",
