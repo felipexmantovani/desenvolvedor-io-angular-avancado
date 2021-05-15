@@ -25,7 +25,7 @@ describe('usuario-novo.spec', () => {
     cy.fixture('./../fixtures/auth/login').then(fixture => fixtureLogin = fixture);
   });
 
-  it('Deve cadastrar um novo usuário', () => {
+  it('Deve cadastrar um novo usuário e realizar o login', () => {
     // Ir para home
     cy.visit('/')
     .url()
