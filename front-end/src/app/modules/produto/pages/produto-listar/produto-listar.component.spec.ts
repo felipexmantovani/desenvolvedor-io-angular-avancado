@@ -5,9 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
+import { ProdutoTableComponent } from '../../components/produto-table/produto-table.component';
 import { ProdutoListarComponent } from './produto-listar.component';
 
 describe('produto-listar.component.spec | ProdutoListarComponent', () => {
+
   let component: ProdutoListarComponent;
   let fixture: ComponentFixture<ProdutoListarComponent>;
 
@@ -38,9 +40,23 @@ describe('produto-listar.component.spec | ProdutoListarComponent', () => {
     fixture = TestBed.createComponent(ProdutoListarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    component.table = new ProdutoTableComponent(null, null, null, null, null, null);
+    component.table.produtosImmutable  = PRODUTO_MOCK;
   });
 
   it('Deve ser criado', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Deve popular produtos da grid ao executar método onQuickSearch() sem filtro', () => {
+    component.onQuickSearch('');
+    expect(component.table.produtos.length).toBe(7);
+  });
+
+  it('Deve filtrar produtos da grid', () => {
+    component.onQuickSearch('CSS Total');
+    expect(component.table.produtos.length).toBe(1);
+  });
+
 });

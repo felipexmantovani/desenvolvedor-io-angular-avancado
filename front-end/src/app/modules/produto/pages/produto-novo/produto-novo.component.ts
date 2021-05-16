@@ -10,6 +10,7 @@ import { PRODUTO_CONFIG } from '../../produto.config';
   templateUrl: './produto-novo.component.html'
 })
 export class ProdutoNovoComponent implements PageDefault, CanDeactivatePage {
+
   pageTitle = `Novo ${PRODUTO_CONFIG.name}`;
 
   breadcrumb: PoBreadcrumb = {
@@ -40,6 +41,7 @@ export class ProdutoNovoComponent implements PageDefault, CanDeactivatePage {
   }
 
   canDeactivate(): boolean {
-    return !this.formComponent.form.dirty || this.onSubmitForm;
+    return !this.formComponent.form?.dirty || this.onSubmitForm;
   }
+
 }

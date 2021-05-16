@@ -1,9 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ProdutoFormComponent } from '../../components/produto-form/produto-form.component';
 import { PRODUTO_CONFIG } from '../../produto.config';
 import { ProdutoNovoComponent } from './produto-novo.component';
 
 describe('produto-novo.component.spec | ProdutoNovoComponent', () => {
+
   let component: ProdutoNovoComponent;
   let fixture: ComponentFixture<ProdutoNovoComponent>;
 
@@ -43,4 +45,20 @@ describe('produto-novo.component.spec | ProdutoNovoComponent', () => {
     expect(component.actions[1].label).toBe('Cancelar');
     expect(component.actions[1].url).toBe(PRODUTO_CONFIG.pathFront);
   });
+
+  it('Deve executar método onSubmit() do component filho ao clicar em salvar', () => {
+    component.formComponent = new ProdutoFormComponent(null, null, null, null, null);
+    spyOn(component.formComponent, 'onSubmit');
+
+    const salvar = component.actions.find(item => item.label === 'Salvar');
+    salvar.action();
+
+    expect(component.formComponent.onSubmit).toHaveBeenCalled();
+  });
+
+  it('Deve retornar true caso o form não estiver sujo e não foi submetido', () => {
+    const retorno = component.canDeactivate();
+    expect(retorno).toBeTrue();
+  });
+
 });

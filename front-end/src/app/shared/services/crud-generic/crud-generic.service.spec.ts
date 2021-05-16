@@ -1,4 +1,4 @@
-import { HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -67,7 +67,26 @@ describe('crud-generic.service.spec | CrudGenericService', () => {
       .flush({ data: MOCK[0] });
     });
 
-    it('Deve lançar um erro', () => {});
+    it('Deve tratar erro', () => {
+      service.create(MOCK[0]).subscribe(
+        () => {},
+        (error: HttpErrorResponse) => {
+          expect(exceptionService.handleError).toHaveBeenCalled();
+          expect(error.status).toBe(400);
+          expect(error.statusText).toBe('Erro intensional');
+        }
+      );
+
+      httpTestingController.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.method === 'POST' &&
+          req.body === MOCK[0]
+        );
+      })
+      .flush(null, { status: 400, statusText: 'Erro intensional' });
+
+      expect(exceptionService.handleError).toHaveBeenCalled();
+    });
   });
 
   describe('READ', () => {
@@ -80,7 +99,21 @@ describe('crud-generic.service.spec | CrudGenericService', () => {
       .flush(MOCK);
     });
 
-    it('Deve lançar um erro', () => {});
+    it('Deve tratar erro', () => {
+      service.read().subscribe(
+        () => {},
+        (error: HttpErrorResponse) => {
+          expect(exceptionService.handleError).toHaveBeenCalled();
+          expect(error.status).toBe(400);
+          expect(error.statusText).toBe('Erro intensional');
+        }
+      );
+
+      httpTestingController.expectOne((req: HttpRequest<any>) => req.method === 'GET')
+      .flush(null, { status: 400, statusText: 'Erro intensional' });
+
+      expect(exceptionService.handleError).toHaveBeenCalled();
+    });
   });
 
   describe('BY-ID', () => {
@@ -94,7 +127,21 @@ describe('crud-generic.service.spec | CrudGenericService', () => {
       .flush(res);
     });
 
-    it('Deve lançar um erro', () => {});
+    it('Deve tratar erro', () => {
+      service.readById('123').subscribe(
+        () => {},
+        (error: HttpErrorResponse) => {
+          expect(exceptionService.handleError).toHaveBeenCalled();
+          expect(error.status).toBe(400);
+          expect(error.statusText).toBe('Erro intensional');
+        }
+      );
+
+      httpTestingController.expectOne((req: HttpRequest<any>) => req.method === 'GET')
+      .flush(null, { status: 400, statusText: 'Erro intensional' });
+
+      expect(exceptionService.handleError).toHaveBeenCalled();
+    });
   });
 
   describe('PUT', () => {
@@ -113,7 +160,26 @@ describe('crud-generic.service.spec | CrudGenericService', () => {
       .flush({ data: MOCK[0] });
     });
 
-    it('Deve lançar um erro', () => {});
+    it('Deve tratar erro', () => {
+      service.update(MOCK[0]).subscribe(
+        () => {},
+        (error: HttpErrorResponse) => {
+          expect(exceptionService.handleError).toHaveBeenCalled();
+          expect(error.status).toBe(400);
+          expect(error.statusText).toBe('Erro intensional');
+        }
+      );
+
+      httpTestingController.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.method === 'PUT' &&
+          req.body === MOCK[0]
+        );
+      })
+      .flush(null, { status: 400, statusText: 'Erro intensional' });
+
+      expect(exceptionService.handleError).toHaveBeenCalled();
+    });
   });
 
   describe('DELETE', () => {
@@ -126,6 +192,20 @@ describe('crud-generic.service.spec | CrudGenericService', () => {
       .flush({ data: MOCK[0] });
     });
 
-    it('Deve lançar um erro', () => {});
+    it('Deve tratar erro', () => {
+      service.delete('123').subscribe(
+        () => {},
+        (error: HttpErrorResponse) => {
+          expect(exceptionService.handleError).toHaveBeenCalled();
+          expect(error.status).toBe(400);
+          expect(error.statusText).toBe('Erro intensional');
+        }
+      );
+
+      httpTestingController.expectOne((req: HttpRequest<any>) => req.method === 'DELETE')
+      .flush(null, { status: 400, statusText: 'Erro intensional' });
+
+      expect(exceptionService.handleError).toHaveBeenCalled();
+    });
   });
 });

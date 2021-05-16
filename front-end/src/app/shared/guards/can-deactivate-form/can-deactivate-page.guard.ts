@@ -7,25 +7,29 @@ import { CanDeactivatePage } from '../../interfaces/can-deactivate-page.interfac
   providedIn: 'root'
 })
 export class CanDeactivatePageGuard implements CanDeactivate<CanDeactivatePage> {
+
+  optionsDialog: PoDialogConfirmOptions;
+
   constructor(public poDialogService: PoDialogService) {}
 
   async canDeactivate(component: CanDeactivatePage): Promise<boolean> {
     return await this.verify(component);
   }
 
-  private verify(component: CanDeactivatePage): Promise<boolean> {
+  verify(component: CanDeactivatePage): Promise<boolean> {
     return new Promise((resolve, reject) => {
       if (component.canDeactivate()) {
         resolve(true);
       } else {
-        const options: PoDialogConfirmOptions = {
+        this.optionsDialog = {
           title: 'Confirmação!',
           message: component.canDeactivateTextModal,
           confirm: () => resolve(true),
           cancel: () => resolve(false)
         };
-        this.poDialogService.confirm(options);
+        this.poDialogService.confirm(this.optionsDialog);
       }
     });
   }
+
 }

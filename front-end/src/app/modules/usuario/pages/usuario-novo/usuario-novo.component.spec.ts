@@ -13,6 +13,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { UsuarioNovoComponent } from './usuario-novo.component';
 
 describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
+
   let component: UsuarioNovoComponent;
   let fixture: ComponentFixture<UsuarioNovoComponent>;
   let notificationService: jasmine.SpyObj<NotificationService>;
@@ -92,4 +93,15 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
     expect(notificationService.success).toHaveBeenCalledWith(`${token.userToken.email} cadastrado com sucesso.`);
     expect(router.navigateByUrl).toHaveBeenCalledWith(`${AUTH_CONFIG.pathFront}/login`);
   });
+
+  it('Deve apresentar notificação caso formulário estiver inválido ao ser submetido', () => {
+    component.onSubmit();
+    expect(notificationService.error).toHaveBeenCalledWith('Verifique o formulário.');
+  });
+
+  it('Deve retornar true caso o form não estiver sujo e não foi submetido', () => {
+    const retorno = component.canDeactivate();
+    expect(retorno).toBeTrue();
+  });
+
 });

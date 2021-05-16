@@ -1,6 +1,7 @@
 import { StringUtil } from './string.util';
 
 describe('string.util.spec | StringUtil', () => {
+
   let textResume: string;
 
   beforeEach(() => {
@@ -60,4 +61,5 @@ describe('string.util.spec | StringUtil', () => {
       expect(StringUtil.maskCnpj(cpf)).toBe('75.130.307/0001-06');
     });
   });
+
 });

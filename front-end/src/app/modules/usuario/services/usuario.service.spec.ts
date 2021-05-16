@@ -1,4 +1,4 @@
-import { HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -41,5 +41,24 @@ describe('usuario.service.spec | UsuarioService', () => {
       );
     })
     .flush({data: token});
+  });
+
+  it('Deve tratar erro ao consumir endpoint', () => {
+    service.novo(USUARIO_MOCK).subscribe(
+      () => {},
+      (error: HttpErrorResponse) => {
+        expect(error.status).toBe(400);
+        expect(error.statusText).toBe('Erro intensional');
+      }
+    );
+
+    httpTestingController.expectOne((req: HttpRequest<any>) => {
+      return (
+        req.url === `${APP_CONFIG.apiV1}/nova-conta` &&
+        req.method === 'POST' &&
+        req.body === USUARIO_MOCK
+      );
+    })
+    .flush(null, { status: 400, statusText: 'Erro intensional' });
   });
 });
