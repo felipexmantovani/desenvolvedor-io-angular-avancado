@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { StringUtil } from './string.util';
 
-fdescribe('string.util.spec | StringUtil', () => {
+describe('string.util.spec | StringUtil', () => {
 
   let textResume: string;
 
