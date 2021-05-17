@@ -2,7 +2,7 @@
   [p-title]="pageTitle"
   [p-breadcrumb]="breadcrumb">
 
-  <po-widget class="po-lg-6 po-mb-2" [p-title]="fornecedoresTitle">
+  <po-widget data-cy="fornecedores" class="po-lg-6 po-mb-2" [p-title]="fornecedoresTitle">
     <div class="po-row">
       <div class="po-sm-12 po-md-4">
         <div class="po-font-subtitle po-text-center po-text-color-01">{{ fornecedores?.length }}</div>
@@ -19,7 +19,7 @@
     </div>
   </po-widget>
 
-  <po-widget class="po-lg-6" [p-title]="produtosTitle" *ngIf="authService.isLogged()">
+  <po-widget data-cy="produtos" class="po-lg-6" [p-title]="produtosTitle" *ngIf="authService.isLogged()">
     <div class="po-row">
       <div class="po-sm-12 po-md-4">
         <div class="po-font-subtitle po-text-center po-text-color-01">{{ produtos?.length }}</div>

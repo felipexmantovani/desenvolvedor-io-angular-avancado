@@ -1,3 +1,4 @@
 export interface Home {
-  cards: string;
+  fornecedores: string;
+  produtos: string;
 }

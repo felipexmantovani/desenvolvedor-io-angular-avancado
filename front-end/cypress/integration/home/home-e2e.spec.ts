@@ -34,11 +34,10 @@ describe('home-e2e.spec', () => {
     })
 
     // Exibe apenas o card dos fornecedores pois usuário está deslogado
-    .get(fixtureHome.cards)
-    .should(($cards) => {
-      expect(($cards.length)).to.equal(1);
-      expect(($cards[0])).to.contain('Fornecedores');
-    });
+    .get(fixtureHome.fornecedores)
+    .should('exist')
+    .get(fixtureHome.produtos)
+    .should('not.exist');
   });
 
 });

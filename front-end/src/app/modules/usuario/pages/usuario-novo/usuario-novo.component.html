@@ -6,11 +6,12 @@
     <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
 
       <div class="po-sm-12 po-md-8 po-lg-8 po-xl-8 po-offset-md-2 po-offset-lg-2 po-offset-xl-2">
-        <img class="w-100" src="./assets/nova-conta.png">
+        <img data-cy="imagem" class="w-100" src="./assets/nova-conta.png">
       </div>
 
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <po-email
+          data-cy="email"
           formControlName="email"
           name="email"
           p-auto-focus="true"
@@ -24,6 +25,7 @@
         </po-email>
 
         <po-password
+          data-cy="password"
           formControlName="password"
           name="password"
           p-clean="true"
@@ -37,6 +39,7 @@
         </po-password>
 
         <po-password
+          data-cy="confirm-password"
           formControlName="confirmPassword"
           name="confirmPassword"
           p-clean="true"
@@ -48,6 +51,7 @@
 
         <button hidden type="submit"></button>
         <po-button
+          data-cy="submit"
           class="po-sm-12 po-mt-2 po-p-0"
           (p-click)="onSubmit()"
           p-label="Enviar"

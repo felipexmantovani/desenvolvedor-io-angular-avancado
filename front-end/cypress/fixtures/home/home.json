@@ -1,3 +1,4 @@
 {
-  "cards": ".po-page-content .po-widget"
+  "fornecedores": "[data-cy='fornecedores']",
+  "produtos": "[data-cy='produtos']"
 }

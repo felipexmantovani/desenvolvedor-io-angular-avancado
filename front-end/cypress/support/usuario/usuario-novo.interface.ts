@@ -4,7 +4,7 @@ export interface UsuarioNovo {
     email: string;
     password: string;
     passwordMsgErro: string;
-    passwordConfirm: string;
+    confirmPassword: string;
     btnSubmit: string;
   };
 }
