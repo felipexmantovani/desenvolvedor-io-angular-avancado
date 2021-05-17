@@ -1,12 +1,9 @@
-/// <reference types="cypress" />
-
 import { Home } from '../../support/home/home.interface';
 import { Page } from '../../support/_shared/interfaces/page.interface';
 
 describe('home-e2e.spec', () => {
 
   let fixturePage: Page;
-
   let fixtureHome: Home;
 
   beforeEach(() => {

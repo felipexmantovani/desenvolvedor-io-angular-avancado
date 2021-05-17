@@ -5,4 +5,8 @@ export interface Login {
     password: string;
     btnSubmit: string;
   };
+  loginDefault: {
+    email: string;
+    password: string;
+  };
 }

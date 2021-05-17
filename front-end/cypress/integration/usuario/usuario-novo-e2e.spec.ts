@@ -7,16 +7,11 @@ import { DateUtil } from '../../support/_shared/util/date.util';
 describe('usuario-novo-e2e.spec', () => {
 
   let fixturePage: Page;
-
   let fixtureSidebar: Sidebar;
-
   let fixtureUsuarioNovo: UsuarioNovo;
-
   let fixtureLogin: Login;
 
   const emailUser = `cy_${DateUtil.getTime()}@email.com`;
-
-  const passwordDefault = 'Teste@123';
 
   beforeEach(() => {
     cy.fixture('./../fixtures/_shared/page').then(fixture => fixturePage = fixture);
@@ -62,7 +57,7 @@ describe('usuario-novo-e2e.spec', () => {
     .should($element => expect($element.attr('class')).to.contain('po-toaster-error'))
     .get(fixturePage.toaster.msg)
     .should('contain', 'Verifique o formulário.')
-    .wait(2000)
+    .wait(1000)
     .get(fixturePage.toaster.btnClose)
     .click()
 
@@ -79,7 +74,7 @@ describe('usuario-novo-e2e.spec', () => {
     .get(fixtureUsuarioNovo.form.email)
     .type(emailUser)
     .get(fixtureUsuarioNovo.form.password)
-    .type(passwordDefault)
+    .type(fixtureLogin.loginDefault.password)
     .get(fixtureUsuarioNovo.form.confirmPassword)
     .type('Diferente@123')
     .get(fixtureUsuarioNovo.form.btnSubmit)
@@ -89,17 +84,17 @@ describe('usuario-novo-e2e.spec', () => {
     .should($element => expect($element.attr('class')).to.contain('po-toaster-error'))
     .get(fixturePage.toaster.msg)
     .should('contain', 'As senhas devem ser iguais.')
-    .wait(2000)
+    .wait(1000)
     .get(fixturePage.toaster.btnClose)
     .click()
 
     // Informa a senha novamente e cria novo usuário
     .get(fixtureUsuarioNovo.form.password)
     .clear()
-    .type(passwordDefault)
+    .type(fixtureLogin.loginDefault.password)
     .get(fixtureUsuarioNovo.form.confirmPassword)
     .clear()
-    .type(passwordDefault)
+    .type(fixtureLogin.loginDefault.password)
     .get(fixtureUsuarioNovo.form.btnSubmit)
     .click()
 
@@ -111,32 +106,15 @@ describe('usuario-novo-e2e.spec', () => {
     .should($element => expect($element.attr('class')).to.contain('po-toaster-success'))
     .get(fixturePage.toaster.msg)
     .should('contain', `${emailUser} cadastrado com sucesso.`)
-    .wait(2000)
+    .wait(1000)
     .get(fixturePage.toaster.element)
     .click()
 
-    // Faz login com usuário criado, navega para home e faz logout
-    .get(fixtureLogin.form.email)
-    .type(emailUser)
-    .get(fixtureLogin.form.password)
-    .type(passwordDefault)
-    .get(fixtureLogin.form.btnSubmit)
-    .click()
-    .get(fixturePage.toaster.element)
-    .should('be.visible')
-    .should($element => expect($element.attr('class')).to.contain('po-toaster-success'))
-    .get(fixturePage.toaster.msg)
-    .should('contain', 'Olá, seja bem-vindo(a).')
-    .wait(2000)
-    .get(fixturePage.toaster.element)
-    .click()
+    // Faz login e logout
+    .login(emailUser, fixtureLogin.loginDefault.password)
     .url()
     .should('include', '/home')
-    .get(fixtureSidebar.access.btnSair)
-    .click()
-    .wait(2000)
-    .get(fixtureSidebar.access.modalConfirmLogout)
-    .click();
+    .logout();
   });
 
 });
