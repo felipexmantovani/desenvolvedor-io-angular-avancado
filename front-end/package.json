@@ -8,8 +8,7 @@
     "test": "ng test",
     "test:coverage": "ng test --code-coverage",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "test:cy": "npx cypress open"
+    "e2e": "npx cypress open"
   },
   "private": true,
   "dependencies": {
@@ -46,7 +45,6 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.2"

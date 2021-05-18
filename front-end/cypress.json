@@ -3,5 +3,8 @@
   "baseUrl": "http://localhost:4200",
   "viewportHeight": 768,
   "viewportWidth": 1366,
-  "supportFile": "cypress/support/index.ts"
+  "fixturesFolder": "e2e/fixtures",
+  "integrationFolder": "e2e/integration",
+  "pluginsFile": "e2e/plugins/index.js",
+  "supportFile": "e2e/support/index.ts"
 }

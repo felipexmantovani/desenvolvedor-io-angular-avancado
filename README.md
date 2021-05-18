@@ -99,5 +99,5 @@ npm start
 - Rodar teste
 
 `
-npm run test:cy
+npm run e2e
 `
