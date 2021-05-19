@@ -13,9 +13,7 @@ describe('home-e2e.spec', () => {
 
   it('Deve montar a página corretamente', () => {
     // Ir para home
-    cy.visit('/')
-    .url()
-    .should('include', '/home')
+    cy.navigateHome()
 
     // Exibe corretamente o breadcrumb da página
     .get(fixturePage.breadcrumb)

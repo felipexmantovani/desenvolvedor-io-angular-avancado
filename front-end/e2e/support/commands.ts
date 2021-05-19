@@ -3,6 +3,7 @@ declare global {
     interface Chainable {
       login(email?: string, password?: string): Chainable;
       logout(): Chainable;
+      navigateHome(): Chainable;
     }
   }
 }
@@ -21,7 +22,16 @@ beforeEach(() => {
   cy.fixture('./../fixtures/auth/login').then(fixture => fixtureLogin = fixture);
 });
 
+Cypress.Commands.add('navigateHome', () => {
+  cy.visit('/')
+    .url()
+    .should('include', '/home');
+});
+
 Cypress.Commands.add('login', (email, password) => {
+  cy.visit('/auth/login')
+    .url()
+    .should('include', '/auth/login');
   if (email && password) {
     cy.get(fixtureLogin.form.email)
       .type(email)
@@ -49,5 +59,7 @@ Cypress.Commands.add('logout', () => {
     .click()
     .wait(1000)
     .get(fixtureSidebar.access.modalConfirmLogout)
-    .click();
+    .click()
+    .url()
+    .should('include', '/home');
 });

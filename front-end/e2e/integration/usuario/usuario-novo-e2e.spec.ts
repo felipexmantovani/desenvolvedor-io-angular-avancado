@@ -22,9 +22,7 @@ describe('usuario-novo-e2e.spec', () => {
 
   it('Deve cadastrar um novo usuário e realizar o login', () => {
     // Ir para home
-    cy.visit('/')
-    .url()
-    .should('include', '/home')
+    cy.navigateHome()
 
     // Ir para página de cadastro
     .get(fixtureSidebar.access.btnCriarConta)
@@ -110,7 +108,7 @@ describe('usuario-novo-e2e.spec', () => {
     .get(fixturePage.toaster.element)
     .click()
 
-    // Faz login e logout
+    // Faz login com usuário criado e logo após faz logout
     .login(emailUser, fixtureLogin.loginDefault.password)
     .url()
     .should('include', '/home')
