@@ -1,0 +1,13 @@
+{
+  "id": "[data-cy=id]",
+  "email": "[data-cy=email]",
+  "claims": {
+    "produto": "[data-cy=claims] .po-container .po-row div:nth-child(1)",
+    "fornecedor": "[data-cy=claims] .po-container .po-row div:nth-child(2)",
+    "sub": "[data-cy=claims] .po-container .po-row div:nth-child(3)",
+    "email": "[data-cy=claims] .po-container .po-row div:nth-child(4)",
+    "jti": "[data-cy=claims] .po-container .po-row div:nth-child(5)",
+    "nbf": "[data-cy=claims] .po-container .po-row div:nth-child(6)",
+    "iat": "[data-cy=claims] .po-container .po-row div:nth-child(7)"
+  }
+}

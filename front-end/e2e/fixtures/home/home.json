@@ -1,4 +1,4 @@
 {
-  "fornecedores": "[data-cy='fornecedores']",
-  "produtos": "[data-cy='produtos']"
+  "fornecedores": "[data-cy=fornecedores]",
+  "produtos": "[data-cy=produtos]"
 }

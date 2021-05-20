@@ -1,12 +1,8 @@
 {
-  "image": "[data-cy='imagem']",
+  "image": "[data-cy=imagem]",
   "form": {
-    "email": "[data-cy='email'] input",
-    "password": "[data-cy='password'] input",
-    "btnSubmit": "[data-cy='submit'] button"
-  },
-  "loginDefault": {
-    "email": "teste@teste.com",
-    "password": "Teste@123"
+    "email": "[data-cy=email] input",
+    "password": "[data-cy=password] input",
+    "btnSubmit": "[data-cy=submit] button"
   }
 }

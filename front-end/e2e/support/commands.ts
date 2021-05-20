@@ -4,10 +4,13 @@ declare global {
       login(email?: string, password?: string): Chainable;
       logout(): Chainable;
       navigateHome(): Chainable;
+      toastClose(): Chainable;
+      toastCheck(typeClass: string, msg: string): Chainable;
     }
   }
 }
 
+import { LOGIN_CONFIG } from './auth/login.config';
 import { Login } from './auth/login.interface';
 import { Page } from './_shared/interfaces/page.interface';
 import { Sidebar } from './_shared/interfaces/sidebar.interface';
@@ -29,9 +32,6 @@ Cypress.Commands.add('navigateHome', () => {
 });
 
 Cypress.Commands.add('login', (email, password) => {
-  cy.visit('/auth/login')
-    .url()
-    .should('include', '/auth/login');
   if (email && password) {
     cy.get(fixtureLogin.form.email)
       .type(email)
@@ -39,12 +39,13 @@ Cypress.Commands.add('login', (email, password) => {
       .type(password);
   } else {
     cy.get(fixtureLogin.form.email)
-      .type(fixtureLogin.loginDefault.email)
+      .type(LOGIN_CONFIG.email)
       .get(fixtureLogin.form.password)
-      .type(fixtureLogin.loginDefault.password);
+      .type(LOGIN_CONFIG.password);
   }
   cy.get(fixtureLogin.form.btnSubmit)
-    .click().get(fixturePage.toaster.element)
+    .click()
+    .get(fixturePage.toaster.element)
     .should('be.visible')
     .should($element => expect($element.attr('class')).to.contain('po-toaster-success'))
     .get(fixturePage.toaster.msg)
@@ -62,4 +63,21 @@ Cypress.Commands.add('logout', () => {
     .click()
     .url()
     .should('include', '/home');
+});
+
+Cypress.Commands.add('toastClose', () => {
+  cy.get(fixturePage.toaster.element)
+    .click();
+});
+
+Cypress.Commands.add('toastCheck', (typeClass: string, msg: string) => {
+  cy.get(fixturePage.toaster.element)
+    .should('be.visible')
+    .should($element => expect($element.attr('class')).to.contain(typeClass))
+    .get(fixturePage.toaster.msg)
+    .should('contain', msg)
+    .wait(1000)
+    .toastClose()
+    .get(fixturePage.toaster.element)
+    .should('not.exist')
 });

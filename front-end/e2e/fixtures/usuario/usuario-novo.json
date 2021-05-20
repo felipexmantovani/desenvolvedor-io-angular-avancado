@@ -1,10 +1,10 @@
 {
-  "image": "[data-cy='imagem']",
+  "image": "[data-cy=imagem]",
   "form": {
-    "email": "[data-cy='email'] input",
-    "password": "[data-cy='password'] input",
+    "email": "[data-cy=email] input",
+    "password": "[data-cy=password] input",
     "passwordMsgErro": ".po-page-content form po-field-container[ng-reflect-label='Senha'] .po-field-container-bottom-text-error",
-    "confirmPassword": "[data-cy='confirm-password'] input",
-    "btnSubmit": "[data-cy='submit'] button"
+    "confirmPassword": "[data-cy=confirm-password] input",
+    "btnSubmit": "[data-cy=submit] button"
   }
 }

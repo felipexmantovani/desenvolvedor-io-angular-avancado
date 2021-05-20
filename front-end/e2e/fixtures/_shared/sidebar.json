@@ -4,7 +4,8 @@
     "btnEntrar": ".po-menu-header-template .links po-button[p-label='Entrar']",
     "btnCriarConta": ".po-menu-header-template .links po-button[p-label='Criar conta']",
     "btnSair": ".po-menu-header-template .links po-button[p-label='Sair']",
-    "modalConfirmLogout": ".po-modal .po-modal-content .po-modal-footer po-button[ng-reflect-label='Confirmar']"
+    "modalConfirmLogout": ".po-modal .po-modal-content .po-modal-footer po-button[ng-reflect-label='Confirmar']",
+    "avatar": ".po-menu-header-template .po-avatar"
   },
   "menu": {
     "search": ".po-menu-filter-container .po-menu-filter",

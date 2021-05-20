@@ -1,4 +1,4 @@
-import { Login } from '../../support/auth/login.interface';
+import { LOGIN_CONFIG } from '../../support/auth/login.config';
 import { UsuarioNovo } from '../../support/usuario/usuario-novo.interface';
 import { Page } from '../../support/_shared/interfaces/page.interface';
 import { Sidebar } from '../../support/_shared/interfaces/sidebar.interface';
@@ -9,7 +9,6 @@ describe('usuario-novo-e2e.spec', () => {
   let fixturePage: Page;
   let fixtureSidebar: Sidebar;
   let fixtureUsuarioNovo: UsuarioNovo;
-  let fixtureLogin: Login;
 
   const emailUser = `cy_${DateUtil.getTime()}@email.com`;
 
@@ -17,7 +16,6 @@ describe('usuario-novo-e2e.spec', () => {
     cy.fixture('./../fixtures/_shared/page').then(fixture => fixturePage = fixture);
     cy.fixture('./../fixtures/_shared/sidebar').then(fixture => fixtureSidebar = fixture);
     cy.fixture('./../fixtures/usuario/usuario-novo').then(fixture => fixtureUsuarioNovo = fixture);
-    cy.fixture('./../fixtures/auth/login').then(fixture => fixtureLogin = fixture);
   });
 
   it('Deve cadastrar um novo usuário e realizar o login', () => {
@@ -50,14 +48,7 @@ describe('usuario-novo-e2e.spec', () => {
     // Mostra toaster de error quando submeter formulário estando inválido
     .get(fixtureUsuarioNovo.form.btnSubmit)
     .click()
-    .get(fixturePage.toaster.element)
-    .should('be.visible')
-    .should($element => expect($element.attr('class')).to.contain('po-toaster-error'))
-    .get(fixturePage.toaster.msg)
-    .should('contain', 'Verifique o formulário.')
-    .wait(1000)
-    .get(fixturePage.toaster.btnClose)
-    .click()
+    .toastCheck('po-toaster-error', 'Verifique o formulário.')
 
     // Valida se senha cumpre as regras de senha forte
     .get(fixtureUsuarioNovo.form.password)
@@ -72,44 +63,30 @@ describe('usuario-novo-e2e.spec', () => {
     .get(fixtureUsuarioNovo.form.email)
     .type(emailUser)
     .get(fixtureUsuarioNovo.form.password)
-    .type(fixtureLogin.loginDefault.password)
+    .type(LOGIN_CONFIG.password)
     .get(fixtureUsuarioNovo.form.confirmPassword)
     .type('Diferente@123')
     .get(fixtureUsuarioNovo.form.btnSubmit)
     .click()
-    .get(fixturePage.toaster.element)
-    .should('be.visible')
-    .should($element => expect($element.attr('class')).to.contain('po-toaster-error'))
-    .get(fixturePage.toaster.msg)
-    .should('contain', 'As senhas devem ser iguais.')
-    .wait(1000)
-    .get(fixturePage.toaster.btnClose)
-    .click()
+    .toastCheck('po-toaster-error', 'As senhas devem ser iguais.')
 
     // Informa a senha novamente e cria novo usuário
     .get(fixtureUsuarioNovo.form.password)
     .clear()
-    .type(fixtureLogin.loginDefault.password)
+    .type(LOGIN_CONFIG.password)
     .get(fixtureUsuarioNovo.form.confirmPassword)
     .clear()
-    .type(fixtureLogin.loginDefault.password)
+    .type(LOGIN_CONFIG.password)
     .get(fixtureUsuarioNovo.form.btnSubmit)
     .click()
 
     // Navega para tela de login e exibe toaster de sucesso
     .url()
     .should('include', '/auth/login')
-    .get(fixturePage.toaster.element)
-    .should('be.visible')
-    .should($element => expect($element.attr('class')).to.contain('po-toaster-success'))
-    .get(fixturePage.toaster.msg)
-    .should('contain', `${emailUser} cadastrado com sucesso.`)
-    .wait(1000)
-    .get(fixturePage.toaster.element)
-    .click()
+    .toastCheck('po-toaster-success', `${emailUser} cadastrado com sucesso.`)
 
     // Faz login com usuário criado e logo após faz logout
-    .login(emailUser, fixtureLogin.loginDefault.password)
+    .login(emailUser, LOGIN_CONFIG.password)
     .url()
     .should('include', '/home')
     .logout();
