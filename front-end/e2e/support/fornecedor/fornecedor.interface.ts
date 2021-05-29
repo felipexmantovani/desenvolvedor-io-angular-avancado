@@ -18,6 +18,7 @@ export interface Fornecedor {
     endereco: {
       verMapa: string;
       iframe: string;
+      fecharMapa: string;
       cep: string;
       logradouro: string;
       numero: string;

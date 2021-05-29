@@ -18,6 +18,7 @@
     "endereco": {
       "verMapa": "[data-cy=ver-mapa] > .po-button",
       "iframe": "[data-cy=iframe]",
+      "fecharMapa": ".po-modal .po-modal-header .po-modal-header-close-button",
       "cep": "[data-cy=cep] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
       "logradouro": "[data-cy=lagradouro] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
       "numero": "[data-cy=numero] > po-field-container > .po-field-container > .po-field-container-content > .po-input",

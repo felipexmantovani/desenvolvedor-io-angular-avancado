@@ -76,7 +76,7 @@ describe('fornecedor-e2e.spec', () => {
     .get(fixturePage.title)
     .should(($title) => expect($title[0].textContent).to.contains('Novo Fornecedor'))
 
-    // Cadastra um fornecedor PF
+    // Preenche formulário de PF
     .get(fixtureFornecedor.form.dados.tipoFornecedor.pessoaFisica)
     .click()
     .get(fixtureFornecedor.form.dados.nome)
@@ -90,19 +90,23 @@ describe('fornecedor-e2e.spec', () => {
     .get(fixtureFornecedor.form.endereco.logradouro)
     .focus()
     .wait(2000)
-    .type('Avenida Angular')
+    .type('Rua Rui Rodrigues Maia')
     .get(fixtureFornecedor.form.endereco.numero)
-    .type('2')
+    .type('41')
     .get(fixtureFornecedor.form.endereco.complemento)
-    .type('Edifício Google - Sala 1A')
+    .type('Casa')
     .get(fixtureFornecedor.form.endereco.bairro)
     .type('Centro')
+
+    // Cadastra fornecedor e redireciona para listagem
     .get(fixtureFornecedor.form.btnSalvar)
     .click()
     .toastCheck('po-toaster-success', `Fornecedor ${fornecedorNomePF} cadastrado com sucesso.`)
     .url()
     .should('contain', '/fornecedor')
     .wait(1000)
+
+    // Pesquisa fornecedor cadastrado, deve contar apenas um registro na listagem da table
     .get(fixturePage.search.input)
     .type(fornecedorNomePF)
     .get(fixturePage.search.btnLupa)
@@ -125,7 +129,7 @@ describe('fornecedor-e2e.spec', () => {
     .get(fixturePage.title)
     .should(($title) => expect($title[0].textContent).to.contains('Novo Fornecedor'))
 
-    // Cadastra um fornecedor PJ
+    // Preenche formulário de PJ
     .get(fixtureFornecedor.form.dados.tipoFornecedor.pessoaJuridica)
     .click()
     .get(fixtureFornecedor.form.dados.nome)
@@ -139,19 +143,23 @@ describe('fornecedor-e2e.spec', () => {
     .get(fixtureFornecedor.form.endereco.logradouro)
     .focus()
     .wait(2000)
-    .type('Avenida Angular')
+    .type('Rua Rui Rodrigues Maia')
     .get(fixtureFornecedor.form.endereco.numero)
-    .type('2')
+    .type('41')
     .get(fixtureFornecedor.form.endereco.complemento)
-    .type('Edifício Google - Sala 1A')
+    .type('Casa')
     .get(fixtureFornecedor.form.endereco.bairro)
     .type('Centro')
+
+    // Cadastra fornecedor e redireciona para listagem
     .get(fixtureFornecedor.form.btnSalvar)
     .click()
     .toastCheck('po-toaster-success', `Fornecedor ${fornecedorNomePJ} cadastrado com sucesso.`)
     .url()
     .should('contain', '/fornecedor')
     .wait(1000)
+
+    // Pesquisa fornecedor cadastrado, deve contar apenas um registro na listagem da table
     .get(fixturePage.search.input)
     .type(fornecedorNomePJ)
     .get(fixturePage.search.btnLupa)
@@ -161,6 +169,7 @@ describe('fornecedor-e2e.spec', () => {
   });
 
   it('Deve editar o último fornecedor PF cadastrado', () => {
+    // Pesquisa fornecedor
     cy.get(fixturePage.search.input)
     .clear()
     .type(fornecedorNomePF)
@@ -170,6 +179,8 @@ describe('fornecedor-e2e.spec', () => {
     .should($rows => expect($rows.length).to.equal(1))
     .get(fixtureFornecedor.table.acoesPrimeiroRegistro)
     .should($acoes => $acoes[0].click())
+
+    // Navega para a página de detalhes
     .get(fixtureFornecedor.table.acaoDetalhes)
     .click()
     .url()
@@ -183,6 +194,17 @@ describe('fornecedor-e2e.spec', () => {
     })
     .get(fixturePage.title)
     .should('contain', fornecedorNomePF)
+
+    // Abre google maps no modal
+    .get(fixtureFornecedor.form.endereco.verMapa)
+    .click()
+    .get(fixtureFornecedor.form.endereco.iframe)
+    .should('be.visible')
+    .wait(5000)
+    .get(fixtureFornecedor.form.endereco.fecharMapa)
+    .click()
+
+    // Altera nome do fornecedor e salva
     .get(fixtureFornecedor.form.dados.nome)
     .clear()
     .type(fornecedorNomeAlteradoPF)
@@ -192,6 +214,8 @@ describe('fornecedor-e2e.spec', () => {
     .url()
     .should('contain', '/fornecedor')
     .wait(1000)
+
+    // Faz pesquisa pelo fornecedor cadastrado, deve conter apenas um registro na table
     .get(fixturePage.search.input)
     .type(fornecedorNomeAlteradoPF)
     .get(fixturePage.search.btnLupa)
