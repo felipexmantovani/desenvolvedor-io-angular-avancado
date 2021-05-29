@@ -8,7 +8,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
     endereco: {
       bairro: 'Parque Paulista',
       cep: '04850020',
-      cidade: 'São Paulo',
+      cidade: 3550308,
       complemento: 'Quadra 1',
       estado: 'SP',
       fornecedorId: '1',
@@ -27,7 +27,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
     endereco: {
       bairro: 'Sítio Cercado',
       cep: '81935020',
-      cidade: 'Curitiba',
+      cidade: 4106902,
       complemento: 'Quadra 2',
       estado: 'PR',
       fornecedorId: '2',
@@ -46,7 +46,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
     endereco: {
       bairro: 'Centro',
       cep: '87580970',
-      cidade: 'Alto Piquiri',
+      cidade: 4100707,
       complemento: 'Quadra 3',
       estado: 'PR',
       fornecedorId: '3',
@@ -65,7 +65,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
     endereco: {
       bairro: 'Itaum',
       cep: '89210050',
-      cidade: 'Joinville',
+      cidade: 4209102,
       complemento: 'Quadra 3',
       estado: 'SC',
       fornecedorId: '4',
@@ -84,7 +84,7 @@ export const FORNECEDOR_MOCK: Array<Fornecedor> = [
     endereco: {
       bairro: 'Centro',
       cep: '36152973',
-      cidade: 'Goianá',
+      cidade: 3127388,
       complemento: 'complemento',
       estado: 'MG',
       fornecedorId: '5',

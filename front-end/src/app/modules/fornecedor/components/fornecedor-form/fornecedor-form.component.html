@@ -3,6 +3,7 @@
     <div class="po-sm-12 po-md-6 po-lg-4 po-xl-4 po-offset-md-3 po-offset-lg-4 po-offset-xl-4">
       <po-divider [p-label]="isPF ? 'Dados pessoais' : 'Dados empresariais'"></po-divider>
       <po-radio-group
+        data-cy="tipoFornecedor"
         formControlName="tipoFornecedor"
         p-label="Tipo"
         [p-disabled]="isEdit()"
@@ -10,6 +11,7 @@
         (p-change)="changeTipoFornecedor($event)">
       </po-radio-group>
       <po-input
+        data-cy="nome"
         formControlName="nome"
         p-maxlength="100"
         p-minlength="2"
@@ -20,6 +22,7 @@
         [p-label]="isPF ? 'Nome' : 'Razão social'">
       </po-input>
       <po-input
+        data-cy="documento"
         formControlName="documento"
         p-clean="true"
         [p-error-pattern]="isPF ? 'Informe um CPF válido' : 'Informe um CNPJ válido'"
@@ -28,6 +31,7 @@
         [p-label]="isPF ? 'CPF' : 'CNPJ'">
       </po-input>
       <po-switch
+        data-cy="ativo"
         formControlName="ativo"
         p-label-on="Sim"
         p-label-off="Não"
@@ -42,6 +46,7 @@
 
       <ng-container *ngIf="isEdit()">
         <po-button
+          data-cy="ver-mapa"
           class="ver-no-mapa"
           p-label="Ver no mapa"
           p-small="true"
@@ -53,6 +58,7 @@
 
       <po-modal #modalMapa p-title="Mapa">
         <iframe
+          data-cy="iframe"
           *ngIf="isEdit()"
           width="100%"
           height="450"
@@ -65,6 +71,7 @@
 
       <div formGroupName="endereco">
         <po-input
+          data-cy="cep"
           formControlName="cep"
           p-clean="true"
           p-error-pattern="Informe CEP válido"
@@ -73,6 +80,7 @@
           (p-change)="changeCep($event)">
         </po-input>
         <po-input
+          data-cy="lagradouro"
           formControlName="logradouro"
           p-maxlength="200"
           p-minlength="2"
@@ -82,6 +90,7 @@
           p-label="Logradouro">
         </po-input>
         <po-input
+          data-cy="numero"
           formControlName="numero"
           p-clean="true"
           p-maxlength="50"
@@ -91,11 +100,13 @@
           p-label="Número">
         </po-input>
         <po-input
+          data-cy="complemento"
           formControlName="complemento"
           p-clean="true"
           p-label="Complemento">
         </po-input>
         <po-input
+          data-cy="bairro"
           formControlName="bairro"
           class="error"
           p-clean="true"
@@ -106,11 +117,13 @@
           p-label="Bairro">
         </po-input>
         <po-select
+          data-cy="estado"
           formControlName="estado"
           p-label="Estado"
           [p-options]="estados">
         </po-select>
         <po-select
+          data-cy="cidade"
           formControlName="cidade"
           [p-disabled]="cidades.length <= 0"
           p-label="Cidade"

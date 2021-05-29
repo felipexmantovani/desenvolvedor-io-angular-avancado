@@ -5,5 +5,9 @@
     "btnClose": ".po-toaster .po-icon-close",
     "element": ".po-toaster",
     "msg": ".po-toaster .po-toaster-message"
+  },
+  "search": {
+    "input": ".po-field-container-content > .po-input",
+    "btnLupa": ".po-field-icon-container-right > .po-icon"
   }
 }

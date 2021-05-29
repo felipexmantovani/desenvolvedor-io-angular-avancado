@@ -1,0 +1,32 @@
+{
+  "btnNovo": ".po-page-list-actions > po-button > .po-button",
+  "table": {
+    "acoesPrimeiroRegistro": ".po-table-column-actions > .po-icon",
+    "acaoDetalhes": ".po-popup .po-popup-container .po-popup-item-default .po-icon",
+    "acaoExcluir": ".po-popup .po-popup-container .po-popup-item-danger .po-icon"
+  },
+  "form": {
+    "dados": {
+      "tipoFornecedor": {
+        "pessoaFisica": "[data-cy=tipoFornecedor] :nth-child(1) > .po-radio-group-label",
+        "pessoaJuridica": "[data-cy=tipoFornecedor] :nth-child(2) > .po-radio-group-label"
+      },
+      "nome": "[data-cy=nome] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
+      "documento": "[data-cy=documento] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
+      "ativo": "[data-cy=ativo] .po-switch-container"
+    },
+    "endereco": {
+      "verMapa": "[data-cy=ver-mapa] > .po-button",
+      "iframe": "[data-cy=iframe]",
+      "cep": "[data-cy=cep] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
+      "logradouro": "[data-cy=lagradouro] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
+      "numero": "[data-cy=numero] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
+      "complemento": "[data-cy=complemento] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
+      "bairro": "[data-cy=bairro] > po-field-container > .po-field-container > .po-field-container-content > .po-input",
+      "estado": "[data-cy=estado] > po-field-container > .po-field-container > .po-select-container > .po-select-button",
+      "cidade": "[data-cy=cidade] > po-field-container > .po-field-container > .po-select-container"
+    },
+    "btnCancelar": "[ng-reflect-label='Cancelar'] > .po-button",
+    "btnSalvar": "[p-type='primary'] > .po-button"
+  }
+}

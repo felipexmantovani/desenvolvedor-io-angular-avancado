@@ -33,6 +33,8 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
 
   cidades: Array<PoSelectOption> = new Array<PoSelectOption>();
 
+  cidade: number;
+
   subs: Subscription = new Subscription();
 
   tipoFornecedor = '1';
@@ -90,15 +92,19 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
         cidade: [null, [Validators.required]],
       })
     });
-    this.onChangesForm();
 
     if (this.isEdit()) {
       this.form.patchValue(this.fornecedor);
+      this.cidade = this.fornecedor.endereco.cidade;
 
       this.form.get('tipoFornecedor').setValue(this.fornecedor.tipoFornecedor.toString());
+      this.form.get('endereco').get('estado').setValue(this.fornecedor.endereco.estado);
+      this.onChangesForm();
       setTimeout(() => {
         this.form.get('endereco').get('estado').setValue(this.fornecedor.endereco.estado);
-      }, 500);
+      }, 250);
+    } else {
+      this.onChangesForm();
     }
   }
 
@@ -124,6 +130,9 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
                 });
                 if (this.isEdit()) {
                   this.form.get('endereco').get('cidade').setValue(this.fornecedor.endereco.cidade);
+                }
+                if (!this.isEdit() && this.cidade) {
+                  this.form.get('endereco').get('cidade').setValue(this.cidade);
                 }
               }
             });
@@ -161,6 +170,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
             enderecoControl.get('logradouro').setValue(viaCep.logradouro);
             enderecoControl.get('estado').setValue(viaCep.uf);
             enderecoControl.get('bairro').setValue(viaCep.bairro);
+            this.cidade = viaCep.ibge;
             setTimeout(() => {
               enderecoControl.get('cidade').setValue(viaCep.ibge);
             }, 250);
@@ -185,7 +195,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
       });
   }
 
-  getMunicipio(municipioId: string): void {
+  getMunicipio(municipioId: number): void {
     this.ibgeService
       .getMunicipio(municipioId)
       .subscribe({
@@ -208,7 +218,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
     if (!this.isEdit()) {
       this.fornecedor = this.form.value;
       this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString(), 10);
-      this.fornecedor.endereco.cidade = this.fornecedor.endereco.cidade.toString();
+      this.fornecedor.endereco.cidade = this.fornecedor.endereco.cidade;
 
       this.fornecedorService
         .create(this.fornecedor)
@@ -228,7 +238,7 @@ export class FornecedorFormComponent implements OnInit, OnDestroy {
 
       this.fornecedor.endereco.id = enderecoId;
       this.fornecedor.endereco.fornecedorId = fornecedorId;
-      this.fornecedor.endereco.cidade = this.fornecedor.endereco.cidade.toString();
+      this.fornecedor.endereco.cidade = this.fornecedor.endereco.cidade;
 
       this.fornecedor.id = fornecedorId;
       this.fornecedor.tipoFornecedor = parseInt(this.fornecedor.tipoFornecedor.toString(), 10);

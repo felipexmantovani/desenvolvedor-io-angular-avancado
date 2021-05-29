@@ -121,6 +121,7 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
 
     component.form.patchValue(fornecedor);
     component.onSubmit();
+
     fornecedorService
       .create(component.fornecedor)
       .subscribe(fornecedorRes => {
@@ -175,4 +176,20 @@ describe('fornecedor-form.component.spec | FornecedorFormComponent', () => {
     component.verMapa();
     expect(component.modalMapa.open).toHaveBeenCalled();
   });
+
+  it('Deve setar valor da cidade corretamente caso formulário for de edição', () => {
+    spyOn(component, 'isEdit').and.returnValue(true);
+    component.fornecedor = fornecedor;
+    component.form.get('endereco').get('estado').setValue('PR');
+    expect(component.form.get('endereco').get('cidade').value).toBe(3550308);
+  });
+
+  it('Deve setar valor da cidade corretamente caso formulário for de criação', () => {
+    spyOn(component, 'isEdit').and.returnValue(false);
+    component.cidade = 3550308;
+    component.fornecedor = null;
+    component.form.get('endereco').get('estado').setValue('SC');
+    expect(component.form.get('endereco').get('cidade').value).toBe(3550308);
+  });
+
 });

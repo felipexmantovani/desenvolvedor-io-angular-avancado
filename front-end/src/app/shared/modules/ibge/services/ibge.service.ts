@@ -44,7 +44,7 @@ export class IbgeService {
       );
   }
 
-  getMunicipio(idMunicipio: string): Observable<IbgeMunicipio> {
+  getMunicipio(idMunicipio: number): Observable<IbgeMunicipio> {
     return this.httpClient
       .get<IbgeMunicipio>(`${IbgeService.API_MUNICIPIOS}/${idMunicipio}`)
       .pipe(

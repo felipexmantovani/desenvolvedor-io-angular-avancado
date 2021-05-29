@@ -34,8 +34,7 @@
     p-hide-text-overflow="true"
     [p-actions]="actionsTable"
     [p-columns]="columns"
-    [p-items]="fornecedores"
-    [p-loading]="fornecedores?.length === 0">
+    [p-items]="fornecedores">
 
     <ng-template p-table-column-template p-property="ativo" let-value>
       <span

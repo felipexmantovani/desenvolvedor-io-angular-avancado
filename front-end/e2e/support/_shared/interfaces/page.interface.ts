@@ -6,4 +6,8 @@ export interface Page {
     element: string,
     msg: string,
   };
+  search: {
+    input: string;
+    btnLupa: string;
+  }
 }

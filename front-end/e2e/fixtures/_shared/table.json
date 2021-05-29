@@ -1,0 +1,4 @@
+{
+  "table": ".po-table",
+  "rows": ".po-table .po-table-group-row .po-table-row"
+}

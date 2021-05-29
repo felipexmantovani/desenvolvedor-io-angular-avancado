@@ -133,7 +133,10 @@ export class FornecedorListarComponent implements OnInit, OnDestroy, PageDefault
             this.notificationService.success(`Fornecedor ${fornecedorRes.nome} excluído com sucesso.`);
             this.fornecedorService
               .read()
-              .subscribe(fornecedores => this.fornecedores = fornecedores);
+              .subscribe(fornecedores => {
+                this.fornecedores = fornecedores;
+                this.setAtivosInativos();
+              });
           });
       }
     };

@@ -95,7 +95,10 @@ export class ProdutoTableComponent implements OnInit {
             this.notificationService.success(`Produto ${produtoRes.nome} excluído com sucesso.`);
             this.produtoService
               .read()
-              .subscribe(produtos => this.produtos = produtos);
+              .subscribe(produtos => {
+                this.produtos = produtos;
+                this.setAtivosInativos();
+              });
           });
       },
       cancel: () => {}

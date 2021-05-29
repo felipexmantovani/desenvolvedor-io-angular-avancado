@@ -26,8 +26,7 @@
   p-hide-text-overflow="true"
   [p-actions]="actionsTable"
   [p-columns]="columns"
-  [p-items]="produtos"
-  [p-loading]="produtos?.length === 0">
+  [p-items]="produtos">
 
   <ng-template p-table-column-template p-property="ativo" let-value>
     <span

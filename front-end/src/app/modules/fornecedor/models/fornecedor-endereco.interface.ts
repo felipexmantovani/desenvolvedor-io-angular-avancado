@@ -5,7 +5,7 @@ export interface FornecedorEndereco {
   complemento: string;
   bairro: string;
   cep: string;
-  cidade: string;
+  cidade: number;
   estado: string;
   fornecedorId: string;
 }

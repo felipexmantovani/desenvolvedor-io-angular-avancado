@@ -115,7 +115,7 @@ describe('ibge.service.spec | IbgeService', () => {
   });
 
   it('Deve retornar null vazio após fazer busca por município getMunicipio()', () => {
-    const idMunicipio = '123';
+    const idMunicipio = 123;
 
     service.getMunicipio(idMunicipio).subscribe((ibgeMunicipio) => {
       expect(ibgeMunicipio).toBeNull();
@@ -131,7 +131,7 @@ describe('ibge.service.spec | IbgeService', () => {
   });
 
   it('Deve tratar erro ao consumir getMunicipio()', () => {
-    const idMunicipio = '123';
+    const idMunicipio = 123;
 
     service.getMunicipio(idMunicipio).subscribe(
       () => {},
