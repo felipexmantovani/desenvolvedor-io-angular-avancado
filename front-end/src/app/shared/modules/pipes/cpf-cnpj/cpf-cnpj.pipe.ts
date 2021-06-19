@@ -7,7 +7,7 @@ import { StringUtil } from '../../../utils/string.util';
 export class CpfCnpjPipe implements PipeTransform {
   constructor() {}
 
-  transform(value: string, ...args: unknown[]): string {
+  transform(value: string): string {
     if (value.length <= 11) {
       return StringUtil.maskCpf(value);
     } else {

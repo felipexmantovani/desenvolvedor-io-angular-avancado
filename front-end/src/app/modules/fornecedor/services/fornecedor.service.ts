@@ -55,7 +55,7 @@ export class FornecedorService extends CrudGenericService<Fornecedor> implements
       );
   }
 
-  getFilteredData(params: { property: string, value: string }, filterParams?: any): Observable<PoComboOption[]> {
+  getFilteredData(params: { property: string, value: string }): Observable<PoComboOption[]> {
     return this.read()
       .pipe(
         map(fornecedores => {
@@ -73,7 +73,7 @@ export class FornecedorService extends CrudGenericService<Fornecedor> implements
       );
   }
 
-  getObjectByValue(value: string, filterParams?: any): Observable<PoComboOption> {
+  getObjectByValue(value: string): Observable<PoComboOption> {
     return this.readById(value).pipe(map(fornecedor => this.convertCombo(fornecedor)));
   }
 

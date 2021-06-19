@@ -8,17 +8,25 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "noUnusedParameters": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
-      "es2018",
+      "es2019",
       "dom"
     ],
     "noUnusedLocals": true,
   },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  },
   "exclude": [
     "./cypress/**/*.ts"
-  ]
+  ],
 }

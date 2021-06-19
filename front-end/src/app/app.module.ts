@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { LayoutComponentsModule } from './modules/layout/components/layout-component.module';
+import { WebBackendApiModule } from 'web-backend-api';
 registerLocaleData(pt);
 
 @NgModule({
@@ -14,7 +15,8 @@ registerLocaleData(pt);
     BrowserModule,
     AppRoutingModule,
     LayoutComponentsModule,
-    CoreModule
+    CoreModule,
+    WebBackendApiModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [

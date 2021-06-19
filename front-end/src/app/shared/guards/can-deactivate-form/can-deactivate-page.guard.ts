@@ -17,7 +17,7 @@ export class CanDeactivatePageGuard implements CanDeactivate<CanDeactivatePage> 
   }
 
   verify(component: CanDeactivatePage): Promise<boolean> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (component.canDeactivate()) {
         resolve(true);
       } else {
