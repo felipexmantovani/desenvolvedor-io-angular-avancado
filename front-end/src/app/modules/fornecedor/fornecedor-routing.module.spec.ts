@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { FORNECEDOR_MOCK } from '../../mocks/fornecedor.mock';
+import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor/fornecedor.mock';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { routes } from './fornecedor-routing.module';
 import { FornecedorGetByIdResolver } from './resolvers/fornecedor-get-by-id.resolver';

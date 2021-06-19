@@ -3,8 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { FORNECEDOR_MOCK } from '../../../../../mocks/fornecedor/fornecedor.mock';
 import { APP_CONFIG } from '../../../app.config';
-import { FORNECEDOR_MOCK } from '../../../mocks/fornecedor.mock';
 import { ExceptionService } from '../../../shared/services/exception/exception.service';
 import { FORNECEDOR_CONFIG } from '../fornecedor.config';
 import { Fornecedor } from '../models/fornecedor.interface';

@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
-import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
+import { PRODUTO_MOCK } from '../../../../../../mocks/produto/produto.mock';
 import { ProdutoTableComponent } from '../../components/produto-table/produto-table.component';
 import { ProdutoListarComponent } from './produto-listar.component';
 

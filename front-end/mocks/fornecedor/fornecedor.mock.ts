@@ -3,7 +3,7 @@ import { Produto } from '../../src/app/modules/produto/models/produto.interface'
 
 export const collectionName = 'fornecedores';
 
-export const fornecedores: Array<Fornecedor> = [
+export const FORNECEDOR_MOCK: Array<Fornecedor> = [
   {
     ativo: true,
     documento: '80102499047',

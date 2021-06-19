@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { PRODUTO_MOCK } from '../../mocks/produto.mock';
+import { PRODUTO_MOCK } from '../../../../mocks/produto/produto.mock';
 import { AuthService } from '../auth/services/auth.service';
 import { routes } from './produto-routing.module';
 import { ProdutoGetByIdResolver } from './resolvers/produto-get-by-id.resolver';

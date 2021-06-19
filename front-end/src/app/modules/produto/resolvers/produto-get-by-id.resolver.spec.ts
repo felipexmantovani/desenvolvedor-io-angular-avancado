@@ -2,8 +2,8 @@ import { HttpRequest } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PRODUTO_MOCK } from '../../../../../mocks/produto/produto.mock';
 import { APP_CONFIG } from '../../../app.config';
-import { PRODUTO_MOCK } from '../../../mocks/produto.mock';
 import { PRODUTO_CONFIG } from '../produto.config';
 import { ProdutoGetByIdResolver } from './produto-get-by-id.resolver';
 

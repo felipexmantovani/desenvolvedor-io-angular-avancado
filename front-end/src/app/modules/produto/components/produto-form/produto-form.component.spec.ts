@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { PoFieldModule } from '@po-ui/ng-components';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { of } from 'rxjs';
-import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
+import { PRODUTO_MOCK } from '../../../../../../mocks/produto/produto.mock';
 import { NotificationService } from '../../../../shared/services/notification/notification.service';
 import { PRODUTO_CONFIG } from '../../produto.config';
 import { ProdutoService } from '../../services/produto.service';

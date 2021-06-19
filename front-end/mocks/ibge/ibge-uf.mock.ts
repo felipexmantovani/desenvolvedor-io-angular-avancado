@@ -1,4 +1,4 @@
-import { IbgeUf } from '../shared/modules/ibge/models/uf.interface';
+import { IbgeUf } from '../../src/app/shared/modules/ibge/models/uf.interface';
 
 export const IBGE_UF_MOCK: Array<IbgeUf> = [
   {

@@ -1,7 +1,7 @@
 import { dataService, IBackendService } from 'web-backend-api';
-import { collectionName, fornecedores } from './fornecedor.mock';
+import { collectionName, FORNECEDOR_MOCK } from './fornecedor.mock';
 
 dataService(collectionName, (dbService: IBackendService) => {
 
-  fornecedores.forEach((fornecedor) => dbService.storeData(collectionName, fornecedor));
+  FORNECEDOR_MOCK.forEach((fornecedor) => dbService.storeData(collectionName, fornecedor));
 });

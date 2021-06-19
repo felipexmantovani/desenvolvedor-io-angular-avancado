@@ -1,4 +1,4 @@
-import { IbgeMunicipio } from '../shared/modules/ibge/models/municipio.interface';
+import { IbgeMunicipio } from '../../src/app/shared/modules/ibge/models/municipio.interface';
 
 export const IBGE_MUNICIPIO_MOCK: Array<IbgeMunicipio> = [
   {

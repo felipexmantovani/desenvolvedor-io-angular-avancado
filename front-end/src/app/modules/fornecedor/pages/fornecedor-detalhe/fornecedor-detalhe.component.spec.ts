@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoPageModule } from '@po-ui/ng-components';
-import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
+import { FORNECEDOR_MOCK } from '../../../../../../mocks/fornecedor/fornecedor.mock';
 import { FornecedorFormComponent } from '../../components/fornecedor-form/fornecedor-form.component';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorDetalheComponent } from './fornecedor-detalhe.component';

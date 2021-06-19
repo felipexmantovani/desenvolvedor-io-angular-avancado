@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { of } from 'rxjs';
-import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
+import { PRODUTO_MOCK } from '../../../../../../mocks/produto/produto.mock';
 import { PRODUTO_CONFIG } from '../../produto.config';
 import { ProdutoService } from '../../services/produto.service';
 import { ProdutoTableComponent } from './produto-table.component';

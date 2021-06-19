@@ -1,4 +1,6 @@
-import { Produto } from '../modules/produto/models/produto.interface';
+import { Produto } from '../../src/app/modules/produto/models/produto.interface';
+
+export const collectionName = 'produtos';
 
 export const PRODUTO_MOCK: Array<Produto> = [
   {
@@ -84,5 +86,5 @@ export const PRODUTO_MOCK: Array<Produto> = [
     dataCadastro: '2019-05-13T19:30:09.7901809',
     ativo: true,
     nomeFornecedor: 'SeboTech',
-  },
+  }
 ];

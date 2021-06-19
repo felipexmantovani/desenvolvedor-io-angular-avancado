@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { PRODUTO_MOCK } from '../../../../mocks/produto.mock';
+import { PRODUTO_MOCK } from '../../../../../../mocks/produto/produto.mock';
 import { ProdutoFormComponent } from '../../components/produto-form/produto-form.component';
 import { ProdutoDetalheComponent } from './produto-detalhe.component';
 

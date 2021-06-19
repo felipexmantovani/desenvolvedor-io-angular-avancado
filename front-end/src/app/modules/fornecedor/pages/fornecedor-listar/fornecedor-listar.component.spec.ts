@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PoDialogService } from '@po-ui/ng-components';
 import { of } from 'rxjs';
-import { FORNECEDOR_MOCK } from '../../../../mocks/fornecedor.mock';
+import { FORNECEDOR_MOCK } from '../../../../../../mocks/fornecedor/fornecedor.mock';
 import { FORNECEDOR_CONFIG } from '../../fornecedor.config';
 import { FornecedorService } from '../../services/fornecedor.service';
 import { FornecedorListarComponent } from './fornecedor-listar.component';
