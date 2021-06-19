@@ -18,7 +18,8 @@ const config: BackendConfigArgs = {
   host: 'localhost',
   apiBase: 'api/v1',
   passThruUnknownUrl: true,
-  jsonParseWithDate: true
+  jsonParseWithDate: true,
+  pageEncapsulation: false
 };
 setupBackend(config, {dbtype: 'indexdb'}).then(() => {
   platformBrowserDynamic().bootstrapModule(AppModule).then(
