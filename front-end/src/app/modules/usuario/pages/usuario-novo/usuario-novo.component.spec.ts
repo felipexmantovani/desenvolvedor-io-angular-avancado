@@ -26,10 +26,12 @@ describe('usuario-novo.component.spec | UsuarioNovoComponent', () => {
   const token: Token = {
     accessToken: '123abc',
     userToken: {
-      claims: {
-        type: 'type',
-        value: 'value'
-      },
+      claims: [
+        {
+          type: 'type',
+          value: 'value'
+        }
+      ],
       email: 'teste@teste.com',
       id: '1'
     }

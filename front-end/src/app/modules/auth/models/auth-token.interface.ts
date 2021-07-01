@@ -7,10 +7,10 @@ export interface Token {
 export interface UserToken {
   id: string;
   email: string;
-  claims: Claims;
+  claims: Array<Claim>;
 }
 
-interface Claims {
+interface Claim {
   value: string;
   type: string;
 }
